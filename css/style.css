@@ -2079,27 +2079,38 @@ h1, h2, h3, h4, h5, h6 {
     .btn-signup { display: none; }
     .mobile-toggle { display: block; }
 
-    /* --- Hero --- */
+    /* --- Hero (Mobil Premium) --- */
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
     }
     
-    .hero-title { font-size: 2.4rem; }
+    .hero-title { 
+        font-size: 2.2rem; 
+        line-height: 1.15;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
     
     .hero-description { 
-        margin: 0 auto 30px;
+        margin: 0 auto 28px;
         max-width: 100%;
-        font-size: 1.05rem;
+        font-size: 1rem;
+        line-height: 1.65;
+        padding: 0 4px;
     }
     
     .hero-buttons { 
         flex-direction: column; 
         gap: 12px;
+        padding: 0 8px;
     }
     .hero-buttons .btn {
         width: 100%;
         justify-content: center;
+        padding: 14px 24px;
+        font-size: 1rem;
+        border-radius: 14px;
     }
     
     .hero-stats { 
@@ -2121,7 +2132,82 @@ h1, h2, h3, h4, h5, h6 {
         justify-content: center;
     }
     
-    .hero-visual { margin-top: 30px; max-width: 360px; margin-inline: auto; }
+    /* --- Hero Visual / App Mockup (Mobil Premium) --- */
+    .hero-visual { 
+        margin-top: 36px; 
+        max-width: 100%; 
+        margin-inline: auto; 
+        perspective: none;
+    }
+
+    .app-mockup {
+        transform: none !important;
+        animation: none !important;
+        border-radius: 24px;
+        padding: 4px;
+        border: 2px solid rgba(84, 98, 235, 0.08);
+        box-shadow: 
+            0 20px 60px rgba(84, 98, 235, 0.12),
+            0 0 0 1px rgba(84, 98, 235, 0.04);
+        background: white;
+    }
+
+    .mockup-frame {
+        border-radius: 20px;
+        height: auto;
+        min-height: 320px;
+        background: linear-gradient(145deg, #f8f9ff 0%, #f0f2fb 100%);
+    }
+
+    .mockup-screen {
+        padding: 18px 14px;
+    }
+
+    .mockup-header {
+        margin-bottom: 14px;
+    }
+
+    .mockup-user .user-text strong {
+        font-size: 0.88rem;
+    }
+    .mockup-user .user-text span {
+        font-size: 0.72rem;
+    }
+
+    .mockup-search {
+        padding: 10px 14px;
+        font-size: 0.82rem;
+        margin-bottom: 14px;
+        border-radius: 12px;
+    }
+
+    .mockup-categories {
+        gap: 6px;
+        margin-bottom: 14px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cat-pill {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+        border-radius: 10px;
+    }
+
+    .t-card {
+        padding: 12px;
+        border-radius: 14px;
+        gap: 10px;
+    }
+
+    .t-avatar { width: 40px; height: 40px; border-radius: 10px; }
+    .t-info strong { font-size: 0.85rem; }
+    .t-info span { font-size: 0.72rem; }
+    .t-distance { font-size: 0.65rem; padding: 2px 5px; }
+    .t-rating { font-size: 0.78rem; }
+
+    .mockup-cards-container { min-height: auto; }
+    .mockup-cards { gap: 10px; }
 
     /* --- Hero floating elements --- */
     .floating-element { display: none; }
@@ -2225,9 +2311,9 @@ h1, h2, h3, h4, h5, h6 {
     
     /* Hero */
     .hero { padding-top: 100px; padding-bottom: 40px; }
-    .hero-title { font-size: 1.9rem; letter-spacing: -0.5px; }
-    .hero-description { font-size: 0.95rem; }
-    .hero-buttons { flex-direction: column; gap: 10px; }
+    .hero-title { font-size: 1.75rem; letter-spacing: -0.5px; line-height: 1.2; }
+    .hero-description { font-size: 0.92rem; padding: 0; }
+    .hero-buttons { flex-direction: column; gap: 10px; padding: 0; }
     .hero-stats { 
         flex-direction: column; 
         gap: 16px !important;
@@ -2243,7 +2329,22 @@ h1, h2, h3, h4, h5, h6 {
     .stat-icon { width: 40px; height: 40px; font-size: 20px; }
     .stat-info strong { font-size: 1.2rem; }
     .stat-info span { font-size: 0.8rem; }
-    .hero-visual { max-width: 300px; }
+
+    /* Mockup mobil ince ayar */
+    .hero-visual { max-width: 100%; }
+    .mockup-screen { padding: 16px 12px; }
+    .mockup-header { margin-bottom: 12px; }
+    .avatar { width: 32px; height: 32px; }
+    .mockup-user .user-text strong { font-size: 0.82rem; }
+    .mockup-user .user-text span { font-size: 0.68rem; }
+    .mockup-search { padding: 9px 12px; font-size: 0.78rem; margin-bottom: 12px; }
+    .mockup-categories { gap: 5px; margin-bottom: 12px; }
+    .cat-pill { padding: 5px 10px; font-size: 0.72rem; }
+    .t-card { padding: 10px; border-radius: 12px; gap: 8px; }
+    .t-avatar { width: 36px; height: 36px; border-radius: 8px; }
+    .t-info strong { font-size: 0.8rem; }
+    .t-info span { font-size: 0.68rem; }
+    .mockup-cards { gap: 8px; }
 
     /* Badge */
     .badge { font-size: 0.78rem; padding: 6px 12px; margin-bottom: 16px; }
