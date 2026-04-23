@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sıkça Sorulan Sorular | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=12">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+    <section class="section" style="padding-top: 150px; min-height: 60vh;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <h1 style="color: var(--royal-blue); margin-bottom: 20px; font-size: 2.5rem;">Sıkça Sorulan Sorular</h1>
+            </div>
+            <div class="page-content" style="font-size: 1.1rem; color: var(--medium-gray-900); max-width: 900px; line-height: 1.8;">
+                
+<div class="sss-section" style="max-width: 900px; margin: 0 auto; perspective: 1000px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <p style="font-size: 1.15rem; color: var(--medium-gray); max-width: 700px; margin: 0 auto;">
+            Öğretsen ekosistemi hakkında en çok merak edilen soruları uzmanlık alanınıza göre inceleyebilirsiniz.
+        </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="feature-tabs" style="margin-bottom: 40px; border-bottom: 1px solid #eef0fb; padding-bottom: 20px;">
+        <button class="tab-btn active" data-target="sss-ogrenci" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05);"><i class="ph ph-graduation-cap"></i> Öğrenciler & Veliler</button>
+        <button class="tab-btn" data-target="sss-egitmen" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05);"><i class="ph ph-chalkboard-teacher"></i> Eğitmenler</button>
+        <button class="tab-btn" data-target="sss-kurum" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05);"><i class="ph ph-buildings"></i> Eğitim Kurumları</button>
+    </div>
+
+    <!-- Panes -->
+    <!-- Öğrenci -->
+    <div class="tab-pane active" id="sss-ogrenci">
+        <div class="accordion-list">
+            <!-- 1 -->
+            <div class="accordion-item active" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-magnifying-glass"></i></div>
+                    <span style="font-size: 1.15rem;">Aradığım uzmanı nasıl bulurum?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Öğretsen'in gelişmiş lokasyon bazlı harita altyapısı sayesinde eviniz, işiniz veya okulunuza en yakın eğitmen ve kurumları anında harita üzerinde görüntüleyebilirsiniz. 50'den fazla uzmanlık kategorisinde 10.000'i aşkın profesyonel arasından bütçenize ve konumunuza en uygun olanı seçerek doğrudan iletişime geçebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-currency-circle-dollar"></i></div>
+                    <span style="font-size: 1.15rem;">Öğretsen üzerinden hizmet almak ücretli mi?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Uygulamamızı indirmek ve platformu kullanmak tamamen ücretsizdir. Öğrenci veya veli olarak platforma kayıt olurken veya uzmanlarla iletişime geçerken hiçbir ücret ödemezsiniz.</p>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-shield-check"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitmen yorumlarına ne kadar güvenebilirim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Platformumuzdaki puanlama sistemi tamamen şeffaflık ilkesine dayanır. Sistemimizde yalnızca o uzman veya kurumdan gerçekten eğitim sürecini deneyimlemiş olan öğrenciler değerlendirme yapabilir.</p>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-video-camera"></i></div>
+                    <span style="font-size: 1.15rem;">Özel dersleri online mı yoksa yüz yüze mi alabilirim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Öğretsen'de her iki seçenek de mevcuttur. Eğitmenlerin profillerinde eğitimleri yüz yüze, kendi kurumlarında, öğrencinin evinde veya online olarak verip vermedikleri açıkça belirtilir. Filtreleme yaparak ihtiyacınıza uygun olanı seçebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-credit-card"></i></div>
+                    <span style="font-size: 1.15rem;">Ödemeyi platforma mı yapacağım?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Hayır. Öğretsen komisyonsuz ve şeffaf bir platform olduğu için, ders ücreti ödemeleri öğrenci ile eğitmen/kurum arasında doğrudan anlaşma usulü ile yapılır. Öğretsen aracı olmaz.</p>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-chat-circle-dots"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitmenle dersten önce iletişime geçebilir miyim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kesinlikle. Platform içi güvenli mesajlaşma modülümüz üzerinden eğitmene beklentilerinizi, hedeflerinizi ve programınızı yazabilir, ders öncesinde detaylı bilgi alabilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-star-half"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitimden memnun kalmazsam ne yapmalıyım?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Değerlendirme sistemimiz sizin güvencenizdir. Bir eğitim deneyimini puanlayarak ve şeffaf bir şekilde yorum yaparak, eğitmenin platformdaki kurumsal algısına doğrudan etki edebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-users"></i></div>
+                    <span style="font-size: 1.15rem;">Hangi yaş grupları için eğitimler mevcut?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Öğretsen ekosisteminde okul öncesi, ilkokul, lise, üniversite öğrencileri ve yetişkinler olmak üzere her yaş grubuna özel eğitim verebilecek binlerce uzman bulunur.</p>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-basketball"></i></div>
+                    <span style="font-size: 1.15rem;">Sadece akademik dersler mi var?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Hayır. Akademik branşların (Matematik, İngilizce vb.) yanı sıra; Fitness, Tenis, Müzik Aletleri, Kişisel Gelişim, Diksiyon ve Sanat gibi 50'den fazla zengin kategoride uzmanlar platformumuzda yer alır.</p>
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--royal-blue), #0ea5e9);"><i class="ph ph-certificate"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitmenlerin belgeleri platformda görülüyor mu?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Eğitmenler uzmanlıklarını kanıtlayan sertifika, mezuniyet ve başarı belgelerini profillerine ekleyebilirler. Öğrenciler bu belgeleri ve detaylı eğitim geçmişlerini profillerde şeffaf şekilde inceleyebilir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Eğitmen -->
+    <div class="tab-pane" id="sss-egitmen">
+        <div class="accordion-list">
+            <!-- 1 -->
+            <div class="accordion-item active" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-user-plus"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitmen olarak nasıl kayıt olabilirim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Öğretsen mobil uygulamasını indirerek dakikalar içinde uzmanlık profili oluşturabilirsiniz. Alanlarınızı, sertifikalarınızı ve saatlik ücretlerinizi belirledikten sonra 50.000+ aktif öğrenciye ulaşmaya başlarsınız.</p>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-percent"></i></div>
+                    <span style="font-size: 1.15rem;">Derslerden komisyon kesiliyor mu?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kesinlikle hayır! Öğretsen, eğitmenlerden herhangi bir ders komisyonu veya aracılık ücreti talep etmez. Verdiğiniz dersin ücretinin tamamı doğrudan size aittir.</p>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-calendar-check"></i></div>
+                    <span style="font-size: 1.15rem;">Ders programımı nasıl yöneteceğim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Öğretsen eğitmen paneli üzerinden müsait olduğunuz gün ve saatleri takviminizde pratik bir şekilde işaretleyebilirsiniz. Öğrenciler sadece sizin uygun olduğunuz dilimlerde randevu talep edebilir.</p>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-wallet"></i></div>
+                    <span style="font-size: 1.15rem;">Kendi ders ücretimi kendim mi belirliyorum?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Evet. Uzmanlık seviyenize ve piyasa koşullarına göre saatlik ders ücretinizi tamamen kendi inisiyatifinizle belirler, istediğiniz zaman profilinizden güncelleyebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-map-pin"></i></div>
+                    <span style="font-size: 1.15rem;">Öğrenciler beni nasıl bulacak?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Lokasyonunuzu sisteme girdiğinizde, profiliniz Öğretsen'in güçlü harita arayüzünde indekslenir. Yakınınızdaki bir öğrenci "İngilizce Öğretmeni" aradığında, harita üzerinde size ait bir pin doğrudan karşısına çıkar.</p>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-trend-up"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitmen profilimi nasıl öne çıkarabilirim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Profilinizi detaylı ve şeffaf bir dille doldurmanız çok önemlidir. Tanıtım videonuz, yüksek kaliteli profil fotoğrafınız, detaylı geçmişiniz ve geçmiş öğrencilerinizden alacağınız 5 yıldızlı yorumlar, platform algoritmasında sizi her zaman üst sıralara taşır.</p>
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-list"></i></div>
+                    <span style="font-size: 1.15rem;">Hangi branşlarda ders verebilirim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Eğer gerçekten yetkinliğiniz varsa birden fazla branşta profil oluşturabilirsiniz. Platformumuzda akademik, dil, müzik, spor, yazılım ve tasarım dahil 50'nin üzerinde aktif kategori bulunmaktadır.</p>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-globe"></i></div>
+                    <span style="font-size: 1.15rem;">Sadece yaşadığım şehirdeki öğrencilere mi ders vermeliyim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Eğer eğitimlerinizi "Online" formatta verebiliyorsanız, bunu profilinizde işaretlemeniz yeterlidir. Bu durumda tüm Türkiye'den (hatta yurtdışından) gelen öğrenci taleplerini kabul edebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-chat-centered-text"></i></div>
+                    <span style="font-size: 1.15rem;">Öğrenci velileriyle doğrudan iletişim kurabiliyor muyum?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Evet. Uygulama içerisindeki güvenli mesajlaşma ağı sayesinde veli veya yetişkin öğrenci ile birebir temas halinde kalırsınız. Bu şeffaflık kurum ve eğitmen kalitemizin temelidir.</p>
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--turquoise-blue), #2dd4bf);"><i class="ph ph-handshake"></i></div>
+                    <span style="font-size: 1.15rem;">Ders ücretimi öğrenciden nasıl tahsil ediyorum?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Ders sonrasında veya öncesinde anlaşmanıza bağlı olarak, ücretinizi doğrudan elden veya kendi belirteceğiniz IBAN adresinize banka transferi ile alırsınız. Platform aracı ödeme sistemi tutmaz.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kurumlar -->
+    <div class="tab-pane" id="sss-kurum">
+        <div class="accordion-list">
+            <!-- 1 -->
+            <div class="accordion-item active" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-buildings"></i></div>
+                    <span style="font-size: 1.15rem;">Kurumsal profil neleri kapsar?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Özel Okullar, Etüt Merkezleri, Dil Kursları, Sanat Akademileri ve Spor Salonları kurumsal profil oluşturabilir. Profilinizde kampüs galerisi, tanıtım videosu, şube adresleri ve kurum detaylarına yer vererek marka bilinirliğinizi artırırsınız.</p>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-map-pin"></i></div>
+                    <span style="font-size: 1.15rem;">Birden fazla şubemi nasıl eklerim?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurumsal panelinizden tüm şubelerinizin lokasyonlarını tek bir hesaba bağlayabilirsiniz. Böylece her şubeniz kendi bulunduğu bölgede yapılan harita aramalarında "Kurumsal" rozetiyle öncelikli olarak sergilenir.</p>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-chart-bar"></i></div>
+                    <span style="font-size: 1.15rem;">Performansımızı nasıl ölçeriz?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurumsal üyelere özel sunulan Analiz Paneli sayesinde, hangi günlerde daha çok trafik aldığınızı, profilinizin kaç kez tıklandığını ve doğrudan form dolduran kullanıcı istatistiklerini takip edebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-file-text"></i></div>
+                    <span style="font-size: 1.15rem;">Kurum kaydı oluşturmak için hangi belgeler gerekli?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurum doğrulama süreci için marka tescil, vergi levhası veya MEB kurum açma ruhsatı gibi temel ticari yetkinlik belgelerinizi dijital ortamdan ekibinize yüklemeniz yeterlidir.</p>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-identification-badge"></i></div>
+                    <span style="font-size: 1.15rem;">Bireysel eğitmenlerden farkımız nasıl belli olacak?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Arama sonuçlarında ve harita üzerinde kurumlarınız özel "Kurumsal Profil" tasarımıyla (örn. logolu dikdörtgen pin) ayrılarak çok daha dikkat çekici bir tasarımla ön plana çıkarılır.</p>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-users-three"></i></div>
+                    <span style="font-size: 1.15rem;">Eğitim kadromuzu profilimizde gösterebilir miyiz?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Evet, kurum profiliniz içerisinde "Eğitmenlerimiz" modülünü aktif ederek, kurumunuzda çalışan seçkin eğitimci kadrosunu görselleri ve branşlarıyla birlikte ziyaretçilere sunabilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-video"></i></div>
+                    <span style="font-size: 1.15rem;">Kurumumuza özel bir tanıtım videosu ekleyebilir miyiz?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurumsal profiller yüksek boyutlu medya yükleme imkanına sahiptir. Okulunuzun fiziksel olanaklarını anlatan bir YouTube veya Vimeo linkini profilinize anında entegre edebilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-chats"></i></div>
+                    <span style="font-size: 1.15rem;">Yorumları ve değerlendirmeleri nasıl yöneteceğiz?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurumsal panelinizden veli veya öğrenci geri bildirimlerine hızlıca yanıt verebilir, marka güvenilirliğinizi üst seviyede tutmak adına şeffaf iletişim stratejinizi koruyabilirsiniz.</p>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-calendar-plus"></i></div>
+                    <span style="font-size: 1.15rem;">Kampanya veya erken kayıt dönemleri için bildirim atabilir miyiz?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Kurumsal profiller, dönemlik kampanya, indirim veya ücretsiz deneme dersi gibi etkinliklerini kendi panoları üzerinden yayınlayarak, çevrelerindeki aday öğrencilere push bildirimi gönderebilirler.</p>
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="accordion-item" style="margin-bottom: 15px; box-shadow: 0 10px 30px rgba(84,98,235,0.08); border-radius: 16px; transition: transform 0.3s; transform: translateZ(0);">
+                <button class="accordion-trigger" style="border: none; padding: 20px 25px;">
+                    <div class="acc-icon" style="background: linear-gradient(135deg, var(--light-orange), #fbbf24);"><i class="ph ph-headset"></i></div>
+                    <span style="font-size: 1.15rem;">Kurumsal hesaplara özel destek ekibi var mı?</span>
+                    <i class="ph ph-caret-down acc-arrow"></i>
+                </button>
+                <div class="accordion-content" style="border: none;">
+                    <p style="font-size: 1.05rem;">Evet, Öğretsen'e katılan her kuruma özel bir Kurumsal Müşteri Temsilcisi atanır. Teknik veya tasarımsal her türlü sorun için doğrudan temsilcinize 7/24 ulaşabilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.accordion-item:hover {
+    transform: translateY(-5px) scale(1.01) !important;
+    box-shadow: 0 20px 40px rgba(84,98,235,0.15) !important;
+}
+</style>
+
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="aydinlatma-metni.html">Aydınlatma Metni</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="kvkk.html">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=12"></script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenmenin En Yakın Yolu | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin. Spor, Yabancı Dil, Akademik ve daha fazlası.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=12">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="badge">Eğitimde Yeni Dönem <i class="ph ph-sparkle"></i></span>
+                <h1 class="hero-title">Öğrenmenin <span>En Yakın Yolu</span></h1>
+                <p class="hero-description">
+                    Öğrencileri; uzman eğitmenler, özel okullar, etüt merkezleri ve spor salonları ile bir araya getiren yeni nesil platform. İster kendini geliştir, ister kurumunu ve bilgilerini 50.000'den fazla kişiye ulaştır.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-primary btn-lg">Eğitmen / Kurum Bul <i class="ph ph-magnifying-glass"></i></a>
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-outline btn-lg">Kayıt Ol <i class="ph ph-buildings"></i></a>
+                </div>
+                <div class="hero-stats" style="display:flex; align-items:center; gap:30px; flex-wrap:wrap;">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="ph ph-users"></i></div>
+                        <div class="stat-info">
+                            <strong>50k+</strong>
+                            <span>Aktif Öğrenci</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="ph ph-student"></i></div>
+                        <div class="stat-info">
+                            <strong>10k+</strong>
+                            <span>Eğitmen & Kurum</span>
+                        </div>
+                    </div>
+                    <div class="stat-store-links" style="display:flex; flex-direction:column; gap:6px; padding-left:20px; border-left:1px solid var(--light-gray);">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--medium-gray); text-transform:uppercase; letter-spacing:0.5px;">Uygulamayı İndir</span>
+                        <div style="display:flex; gap:16px; align-items:center;">
+                            <a href="https://link-to.app/ljiMjxDi5g" target="_blank" title="App Store" class="store-icon-hover" style="display:flex; align-items:center; justify-content:center; transition:all 0.2s;">
+                                <svg width="26" height="32" viewBox="0 0 384 512" fill="var(--black-russian)" xmlns="http://www.w3.org/2000/svg"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                            </a>
+                            <a href="https://link-to.app/ljiMjxDi5g" target="_blank" title="Google Play" class="store-icon-hover" style="display:flex; align-items:center; justify-content:center; transition:all 0.2s;">
+                                <svg width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.53986 1.76104C5.03988 2.27985 4.75 3.01893 4.75 4.02061V43.9749C4.75 44.9781 5.03988 45.7172 5.53986 46.236L5.65604 46.3475L29.4184 22.5835V22.1818V21.7801L5.65604 1.64966L5.53986 1.76104Z" fill="#00A0FF"/><path d="M37.3371 30.5054L29.4182 22.5849V22.1832V21.7814L37.3385 13.861L37.5 13.9531L46.8876 19.2882C49.5627 20.8094 49.5627 23.3082 46.8876 24.8322L37.5 30.1659L37.3371 30.5054Z" fill="#FFE000"/><path d="M37.3384 30.5055L29.4182 22.5849L5.53986 46.2375C6.27376 46.9945 7.42442 47.0754 8.79095 46.3021L37.3384 30.5055Z" fill="#FF3A44"/><path d="M37.3384 13.861L8.79095 1.66687C7.42442 0.895015 6.27376 0.974415 5.53986 1.73142L29.4182 22.1814L37.3384 13.861Z" fill="#00EE76"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <style>
+                        .store-icon-hover:hover {
+                            transform: translateY(-3px) scale(1.1);
+                            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+                        }
+                    </style>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="app-mockup">
+                    <div class="mockup-frame">
+                        <div class="mockup-screen">
+                            <div class="mockup-header">
+                                <div class="mockup-user">
+                                    <div class="avatar"></div>
+                                    <div class="user-text">
+                                        <span>Merhaba, Ali 👋</span>
+                                        <strong>Bugün ne öğrenmek istersin?</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mockup-search">
+                                <i class="ph ph-magnifying-glass"></i>
+                                <span>Matematik, Gitar, Fitness...</span>
+                            </div>
+                            <div class="mockup-categories">
+                                <div class="cat-pill active" data-mockup="akademik">🎯 Akademik</div>
+                                <div class="cat-pill" data-mockup="okul">🏫 Özel Okul</div>
+                                <div class="cat-pill" data-mockup="spor">🏃 Spor</div>
+                            </div>
+                            <div class="mockup-cards-container">
+                                <!-- Akademik -->
+                                <div class="mockup-cards active" id="mockup-akademik">
+                                    <div class="t-card">
+                                        <img src="assets/images/av_t_m.png" alt="Ali Y." class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Ali Y.</strong>
+                                            <span>Matematik Öğretmeni</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 1.2 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_t_f.png" alt="Ayşe T." class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Ayşe T.</strong>
+                                            <span>İngilizce Öğretmeni</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 850 m</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Hedef Etüt" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Hedef Etüt</strong>
+                                            <span>Lise Hazırlık Kursu</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 2.4 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.8</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Özel Okul -->
+                                <div class="mockup-cards" id="mockup-okul">
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Vizyon Koleji" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Vizyon Koleji</strong>
+                                            <span>Özel Temel Lise</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.5 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Gelecek Okulları" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Gelecek Okulları</strong>
+                                            <span>İlköğretim Kampüsü</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 6.1 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.7</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Yeninesil Anaokulu" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Yeninesil Anaokulu</strong>
+                                            <span>Okul Öncesi Eğitim</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 400 m</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Spor -->
+                                <div class="mockup-cards" id="mockup-spor">
+                                    <div class="t-card">
+                                        <img src="assets/images/av_sp.png" alt="Burak K." class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Burak K.</strong>
+                                            <span>Bireysel Fitness</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 1.5 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.8</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_f_sport.png" alt="Selin H." class="t-avatar" onerror="this.src='assets/images/av_t_f.png'">
+                                        <div class="t-info">
+                                            <strong>Selin H.</strong>
+                                            <span>Tenis Antrenörü</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.2 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Aqua Kulüp" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Aqua Kulüp</strong>
+                                            <span>Yaz Yüzme Okulu</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 8.0 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Floating Elements -->
+                <div class="floating-element el-1">
+                    <i class="ph-fill ph-check-circle"></i>
+                    <span>Uzman Eğitmenler & Kurumlar</span>
+                </div>
+                <div class="floating-element el-2">
+                    <i class="ph-fill ph-map-pin"></i>
+                    <span>Sana En Yakın</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- İlanlar (SEO İndekslenebilir) -->
+    <section class="listings section bg-gray" id="ilanlar">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Yakınındaki <span>Eğitmenler</span> ve Kurumlar</h2>
+                <p>Öğretsen'de binlerce eğitmen ve kurum seni bekliyor. Hemen uygulamayı indir, en yakınını bul!</p>
+            </div>
+            <div class="listing-filters">
+                <button class="listing-filter active" data-cat="all">Tümü</button>
+                <button class="listing-filter" data-cat="etut">Etüt Merkezi</button>
+                <button class="listing-filter" data-cat="okul">Okul</button>
+                <button class="listing-filter" data-cat="ozel-ders">Özel Ders</button>
+                <button class="listing-filter" data-cat="spor">Spor</button>
+                <button class="listing-filter" data-cat="dil">Yabancı Dil</button>
+            </div>
+            <div class="listing-grid">
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-teacher" itemscope itemtype="https://schema.org/Person" data-cat="ozel-ders">
+                    <div class="lc-cover"><img src="assets/images/cover_math2.png" alt="Ali Y. - Matematik Öğretmeni İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>Matematik</span><span>Deneme Dersi</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>4.9</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">100+ değerlendirme</span><div class="lc-price">850<small>,00 TL</small></div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_t_m.png" alt="Ali Y."></div><div class="lc-info"><strong itemprop="name">Ali Y.</strong><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Kadıköy, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3 itemprop="jobTitle">LGS ve TYT Matematik Hazırlık...</h3><p itemprop="description">LGS ve TYT matematik hazırlık. 8 yıllık deneyim, yüzlerce başarılı öğrenci.</p></div>
+                </a>
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-teacher" itemscope itemtype="https://schema.org/Person" data-cat="dil">
+                    <div class="lc-cover"><img src="assets/images/cover_english2.png" alt="Ayşe T. - İngilizce Öğretmeni İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>İngilizce</span><span>Deneme Dersi</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>5.0</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">85+ değerlendirme</span><div class="lc-price">750<small>,00 TL</small></div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_t_f.png" alt="Ayşe T."></div><div class="lc-info"><strong itemprop="name">Ayşe T.</strong><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Ataşehir, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3 itemprop="jobTitle">IELTS, TOEFL, YDS Hazırlık...</h3><p itemprop="description">IELTS, TOEFL, YDS hazırlık ve genel konuşma dersleri. Cambridge sertifikalı.</p></div>
+                </a>
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-kurum" itemscope itemtype="https://schema.org/LocalBusiness" data-cat="okul">
+                    <div class="lc-cover"><img src="assets/images/cover_school.png" alt="Vizyon Koleji İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>Özel Okul</span><span>Burs İmkânı</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>5.0</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">200+ değerlendirme</span><div class="lc-price">–</div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_s.png" alt="Vizyon Koleji"></div><div class="lc-info"><strong itemprop="name">Vizyon Koleji</strong> <i class="ph-fill ph-seal-check lc-verified"></i><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Üsküdar, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3>Özel Temel Lise Kayıt...</h3><p itemprop="description">Anadolu ve fen lisesi müfredatı. Burslu kayıt imkânı mevcut. Modern kampüs.</p></div>
+                </a>
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-teacher" itemscope itemtype="https://schema.org/Person" data-cat="spor">
+                    <div class="lc-cover"><img src="assets/images/cover_fitness2.png" alt="Burak K. - Fitness Koçu İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>Fitness</span><span>Kişiye Özel</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>4.8</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">60+ değerlendirme</span><div class="lc-price">950<small>,00 TL</small></div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_t_m2.png" alt="Burak K."></div><div class="lc-info"><strong itemprop="name">Burak K.</strong><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Beşiktaş, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3 itemprop="jobTitle">Bireysel Fitness Koçluğu...</h3><p itemprop="description">Kişiye özel antrenman programları. Fonksiyonel, kuvvet ve kardiyo eğitimi.</p></div>
+                </a>
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-kurum" itemscope itemtype="https://schema.org/LocalBusiness" data-cat="etut">
+                    <div class="lc-cover"><img src="assets/images/cover_etut.png" alt="Hedef Etüt Merkezi İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>Etüt Merkezi</span><span>LGS Hazırlık</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>4.8</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">120+ değerlendirme</span><div class="lc-price">–</div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_s2.png" alt="Hedef Etüt"></div><div class="lc-info"><strong itemprop="name">Hedef Etüt Merkezi</strong> <i class="ph-fill ph-seal-check lc-verified"></i><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Ümraniye, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3>Lise Hazırlık Kursu...</h3><p itemprop="description">LGS ve TYT odaklı etüt programları. Küçük gruplar, birebir takip sistemi.</p></div>
+                </a>
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="listing-card lc-teacher" itemscope itemtype="https://schema.org/Person" data-cat="ozel-ders">
+                    <div class="lc-cover"><img src="assets/images/cover_physics2.png" alt="Zeynep D. - Fizik Öğretmeni İstanbul" itemprop="image" loading="lazy"><div class="lc-tags"><span>Fizik</span><span>AYT Hazırlık</span></div><div class="lc-heart"><i class="ph ph-heart"></i></div><div class="lc-cover-bottom"><div class="lc-rating"><span>4.7</span> <i class="ph-fill ph-star"></i></div><span class="lc-reviews">45+ değerlendirme</span><div class="lc-price">800<small>,00 TL</small></div></div></div>
+                    <div class="lc-profile"><div class="lc-avatar"><img src="assets/images/av_t_f2.png" alt="Zeynep D."></div><div class="lc-info"><strong itemprop="name">Zeynep D.</strong><span><i class="ph-fill ph-map-pin"></i> <span itemprop="address">Maltepe, İstanbul</span></span></div></div>
+                    <div class="lc-body"><h3 itemprop="jobTitle">AYT Fizik Hazırlık...</h3><p itemprop="description">AYT fizik hazırlık. Deney ve uygulama odaklı, görsel anlatım tekniği.</p></div>
+                </a>
+            </div>
+            <div class="listing-more">
+                <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-primary btn-lg"><i class="ph ph-device-mobile"></i> Tüm İlanları Uygulamada Gör</a>
+                <p class="listing-more-text">Öğretsen uygulamasını indir, yakınındaki 2000+ eğitmen ve kurumu keşfet!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Harita Bölümü -->
+    <section class="map-section section" id="harita">
+        <div class="map-bg-overlay"></div>
+        <div class="container">
+            <div class="map-section-header">
+                <div class="map-section-text">
+                    <div class="badge"><i class="ph-fill ph-map-pin"></i> Lokasyon Bazlı Arama</div>
+                    <h2>Sana <span>en yakın</span> eğitimi bul</h2>
+                    <p>Öğretsen haritasında evine, işine ya da okuluna en yakın uzmanı anında keşfet. <strong>10.000'den fazla eğitmen ve kurum</strong> (özel okullar, etüt merkezleri, spor salonları) arasından mesafeni sen seç, en uygun olanı bul.</p>
+                    <ul class="map-feature-list">
+                        <li><i class="ph-fill ph-check-circle"></i> Harita üzerinde 50+ kategoride canlı pin görünümü</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Konumuna göre en yakın mesafe bazlı sıralama</li>
+                        <li><i class="ph-fill ph-check-circle"></i> 50k+ öğrencinin güvendiği şeffaf yorum ve puan sistemi</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Tek tıkla profili incele ve anında iletişime geç</li>
+                    </ul>
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-primary">
+                        <i class="ph ph-device-mobile"></i> Uygulamada Keşfet
+                    </a>
+                </div>
+                <div class="map-visual" style="position: relative;">
+                    <div class="map-app-card" style="border: 1px solid rgba(255,255,255,0.7); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);">
+                        <!-- Üst başlık -->
+                        <div class="mac-header">
+                            <div class="mac-user">
+                                <div class="mac-avatar"></div>
+                                <div>
+                                    <span class="mac-greeting">Merhaba, Ali 👋</span>
+                                    <strong class="mac-title">Bugün ne öğrenmek istersin?</strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Arama -->
+                        <div class="mac-search">
+                            <i class="ph ph-magnifying-glass"></i>
+                            <span>Matematik, Gitar, Fitness...</span>
+                        </div>
+
+                        <!-- Kategori Pilleri -->
+                        <div class="mac-pills">
+                            <span class="mac-pill">🎓 Akademik</span>
+                            <span class="mac-pill active">🏫 Özel Okul</span>
+                            <span class="mac-pill">🏃 Spor</span>
+                        </div>
+
+                        <!-- Harita -->
+                        <div id="map-inner" style="width:100%;height:260px;border-radius:16px;overflow:hidden;margin-bottom:12px;"></div>
+
+                        <!-- Seçilen ilan (alt kart) -->
+                        <div class="mac-item" style="background:white;border-color:#c7ccf5;">
+                            <img src="assets/images/av_t_m.png" alt="Ali Y." class="mac-item-img" onerror="this.src='assets/images/av_s.png'" style="border-radius:50%;">
+                            <div class="mac-item-info">
+                                <strong>Ali Y.</strong>
+                                <span>Matematik Öğretmeni</span>
+                            </div>
+                            <div class="mac-item-meta">
+                                <span class="mac-dist"><i class="ph-fill ph-map-pin"></i> 1.2 km</span>
+                                <span class="mac-star"><i class="ph-fill ph-star"></i> 4.9</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating badges -->
+                    <div class="map-float map-float-1" style="top: 20px; right: -40px; animation-delay: 1s;">
+                        <i class="ph-fill ph-users"></i> 2000+ Eğitmen
+                    </div>
+                    <div class="map-float map-float-2" style="bottom: 40px; left: -40px;">
+                        <i class="ph-fill ph-map-pin"></i> Sana En Yakın
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kategoriler -->
+    <section class="categories section bg-gray" id="kategoriler">
+        <div class="container">
+            <div class="section-header">
+                <h2>İlgi alanında <span>derinleş</span></h2>
+                <p>Yeni bilgilere ve becerilere adım atın. Size uygun kategoriyi seçin ve keşfedin.</p>
+            </div>
+
+            <div class="cat-slider-container">
+                <div class="cat-grid">
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-books"></i></div>
+                        <h4>Akademik</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-translate"></i></div>
+                        <h4>Yabancı Dil</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-devices"></i></div>
+                        <h4>Teknoloji</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-heartbeat"></i></div>
+                        <h4>Sağlık</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-barbell"></i></div>
+                        <h4>Spor</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-palette"></i></div>
+                        <h4>Hobi</h4>
+                        <span>12 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-buildings"></i></div>
+                        <h4>Özel Okul</h4>
+                        <span>6 Alt Kategori</span>
+                    </a>
+                    <a href="#" class="cat-item">
+                        <div class="cat-icon"><i class="ph ph-chalkboard-teacher"></i></div>
+                        <h4>Etüt Merkezi</h4>
+                        <span>3 Alt Kategori</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İndirme CTA -->
+    <section class="download-app section">
+        <div class="container">
+            <div class="download-wrapper">
+                <div class="download-content">
+                    <h2>Deneyimin <span>Ötesi</span> Cebinde!</h2>
+                    <p>Öğretsen uygulamasını indirerek öğrenme deneyimini sınırların ötesine taşıyabilir, anında en iyi eğitmenlere ulaşabilirsin. Hemen indir, ücretsiz kayıt ol!</p>
+                    
+                    <div class="store-buttons">
+                        <a href="#" class="store-btn">
+                            <i class="ph-fill ph-apple-logo"></i>
+                            <div class="btn-text">
+                                <small>Download on the</small>
+                                <strong>App Store</strong>
+                            </div>
+                        </a>
+                        <a href="#" class="store-btn">
+                            <i class="ph-fill ph-google-play-logo"></i>
+                            <div class="btn-text">
+                                <small>GET IT ON</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="download-image" style="position: relative; z-index: 2; text-align: center;">
+                    <img src="assets/images/app-screen.png" alt="Öğretsen Uygulama Ekran Görüntüsü" style="max-height: 600px; width: auto; object-fit: contain; drop-shadow(0 30px 60px rgba(0,0,0,0.4)); animation: floating 6s ease-in-out infinite;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials section bg-light-gray">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Başarı <span>Hikayeleri</span></h2>
+                <p>Öğretsen ailesinin deneyimlerini keşfedin.</p>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+                    <p>"Öğrencilerime sayenizde ulaştım. Bir yere bağlı olmadan çalışmanın, öğrencilerimle birebir ilgilenmek, fitnessla zinde, fit ve mutlu olduklarını görmek çok güzel."</p>
+                    <div class="author">
+                        <div class="author-avatar bg-blue">FE</div>
+                        <div class="author-info">
+                            <strong>Fitness Eğitmeni</strong>
+                            <span>İstanbul</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+                    <p>"Kullanımı çok kolay bir uygulama. Oğlum için matematik öğretmeni ararken tesadüfen karşılaştım. En yakın öğretmeni bulup başladık, çok memnunuz."</p>
+                    <div class="author">
+                        <div class="author-avatar bg-orange">V</div>
+                        <div class="author-info">
+                            <strong>Öğrenci Velisi</strong>
+                            <span>İstanbul</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="ph-fill ph-quotes"></i></div>
+                    <p>"Gençken gitar çalmayı çok isteyip vakit bulamamıştım. Arkadaş önerisiyle Öğretsen'de hocamı buldum ve derslere başladık bile. Çevreme de öneriyorum!"</p>
+                    <div class="author">
+                        <div class="author-avatar bg-purple">Ö</div>
+                        <div class="author-info">
+                            <strong>Gitar Öğrencisi</strong>
+                            <span>İzmir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="aydinlatma-metni.html">Aydınlatma Metni</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="kvkk.html">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=12"></script>
+</body>
+</html>

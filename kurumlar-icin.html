@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurumlar İçin | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin. Spor, Yabancı Dil, Akademik ve daha fazlası.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=12">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Gece/Gündüz Modu">
+                        <i class="ph ph-moon"></i>
+                    </button>
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+<style>
+.dp-hero{padding:140px 0 50px;text-align:center}
+.dp-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;font-size:.85rem;font-weight:700;margin-bottom:20px;animation:fadeDown .5s ease}
+.dp-title{font-size:3rem;font-weight:900;color:#1a1a2e;margin-bottom:14px;animation:fadeUp .6s ease}
+.dp-title span{background:linear-gradient(135deg,#5462eb,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dp-title.green span{background:linear-gradient(135deg,#059669,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dp-title.orange span{background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dp-sub{font-size:1.1rem;color:#888;max-width:600px;margin:0 auto;animation:fadeUp .7s ease}
+.dp-section{padding:60px 0;border-bottom:1px solid #eef0fb}
+.dp-section:last-of-type{border-bottom:none}
+.dp-row{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start;max-width:900px;margin:0 auto}
+.dp-icon{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;flex-shrink:0;margin-top:4px}
+.dp-content h2{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:8px}
+.dp-content .dp-lead{font-size:1rem;color:#666;line-height:1.7;margin-bottom:20px}
+.dp-benefits{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.dp-benefit{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:#f8f9ff;border-radius:14px;border:1px solid #eef0fb;transition:all .3s}
+.dp-benefit:hover{border-color:#c7ccf5;background:#fff;box-shadow:0 4px 16px rgba(84,98,235,.08)}
+.dp-benefit i{color:#5462eb;font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.dp-benefit span{font-size:.88rem;color:#444;line-height:1.5}
+.dp-highlight{background:linear-gradient(135deg,#f8f9ff,#eef0ff);border-radius:16px;padding:20px 24px;margin-top:16px;border-left:4px solid #5462eb}
+.dp-highlight.green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-left-color:#059669}
+.dp-highlight.orange{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-left-color:#f59e0b}
+.dp-highlight p{font-size:.9rem;color:#555;line-height:1.6;margin:0}
+.dp-highlight strong{color:#1a1a2e}
+.dp-cta-bar{text-align:center;padding:60px 0}
+.dp-cta-bar p{color:#888;margin-bottom:20px;font-size:1rem}
+.dp-back{display:inline-flex;align-items:center;gap:6px;color:#5462eb;font-weight:600;font-size:.9rem;margin-top:16px;text-decoration:none}
+.dp-back:hover{text-decoration:underline}
+.gb{background:linear-gradient(135deg,#5462eb,#7c8cf5)}
+.gg{background:linear-gradient(135deg,#059669,#34d399)}
+.go{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.gp{background:linear-gradient(135deg,#7c3aed,#a78bfa)}
+.gr{background:linear-gradient(135deg,#e11d48,#fb7185)}
+.gt{background:linear-gradient(135deg,#0d9488,#5eead4)}
+.gc{background:linear-gradient(135deg,#0891b2,#67e8f9)}
+.ga{background:linear-gradient(135deg,#d97706,#fcd34d)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.dp-row{grid-template-columns:1fr}.dp-benefits{grid-template-columns:1fr}.dp-title{font-size:2.2rem}}
+</style>
+
+<section class="dp-hero">
+<div class="container">
+    <div class="dp-badge" style="background:#f59e0b;color:#fff"><i class="ph-fill ph-buildings"></i> Kurumlar İçin</div>
+    <h1 class="dp-title orange">Kurumlar İçin <span>Avantajlar</span></h1>
+    <p class="dp-sub">Dijital çağda kurumunuzun görünürlüğünü artırın, binlerce öğrenciye ulaşın.</p>
+</div>
+</section>
+<div class="container">
+
+<div class="dp-section" id="profil">
+    <div class="dp-row">
+        <div class="dp-icon go"><i class="ph ph-buildings"></i></div>
+        <div class="dp-content">
+            <h2>Kurumsal Profil Sayfası</h2>
+            <p class="dp-lead">Profesyonel kurumsal profil sayfanızı oluşturun. Galeri, video, iletişim bilgileri ve şube detaylarıyla markanızı en iyi şekilde tanıtın.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Kurumsal logo, kapak fotoğrafı ve marka kimliği</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Fotoğraf galerisi ve tanıtım videosu ekleme</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Şube adresleri ve iletişim bilgileri</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Kurumsal profil ayrıcalığı ile güvenilirlik</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>Fark:</strong> Kurumsal profile sahip okullar, arama sonuçlarında %5 kat daha fazla tıklanıyor. Hemen başvurun.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-section" id="harita">
+    <div class="dp-row">
+        <div class="dp-icon gb"><i class="ph ph-map-trifold"></i></div>
+        <div class="dp-content">
+            <h2>Harita Üzerinde Görünürlük</h2>
+            <p class="dp-lead">Harita üzerinde konumunuz profesyonel bir pin ile işaretlenir. Çevrenizdeki tüm öğrenciler ve veliler sizi kolayca keşfeder.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Haritada kurumsal pin ile öne çıkma</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Bölge bazlı arama sonuçlarında üst sıralarda yer alma</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Mesafe bilgisi ile potansiyel öğrencilere yakınlık gösterme</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Birden fazla şube için ayrı konum pinleri</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>Veri:</strong> Kullanıcıların %70'i eğitmen/kurum ararken harita görünümünü tercih ediyor. Haritada görünmek, keşfedilmenin en güçlü yolu.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-section" id="hedef-kitle">
+    <div class="dp-row">
+        <div class="dp-icon ob"><i class="ph ph-users-three"></i></div>
+        <div class="dp-content">
+            <h2>Doğrudan Hedef Kitleye Ulaşım</h2>
+            <p class="dp-lead">Geleneksel reklamlara bütçe ayırmak yerine, bulunduğunuz bölgede halihazırda eğitim arayan 50.000+ öğrenciye ve veliye anında ulaşın.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>50.000+ aktif öğrenci havuzuna organik erişim</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Hedeflenmiş kategori bazlı görünürlük</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Kampanya ve burs duyurusu yapabilme imkânı</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Sezon başı kayıt dönemlerinde öne çıkma</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>ROI:</strong> Geleneksel reklamlarda bir öğrenci kazanım maliyeti ortalama 200-500 TL iken, Öğretsen'de bu maliyet sıfır. Organik erişimle büyüyün.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-section" id="analiz">
+    <div class="dp-row">
+        <div class="dp-icon gp"><i class="ph ph-chart-bar"></i></div>
+        <div class="dp-content">
+            <h2>Kurumsal Analiz Paneli</h2>
+            <p class="dp-lead">Profilinizin performansını detaylı olarak takip edin. Görüntülenme, tıklanma, mesaj ve iletişim istatistikleri.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Günlük, haftalık ve aylık görüntülenme verileri</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Hangi kategorilerden trafik geldiğini görme</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Mesaj ve iletişim talep istatistikleri</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Rakip kurumlarla karşılaştırma metrikleri</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>Aksiyon:</strong> Analiz panelini düzenli kontrol ederek hangi dönemlerde talep arttığını tespit edin ve kampanyalarınızı buna göre planlayın.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-section" id="prestij">
+    <div class="dp-row">
+        <div class="dp-icon gr"><i class="ph ph-trophy"></i></div>
+        <div class="dp-content">
+            <h2>Marka Prestiji Oluşturma</h2>
+            <p class="dp-lead">Olumlu değerlendirmeler ve yüksek puanlar ile güvenilir eğitim kurumu olarak sektörde öne çıkın. Dijital itibar yönetiminin gücünü keşfedin.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Öğrenci ve veli yorumlarıyla sosyal kanıt oluşturma</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Başarı hikayeleri ve mezun referansları vitrini</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Yüksek puan ile arama sonuçlarında üst sıralarda yer alma</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Sektörde dijital otorite ve güven inşası</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>Strateji:</strong> Her dönem sonunda memnun öğrenci ve velilerden değerlendirme isteyin. 50+ olumlu yorum alan kurumlar 'Öne Çıkan' rozetini kazanır.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-section" id="entegrasyon">
+    <div class="dp-row">
+        <div class="dp-icon gc"><i class="ph ph-plugs-connected"></i></div>
+        <div class="dp-content">
+            <h2>Kolay Entegrasyon</h2>
+            <p class="dp-lead">Mevcut sistemlerinizle kolayca entegre olun. Kurumsal yönetim panelinden tüm şubelerinizi ve eğitmenlerinizi tek merkezden yönetin.</p>
+            <div class="dp-benefits">
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Kurumsal yönetim paneli ile merkezi kontrol</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Çoklu şube desteği: her şubeyi ayrı profil olarak yönetin</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>API entegrasyon imkânı ile kendi sisteminize bağlayın</span></div>
+                <div class="dp-benefit"><i class="ph-fill ph-check-circle"></i><span>Toplu eğitmen ekleme ve yönetme</span></div>
+            </div>
+            <div class="dp-highlight orange"><p><strong>Ölçeklenme:</strong> İster tek şubeli bir etüt merkezi olun, ister 20 şubeli bir okul zinciri — Öğretsen kurumsal paneli her ölçeğe uyum sağlar.</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="dp-cta-bar">
+    <p>Hemen başlamak için uygulamayı indir!</p>
+    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-primary btn-lg"><i class="ph ph-device-mobile"></i> Uygulamayı İndir</a>
+    <br><a href="neden-ogretsen.html" class="dp-back"><i class="ph ph-arrow-left"></i> Neden Öğretsen?'e Dön</a>
+</div>
+</div>
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="aydinlatma-metni.html">Aydınlatma Metni</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="kvkk.html">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=12"></script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neden Öğretsen? | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin. Spor, Yabancı Dil, Akademik ve daha fazlası.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=12">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+<style>
+/* ===== PAGE HERO ===== */
+.np-hero{padding:160px 0 80px;text-align:center;position:relative;overflow:hidden}
+.np-hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(84,98,235,.08) 0%,transparent 70%);pointer-events:none}
+.np-badge{display:inline-flex;align-items:center;gap:8px;background:#eef0ff;color:#5462eb;padding:8px 20px;border-radius:100px;font-size:.85rem;font-weight:700;margin-bottom:24px;animation:fadeDown .6s ease}
+.np-title{font-size:3.5rem;font-weight:900;color:#1a1a2e;line-height:1.15;margin-bottom:20px;animation:fadeUp .7s ease}
+.np-title span{background:linear-gradient(135deg,#5462eb,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.np-sub{font-size:1.2rem;color:#888;max-width:600px;margin:0 auto;animation:fadeUp .8s ease}
+
+/* ===== STATS ===== */
+.np-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:60px 0 90px}
+.np-stat{text-align:center;padding:32px 16px;background:#fff;border-radius:24px;border:1.5px solid #eef0fb;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:all .6s ease}
+.np-stat.visible{opacity:1;transform:translateY(0)}
+.np-stat:hover{border-color:#c7ccf5;box-shadow:0 12px 40px rgba(84,98,235,.1);transform:translateY(-4px)!important}
+.np-stat i{font-size:2.2rem;margin-bottom:8px;display:block}
+.np-stat .num{font-size:2.8rem;font-weight:900;color:#1a1a2e;display:block;line-height:1.1}
+.np-stat .label{font-size:.85rem;color:#999;margin-top:6px;display:block;font-weight:500}
+.s-blue i{color:#5462eb} .s-green i{color:#059669} .s-purple i{color:#7c3aed} .s-orange i{color:#f59e0b}
+
+/* ===== SECTION BLOCK ===== */
+.np-block{margin-bottom:100px;position:relative}
+.np-block-head{text-align:center;margin-bottom:56px}
+
+.np-block-icon{width:72px;height:72px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;margin-bottom:20px;animation:pulse 3s infinite}
+.np-block-title{font-size:2.6rem;font-weight:900;color:#1a1a2e;margin-bottom:12px}
+.np-block-title span{background:linear-gradient(135deg,#5462eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.np-block-title.green span{background:linear-gradient(135deg,#059669,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.np-block-title.orange span{background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.np-block-sub{font-size:1.05rem;color:#999;max-width:550px;margin:0 auto}
+
+/* ===== FEATURE ACCORDION CARDS ===== */
+.np-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.np-card{background:#fff;border:1.5px solid #eef0fb;border-radius:24px;padding:32px 26px;text-align:center;opacity:0;transform:translateY(40px);transition:all .5s ease; cursor:pointer;}
+.np-card.visible{opacity:1;transform:translateY(0)}
+.np-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(84,98,235,.12);border-color:#c7ccf5}
+.np-card.active{border-color:#5462eb;box-shadow:0 12px 30px rgba(84,98,235,.15);transform:translateY(0) scale(1.02);}
+
+.np-card .c-icon{width:60px;height:60px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;margin-bottom:18px;transition:transform .3s}
+.np-card:hover .c-icon{transform:scale(1.15) rotate(-5deg)}
+.np-card h3{font-size:1.2rem;font-weight:800;color:#1a1a2e;margin-bottom:10px}
+.np-card p{font-size:.85rem;color:#888;line-height:1.55}
+.np-card-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease, margin-top 0.4s ease;text-align:left;}
+.np-card.active .np-card-content{max-height:500px;margin-top:15px; border-top:1px solid #eef0fb; padding-top:15px;}
+.np-card-content p{margin-bottom:12px; color:#555;}
+.np-card-content ul{list-style:none;padding:0;margin:0;}
+.np-card-content ul li{font-size:0.85rem;color:#444;margin-bottom:8px;display:flex;gap:6px;align-items:flex-start;}
+.np-card-content ul li i{color:#5462eb;margin-top:2px;flex-shrink:0;}
+
+.np-card .card-action{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:15px;font-size:0.85rem;font-weight:600;color:#5462eb;transition:all 0.3s;}
+.np-card .card-action i{transition:transform 0.3s;}
+.np-card.active .card-action i{transform:rotate(180deg);}
+
+/* ===== DIVIDER ===== */
+.np-divider{height:2px;background:linear-gradient(90deg,transparent,#dde1f5 30%,#dde1f5 70%,transparent);margin:20px 0 80px;opacity:0;transition:opacity .8s}.np-divider.visible{opacity:1}
+
+/* ===== CTA ===== */
+.np-cta{text-align:center;padding:70px 40px;background:linear-gradient(135deg,#1a1a2e,#2d2b55);border-radius:32px;margin-bottom:80px;position:relative;overflow:hidden}
+.np-cta::before{content:'';position:absolute;top:-100px;right:-100px;width:350px;height:350px;background:#5462eb;filter:blur(120px);opacity:.3}
+.np-cta h2{font-size:2.4rem;font-weight:900;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.np-cta h2 span{color:#a78bfa}
+.np-cta p{color:rgba(255,255,255,.7);font-size:1.05rem;margin-bottom:30px;position:relative;z-index:1}
+
+/* ===== GRADIENT BGS ===== */
+.gb{background:linear-gradient(135deg,#5462eb,#7c8cf5)}
+.gg{background:linear-gradient(135deg,#059669,#34d399)}
+.go{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.gp{background:linear-gradient(135deg,#7c3aed,#a78bfa)}
+.gr{background:linear-gradient(135deg,#e11d48,#fb7185)}
+.gt{background:linear-gradient(135deg,#0d9488,#5eead4)}
+.gc{background:linear-gradient(135deg,#0891b2,#67e8f9)}
+.ga{background:linear-gradient(135deg,#d97706,#fcd34d)}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){.np-grid{grid-template-columns:repeat(2,1fr)}.np-stats{grid-template-columns:repeat(2,1fr)}.np-title{font-size:2.6rem}.np-block-title{font-size:2rem}}
+@media(max-width:600px){.np-grid,.np-stats{grid-template-columns:1fr}.np-title{font-size:2rem}.np-block-title{font-size:1.6rem}.np-cta h2{font-size:1.8rem}}
+</style>
+
+<section class="np-hero">
+<div class="container">
+
+<div class="np-badge"><i class="ph-fill ph-lightbulb"></i> Neden Biz?</div>
+<h1 class="np-title">Neden <span>Öğretsen?</span></h1>
+<p class="np-sub">Öğrenciler, eğitmenler ve kurumlar için tasarlandı.</p>
+
+<div class="np-stats">
+    <div class="np-stat s-blue"><i class="ph-fill ph-users"></i><strong class="num" data-count="10000">0</strong><span class="label">Aktif Öğrenci</span></div>
+    <div class="np-stat s-green"><i class="ph-fill ph-chalkboard-teacher"></i><strong class="num" data-count="2000">0</strong><span class="label">Eğitmen & Kurum</span></div>
+    <div class="np-stat s-purple"><i class="ph-fill ph-squares-four"></i><strong class="num" data-count="50">0</strong><span class="label">Kategori</span></div>
+    <div class="np-stat s-orange"><i class="ph-fill ph-star"></i><strong class="num" data-count="4.8">0</strong><span class="label">Ortalama Puan</span></div>
+</div>
+
+<!-- ÖĞRENCİLER -->
+<div class="np-block">
+    <div class="np-block-head">
+        <div class="np-block-icon gb"><i class="ph-fill ph-student"></i></div>
+        <h2 class="np-block-title">Öğrenciler İçin <span>Avantajlar</span></h2>
+        <p class="np-block-sub">En yakın, en uygun eğitmeni bul. Zaman kaybetme.</p>
+    </div>
+    <div class="np-grid">
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gb"><i class="ph ph-map-pin-line"></i></div>
+            <h3>Lokasyon Bazlı Arama</h3>
+            <p>GPS ile sana en yakın eğitmeni saniyeler içinde bul.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Otomatik konum algılama</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Canlı harita üzerinde eğitmenleri gör</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Mesafeye göre sıralama imkanı</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+        
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gp"><i class="ph ph-funnel-simple"></i></div>
+            <h3>Gelişmiş Filtreleme</h3>
+            <p>Fiyat, puan, mesafe filtreleriyle mükemmel eşleşmeyi bul.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Bütçenize göre fiyat aralığı seçin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Öğrenci yorumlarına ve puanlara göre sıralayın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> İhtiyacınıza uygun spesifik filtreler</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+        
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gt"><i class="ph ph-squares-four"></i></div>
+            <h3>50+ Kategori</h3>
+            <p>Matematik'ten Fitness'a — ne istersen burada.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Akademik: Matematik, Fizik, Türkçe...</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Dil: İngilizce, Almanca, İspanyolca...</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Spor ve Sanat alanlarında yüzlerce eğitmen</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gr"><i class="ph ph-shield-check"></i></div>
+            <h3>Güvenilir Eğitmenler</h3>
+            <p>Gerçek öğrenci yorumları ve puanlar.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Eğitmen kimlik ve belge doğrulama</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Şeffaf değerlendirme sistemi</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Sadece ders alan öğrencilerin yorum yapabilmesi</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon ga"><i class="ph ph-currency-circle-dollar"></i></div>
+            <h3>Şeffaf Fiyatlandırma</h3>
+            <p>Sürpriz ücret yok. Bütçene uygun eğitmeni seç.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Eğitmen profillerinde net saatlik ücret</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Komisyonsuz, doğrudan eğitmenle anlaşma</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Bütçenize göre eğitmen bulma imkanı</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gc"><i class="ph ph-chat-circle-dots"></i></div>
+            <h3>Kolay İletişim</h3>
+            <p>Uygulama içi mesajlaşma ile doğrudan iletişim.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Kişisel numaranızı paylaşmadan mesajlaşın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Hızlı ve güvenli platform içi iletişim</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Ders taleplerini doğrudan iletebilme</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="np-divider"></div>
+
+<!-- EĞİTMENLER -->
+<div class="np-block">
+    <div class="np-block-head">
+        <div class="np-block-icon gg"><i class="ph-fill ph-chalkboard-teacher"></i></div>
+        <h2 class="np-block-title green">Eğitmenler İçin <span>Avantajlar</span></h2>
+        <p class="np-block-sub">Bilgini paylaş, yeteneklerini kazanca dönüştür.</p>
+    </div>
+    <div class="np-grid">
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gg"><i class="ph ph-wallet"></i></div>
+            <h3>%100 Ücretsiz</h3>
+            <p>Kayıt ve profil tamamen ücretsiz. Komisyon yok.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Öğretsen kullanmak eğitmenler için ücretsizdir</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Ders ücretlerinizden komisyon alınmaz</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Gizli maliyetler olmadan kazancınızı artırın</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gb"><i class="ph ph-users-three"></i></div>
+            <h3>50.000+ Öğrenci</h3>
+            <p>Doğru öğrenci kitlesiyle buluş, bölgendeki taleplerle eşleş.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Bulunduğunuz bölgedeki öğrencilere kolayca ulaşın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Uzmanlık alanınızda aktif ders arayan kitle</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Düzenli yeni öğrenci akışı sağlayın</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon go"><i class="ph ph-calendar-check"></i></div>
+            <h3>Esnek Çalışma</h3>
+            <p>Kendi takvimini oluştur. Sen karar ver.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Müsait olduğunuz saatleri sisteme girin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Ek iş olarak veya tam zamanlı eğitim verin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Ders yeri ve saatini öğrencilerinizle kolayca planlayın</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gp"><i class="ph ph-chart-line-up"></i></div>
+            <h3>Marka İnşası</h3>
+            <p>Değerlendirmelerle itibarını artır.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Öğrenci yorumlarıyla güvenilir profil oluşturun</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Başarılarınızı göstererek daha fazla öğrenci çekin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Öğretsen'de tanınan bir eğitmen olun</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gr"><i class="ph ph-megaphone"></i></div>
+            <h3>Organik Tanıtım</h3>
+            <p>Reklam harcaması yapmadan keşfedil.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Harita bazlı aramada çevrenizdeki öğrencilere görünün</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Kategori listelemelerinde potansiyel kitleye ulaşın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Reklam bütçesi ayırmadan profilinizi binlerce kişiye sergileyin</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gt"><i class="ph ph-handshake"></i></div>
+            <h3>Güvenli Ortam</h3>
+            <p>Doğrulanmış profiller, 7/24 destek.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Doğrulanmış kullanıcı profilleri ile güvenli iletişim</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Sadece öğrenmek isteyen ciddi kullanıcılar</li>
+                    <li><i class="ph-fill ph-check-circle"></i> İhtiyaç anında Öğretsen destek ekibi yanınızda</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="np-divider"></div>
+
+<!-- KURUMLAR -->
+<div class="np-block">
+    <div class="np-block-head">
+        <div class="np-block-icon go"><i class="ph-fill ph-buildings"></i></div>
+        <h2 class="np-block-title orange">Kurumlar İçin <span>Avantajlar</span></h2>
+        <p class="np-block-sub">Dijital çağda kurumunuzun görünürlüğünü artırın.</p>
+    </div>
+    <div class="np-grid">
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon go"><i class="ph ph-buildings"></i></div>
+            <h3>Kurumsal Profil</h3>
+            <p>Profesyonel profil sayfanızı oluşturun.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Kurumunuzu tanıtan detaylı sayfa</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Eğitmen kadronuzu ve imkanlarınızı sergileyin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Güven veren, profesyonel dijital vitrin</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gb"><i class="ph ph-map-trifold"></i></div>
+            <h3>Harita Görünürlüğü</h3>
+            <p>Çevrenizdeki öğrenciler sizi keşfeder.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Bölgenizdeki kullanıcılara harita üzerinde öne çıkın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Lokasyon avantajınızı kullanarak kayıt oranını artırın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> 'Yakınımdaki kurumlar' aramasında listelenin</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gg"><i class="ph ph-target"></i></div>
+            <h3>Hedef Kitle</h3>
+            <p>Binlerce öğrenciye doğrudan ulaşın.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Eğitim arayan doğrudan hedef kitleye erişim</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Pasif değil, aktif potansiyel öğrencilere ulaşma imkanı</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Doğru kitleyle etkileşim kurarak dönüşümü artırın</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gp"><i class="ph ph-chart-bar"></i></div>
+            <h3>Analiz Paneli</h3>
+            <p>İstatistiklerinizi detaylı takip edin.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Profil görüntülenme sayılarını analiz edin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Hangi alanlarda talep olduğunu görün</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Veriye dayalı büyüme stratejileri geliştirin</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gr"><i class="ph ph-trophy"></i></div>
+            <h3>Marka Prestiji</h3>
+            <p>Güvenilir kurum olarak öne çıkın.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Öğrenci ve veli değerlendirmeleriyle güven inşa edin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Yüksek yıldızlı profil ile rekabette fark yaratın</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Modern ve yenilikçi bir eğitim kurumu imajı</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+
+        <div class="np-card" onclick="toggleCard(this)">
+            <div class="c-icon gc"><i class="ph ph-plugs-connected"></i></div>
+            <h3>Kolay Entegrasyon</h3>
+            <p>Kurumsal panel ve API entegrasyonu.</p>
+            <div class="np-card-content">
+                <ul>
+                    <li><i class="ph-fill ph-check-circle"></i> Kurumunuz için özel yönetim paneli</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Eğitmenlerinizi ve dersleri kolayca organize edin</li>
+                    <li><i class="ph-fill ph-check-circle"></i> Hızlı kurulum ve kullanım kolaylığı</li>
+                </ul>
+            </div>
+            <div class="card-action">Detayı Gör <i class="ph ph-caret-down"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="np-cta">
+    <h2>Hemen <span>Başla!</span></h2>
+    <p>Öğretsen uygulamasını indir, öğrenmeye veya öğretmeye bugün başla.</p>
+    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-primary btn-lg" style="position:relative;z-index:1"><i class="ph ph-device-mobile"></i> Uygulamayı İndir</a>
+</div>
+
+</div>
+</section>
+
+<script>
+// Toggle accordion cards
+function toggleCard(cardElement) {
+    // Aynı gruptaki diğer açık kartları kapat (opsiyonel)
+    const grid = cardElement.closest('.np-grid');
+    const currentlyActive = grid.querySelector('.np-card.active');
+    
+    // Tıklanan kart zaten açıksa sadece kapat, değilse aç
+    if (currentlyActive && currentlyActive !== cardElement) {
+        currentlyActive.classList.remove('active');
+        currentlyActive.querySelector('.card-action').innerHTML = 'Detayı Gör <i class="ph ph-caret-down"></i>';
+    }
+    
+    cardElement.classList.toggle('active');
+    const actionEl = cardElement.querySelector('.card-action');
+    if(cardElement.classList.contains('active')) {
+        actionEl.innerHTML = 'Kapat <i class="ph ph-caret-up"></i>';
+    } else {
+        actionEl.innerHTML = 'Detayı Gör <i class="ph ph-caret-down"></i>';
+    }
+}
+
+// Scroll Animation Observer
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            // Counter animation
+            if (e.target.classList.contains('np-stat')) {
+                const num = e.target.querySelector('.num');
+                if (num && !num.dataset.done) {
+                    num.dataset.done = '1';
+                    const target = parseFloat(num.dataset.count);
+                    const isDecimal = target < 10;
+                    const duration = 1500;
+                    const start = performance.now();
+                    const tick = (now) => {
+                        const p = Math.min((now - start) / duration, 1);
+                        const ease = 1 - Math.pow(1 - p, 3);
+                        const val = target * ease;
+                        num.textContent = isDecimal ? val.toFixed(1) : Math.floor(val).toLocaleString('tr-TR') + '+';
+                        if (p < 1) requestAnimationFrame(tick);
+                    };
+                    requestAnimationFrame(tick);
+                }
+            }
+        }
+    });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.np-stat, .np-card, .np-divider').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6) * 0.08 + 's';
+    obs.observe(el);
+});
+</script>
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="aydinlatma-metni.html">Aydınlatma Metni</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="kvkk.html">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=12"></script>
+</body>
+</html>

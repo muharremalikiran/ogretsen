@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bize Ulaşın | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=12">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://link-to.app/ljiMjxDi5g" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+    <section class="section" style="padding-top: 150px; min-height: 60vh;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <h1 style="color: var(--royal-blue); margin-bottom: 20px; font-size: 2.5rem;">Bize Ulaşın</h1>
+            </div>
+            <div class="page-content" style="font-size: 1.1rem; color: var(--medium-gray-900); max-width: 900px; line-height: 1.8;">
+                
+<p style="margin-bottom: 30px;">Bizimle iletişime geçmek için aşağıdaki iletişim formunu doldurabilir veya sosyal medya ağlarımız üzerinden bize mesaj gönderebilirsiniz.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
+    <div style="background: var(--bg-gray); padding: 40px; border-radius: 20px; border: 1px solid var(--light-gray);">
+        <h3 style="margin-bottom:25px; font-size:1.5rem;">İletişim Formu</h3>
+        <input type="text" placeholder="Adınız Soyadınız" style="width:100%; padding: 15px; margin-bottom:20px; border:1px solid #ddd; border-radius:12px; outline:none; font-family:inherit;">
+        <input type="email" placeholder="E-posta Adreiniz" style="width:100%; padding: 15px; margin-bottom:20px; border:1px solid #ddd; border-radius:12px; outline:none; font-family:inherit;">
+        <textarea placeholder="Mesajınız" rows="5" style="width:100%; padding: 15px; margin-bottom:20px; border:1px solid #ddd; border-radius:12px; outline:none; font-family:inherit; resize:vertical;"></textarea>
+        <button class="btn btn-primary btn-lg" style="width:100%;">Mesajı Gönder</button>
+    </div>
+    <div>
+        <h3 style="margin-bottom:25px; font-size:1.5rem;">Sosyal Medyadan Ulaşın</h3>
+        <a href="https://www.instagram.com/ogretsen/" target="_blank" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 1.1rem;">
+            <div style="width: 48px; height: 48px; background: var(--bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="ph ph-instagram-logo" style="color:var(--royal-blue); font-size:28px;"></i></div> <span>@ogretsen</span>
+        </a>
+        <a href="https://twitter.com/ogretsenapp" target="_blank" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 1.1rem;">
+            <div style="width: 48px; height: 48px; background: var(--bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="ph ph-twitter-logo" style="color:var(--royal-blue); font-size:28px;"></i></div> <span>@ogretsenapp</span>
+        </a>
+        <a href="https://www.facebook.com/ogretsen/" target="_blank" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 1.1rem;">
+            <div style="width: 48px; height: 48px; background: var(--bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="ph ph-facebook-logo" style="color:var(--royal-blue); font-size:28px;"></i></div> <span>/ogretsen</span>
+        </a>
+        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank" style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 1.1rem;">
+            <div style="width: 48px; height: 48px; background: var(--bg-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="ph ph-linkedin-logo" style="color:var(--royal-blue); font-size:28px;"></i></div> <span>Öğretsen</span>
+        </a>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="aydinlatma-metni.html">Aydınlatma Metni</a></li>
+                            <li><a href="cerez-politikasi.html">Çerez Politikası</a></li>
+                            <li><a href="gizlilik-politikasi.html">Gizlilik Politikası</a></li>
+                            <li><a href="kvkk.html">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="#" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=12"></script>
+</body>
+</html>
