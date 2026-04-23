@@ -2135,16 +2135,18 @@ h1, h2, h3, h4, h5, h6 {
     /* --- Hero Visual / App Mockup (Mobil Premium) --- */
     .hero-visual { 
         margin-top: 36px; 
-        max-width: 100%; 
-        margin-inline: auto; 
+        max-width: none;
+        width: calc(100% + 24px);
+        margin-left: -12px;
+        margin-right: -12px;
         perspective: none;
     }
 
     .app-mockup {
         transform: none !important;
         animation: none !important;
-        border-radius: 24px;
-        padding: 4px;
+        border-radius: 20px;
+        padding: 3px;
         border: 2px solid rgba(84, 98, 235, 0.08);
         box-shadow: 
             0 20px 60px rgba(84, 98, 235, 0.12),
@@ -2153,9 +2155,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .mockup-frame {
-        border-radius: 20px;
+        border-radius: 17px;
         height: auto;
-        min-height: 320px;
+        min-height: auto;
         background: linear-gradient(145deg, #f8f9ff 0%, #f0f2fb 100%);
     }
 
@@ -2331,7 +2333,7 @@ h1, h2, h3, h4, h5, h6 {
     .stat-info span { font-size: 0.8rem; }
 
     /* Mockup mobil ince ayar */
-    .hero-visual { max-width: 100%; }
+    .hero-visual { width: calc(100% + 20px); margin-left: -10px; margin-right: -10px; }
     .mockup-screen { padding: 16px 12px; }
     .mockup-header { margin-bottom: 12px; }
     .avatar { width: 32px; height: 32px; }
