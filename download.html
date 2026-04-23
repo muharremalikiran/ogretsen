@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretsen - Yönlendiriliyor...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9ff;
+            color: #1a1a2e;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(84, 98, 235, 0.2);
+            border-top: 4px solid #5462eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            setTimeout(function() {
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    window.location.href = "https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546";
+                } else if (/android/i.test(userAgent)) {
+                    window.location.href = "https://play.google.com/store/apps/details?id=com.ogretsen.app&hl=tr";
+                } else {
+                    // Eğer masaüstü bir cihazdan taranırsa ana sayfaya at
+                    window.location.href = "https://ogretsen.com/";
+                }
+            }, 800); // Kullanıcı yönlendirildiğini kısa bir an görsün diye ufak gecikme
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h2>Mağazaya Yönlendiriliyorsunuz...</h2>
+        <p>Lütfen bekleyin, cihazınız algılanıyor.</p>
+    </div>
+</body>
+</html>
