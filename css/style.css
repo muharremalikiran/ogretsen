@@ -1980,13 +1980,15 @@ h1, h2, h3, h4, h5, h6 {
     .hero-title { font-size: 3rem; }
     .hero-container { gap: 40px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
-    .cat-grid { grid-template-columns: repeat(3, 1fr); }
     .download-wrapper { padding: 50px; gap: 40px; }
 }
 
 @media (max-width: 768px) {
     .section { padding: 60px 0; }
-    .hero { padding-top: 120px; padding-bottom: 60px; }
+    .container { padding: 0 16px; }
+    .hero { padding-top: 110px; padding-bottom: 50px; }
+
+    /* --- Header / Nav --- */
     .nav-links { 
         display: flex;
         flex-direction: column;
@@ -2013,7 +2015,6 @@ h1, h2, h3, h4, h5, h6 {
         padding: 12px 16px 20px;
     }
 
-    /* Mobil link satırları */
     .nav-links li {
         border-bottom: 1px solid rgba(0,0,0,0.06);
     }
@@ -2033,7 +2034,6 @@ h1, h2, h3, h4, h5, h6 {
         transition: background 0.2s, color 0.2s;
     }
 
-    /* Mobil'de ikonları göster */
     .nav-links li a i {
         display: inline-flex;
         font-size: 1.2rem;
@@ -2049,10 +2049,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .nav-links li a::after {
-        display: none; /* Mobil'de alt çizgi animasyonunu kaldır */
+        display: none;
     }
 
-    /* Mobil CTA butonlar */
     .mobile-cta {
         display: flex !important;
         flex-direction: column;
@@ -2077,18 +2076,26 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .btn-login { display: none; }
+    .btn-signup { display: none; }
     .mobile-toggle { display: block; }
-    
+
+    /* --- Hero --- */
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
     }
     
-    .hero-description { margin: 0 auto 30px; }
+    .hero-title { font-size: 2.4rem; }
+    
+    .hero-description { 
+        margin: 0 auto 30px;
+        max-width: 100%;
+        font-size: 1.05rem;
+    }
     
     .hero-buttons { 
         flex-direction: column; 
-        gap: 16px;
+        gap: 12px;
     }
     .hero-buttons .btn {
         width: 100%;
@@ -2096,15 +2103,16 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-stats { 
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 24px !important;
+        gap: 20px !important;
     }
     
     .stat-store-links {
         border-left: none !important;
         padding-left: 0 !important;
         border-top: 1px solid var(--light-gray);
-        padding-top: 24px;
+        padding-top: 20px;
         align-items: center;
         width: 100%;
         margin-top: 10px;
@@ -2113,42 +2121,212 @@ h1, h2, h3, h4, h5, h6 {
         justify-content: center;
     }
     
-    .hero-visual { margin-top: 40px; max-width: 400px; margin-inline: auto; }
-    
+    .hero-visual { margin-top: 30px; max-width: 360px; margin-inline: auto; }
+
+    /* --- Hero floating elements --- */
+    .floating-element { display: none; }
+    .hero-shape-1 { width: 250px; height: 250px; }
+    .hero-shape-2 { width: 200px; height: 200px; }
+
+    /* --- Section Headers --- */
+    .section-header h2 { font-size: 1.8rem; }
+    .section-header p { font-size: 0.95rem; }
+    .section-header { margin-bottom: 40px; }
+
+    /* --- Features --- */
     .feature-tabs {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
     }
     
     .tab-btn {
         width: 100%;
         max-width: 300px;
+        padding: 12px 20px;
+        font-size: 1rem;
     }
 
     .features-grid { grid-template-columns: 1fr; }
+    .feature-card { padding: 30px 20px; }
+
+    /* --- Map Section --- */
+    .map-section-header { 
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .map-section-text h2 { font-size: 1.8rem; }
+    .map-app-card {
+        transform: none;
+        animation: none;
+        max-width: 100%;
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .map-float { display: none; }
+
+    /* --- Listings --- */
+    .listing-grid { grid-template-columns: 1fr; }
+    .listing-filters { gap: 6px; }
+    .listing-filter { 
+        padding: 7px 14px; 
+        font-size: 0.8rem; 
+    }
+
+    /* --- Testimonials --- */
     .testimonial-grid { grid-template-columns: 1fr; }
-    
+    .testimonial-card { padding: 30px 20px; }
+
+    /* --- Download / CTA --- */
     .download-wrapper {
         grid-template-columns: 1fr;
         text-align: center;
+        padding: 40px 24px;
+        border-radius: 24px;
+        gap: 30px;
     }
     
-    .store-buttons { justify-content: center; }
-    .phone-composition { margin-top: 40px; }
+    .download-content h2 { font-size: 1.8rem; }
+    .download-content p { font-size: 0.95rem; margin-bottom: 28px; }
     
-    .footer-top { grid-template-columns: 1fr; gap: 40px; }
-    .footer-links { grid-template-columns: 1fr; gap: 30px; }
+    .store-buttons { 
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .store-btn {
+        padding: 10px 18px;
+        flex: 1;
+        min-width: 140px;
+        justify-content: center;
+    }
+    .phone-composition { 
+        margin-top: 30px;
+        width: 220px;
+        height: 440px;
+    }
+
+    /* --- Footer --- */
+    .footer { padding: 50px 0 30px; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+    .footer-links { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* --- Accordion --- */
+    .accordion-trigger { padding: 14px 16px; gap: 12px; }
+    .accordion-trigger span { font-size: 0.95rem; }
+    .accordion-content { padding: 0 16px; }
+    .accordion-item.active .accordion-content { padding: 16px 16px 20px; }
 }
 
+/* --- Telefon ekranları (iPhone SE, iPhone 16 Pro, Samsung vb.) --- */
 @media (max-width: 480px) {
-    .hero-title { font-size: 2.2rem; }
-    .hero-buttons { flex-direction: column; }
-    .hero-stats { gap: 16px !important; }
-    .stat-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
+    .container { padding: 0 14px; }
+    .section { padding: 48px 0; }
+    
+    /* Hero */
+    .hero { padding-top: 100px; padding-bottom: 40px; }
+    .hero-title { font-size: 1.9rem; letter-spacing: -0.5px; }
+    .hero-description { font-size: 0.95rem; }
+    .hero-buttons { flex-direction: column; gap: 10px; }
+    .hero-stats { 
+        flex-direction: column; 
+        gap: 16px !important;
+        align-items: center;
     }
-    .cat-grid { grid-template-columns: 1fr; }
+    .stat-item {
+        flex-direction: row;
+        text-align: left;
+        gap: 12px;
+        width: 100%;
+        justify-content: center;
+    }
+    .stat-icon { width: 40px; height: 40px; font-size: 20px; }
+    .stat-info strong { font-size: 1.2rem; }
+    .stat-info span { font-size: 0.8rem; }
+    .hero-visual { max-width: 300px; }
+
+    /* Badge */
+    .badge { font-size: 0.78rem; padding: 6px 12px; margin-bottom: 16px; }
+    
+    /* Section headers */
+    .section-header h2 { font-size: 1.55rem; }
+    .section-header p { font-size: 0.88rem; }
+    .section-header { margin-bottom: 30px; }
+    
+    /* Map section */
+    .map-section-text h2 { font-size: 1.5rem; }
+    .map-section-text p { font-size: 0.92rem; }
+    .mac-header { gap: 8px; }
+    .mac-badge { font-size: 0.68rem; padding: 6px 10px; }
+    .mac-item { padding: 10px 12px; gap: 10px; }
+    .mac-item-img { width: 42px; height: 42px; }
+
+    /* Categories */
+    .cat-item { flex: 0 0 220px; padding: 24px 16px; }
+
+    /* Listings */
+    .listing-filters { 
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .listing-filter { 
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+    .lc-cover { height: 180px; }
+    .lc-profile { padding: 14px 14px 0; }
+    .lc-body { padding: 12px 14px 16px; }
+    
+    /* Download CTA */
+    .download-wrapper { padding: 32px 18px; border-radius: 20px; }
+    .download-content h2 { font-size: 1.5rem; }
+    .download-content p { font-size: 0.88rem; }
     .store-buttons { flex-direction: column; }
+    .store-btn { min-width: unset; width: 100%; }
+    .phone-composition { width: 180px; height: 360px; }
+    
+    /* Testimonials */
+    .testimonial-card { padding: 24px 16px; }
+    .testimonial-card p { font-size: 0.92rem; }
+    
+    /* Footer */
+    .footer-links { grid-template-columns: 1fr; gap: 20px; }
+    .footer-bottom { font-size: 0.8rem; }
+    .app-btn-mini { padding: 10px 16px; font-size: 0.85rem; }
+
+    /* Accordion */
+    .acc-icon { width: 36px; height: 36px; font-size: 1rem; border-radius: 10px; }
+    .accordion-trigger span { font-size: 0.88rem; }
+    .acc-benefits { grid-template-columns: 1fr; }
+
+    /* Feature tabs */
+    .tab-btn { font-size: 0.9rem; padding: 10px 18px; }
+    .feature-card { padding: 24px 16px; }
+    .feature-icon { width: 50px; height: 50px; font-size: 24px; }
+}
+
+/* --- Çok küçük ekranlar (iPhone SE, Galaxy S8) --- */
+@media (max-width: 375px) {
+    .container { padding: 0 12px; }
+    .hero-title { font-size: 1.65rem; }
+    .hero-description { font-size: 0.88rem; }
+    .section-header h2 { font-size: 1.4rem; }
+    .download-content h2 { font-size: 1.35rem; }
+    .map-section-text h2 { font-size: 1.35rem; }
+    .listing-filter { padding: 6px 10px; font-size: 0.75rem; }
+    .btn { padding: 10px 18px; font-size: 0.88rem; }
+    .phone-composition { width: 160px; height: 320px; }
+}
+
+/* --- Genel taşma önleyici --- */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
 }
