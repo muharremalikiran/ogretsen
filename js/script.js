@@ -279,16 +279,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function showDesktopWarning() {
         if (document.getElementById('desktop-warning-popup')) return;
 
+        const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://ogretsen.com/&color=1a1a2e&bgcolor=ffffff";
+
         const popupHtml = `
         <div id="desktop-warning-popup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px); opacity:0; transition: opacity 0.3s ease;">
-            <div style="background:white; padding:40px; border-radius:24px; max-width:400px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.2); transform: scale(0.9); transition: transform 0.3s ease;">
-                <div style="width:80px; height:80px; background:#f0f4ff; color:var(--royal-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 20px;">
+            <div style="background:white; padding:40px; border-radius:24px; max-width:420px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.2); transform: scale(0.9); transition: transform 0.3s ease;">
+                <div style="width:70px; height:70px; background:#f0f4ff; color:var(--royal-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 16px;">
                     <i class="ph ph-device-mobile"></i>
                 </div>
-                <h3 style="font-size:1.5rem; color:#1a1a2e; margin-bottom:15px; font-weight:700;">Mobil Uygulama Gerekli</h3>
-                <p style="color:#555; line-height:1.6; margin-bottom:25px; font-size:1.05rem;">Devam etmek için lütfen Öğretsen mobil uygulamasını telefonunuza indirin. <br><br> Telefonunuzun tarayıcısından sitemize girerek uygulamamızı indirebilirsiniz.</p>
+                <h3 style="font-size:1.5rem; color:#1a1a2e; margin-bottom:12px; font-weight:700;">Mobil Uygulama Gerekli</h3>
+                <p style="color:#555; line-height:1.5; margin-bottom:24px; font-size:0.95rem;">Öğretsen'i kullanmak için mobil uygulamamızı telefonunuza indirin.</p>
+                
+                <div style="background:#f8f9ff; padding:20px 16px; border-radius:16px; margin-bottom:24px; border:1px solid #eef0fb;">
+                    <img src="${qrUrl}" alt="QR Kod" style="width:140px; height:140px; margin-bottom:16px; border-radius:8px; mix-blend-mode: multiply;">
+                    <p style="font-size:0.85rem; color:#444; font-weight:600; margin:0;">Telefonunuzun kamerası ile okutarak <br>uygulamayı hemen indirebilirsiniz.</p>
+                </div>
+
                 <div style="display:flex; justify-content:center;">
-                    <button id="close-warning-btn" style="background:var(--royal-blue); color:white; border:none; padding:14px 28px; border-radius:12px; font-weight:600; cursor:pointer; width:100%; font-size:1.05rem; transition: background 0.3s;">Anladım, Kapat</button>
+                    <button id="close-warning-btn" style="background:var(--bg-gray); color:var(--black-russian); border:1px solid var(--light-gray); padding:12px 24px; border-radius:12px; font-weight:600; cursor:pointer; width:100%; font-size:1rem; transition: all 0.2s;">Kapat</button>
                 </div>
             </div>
         </div>`;
@@ -297,17 +305,21 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const popup = document.getElementById('desktop-warning-popup');
         const innerBox = popup.querySelector('div');
+        const closeBtn = document.getElementById('close-warning-btn');
         
         setTimeout(() => {
             popup.style.opacity = '1';
             innerBox.style.transform = 'scale(1)';
         }, 10);
 
-        document.getElementById('close-warning-btn').addEventListener('click', () => {
+        closeBtn.addEventListener('click', () => {
             popup.style.opacity = '0';
             innerBox.style.transform = 'scale(0.9)';
             setTimeout(() => popup.remove(), 300);
         });
+        
+        closeBtn.addEventListener('mouseover', () => { closeBtn.style.background = '#e2e5f1'; });
+        closeBtn.addEventListener('mouseout', () => { closeBtn.style.background = 'var(--bg-gray)'; });
     }
 
 });
