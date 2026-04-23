@@ -2157,12 +2157,12 @@ h1, h2, h3, h4, h5, h6 {
     .mockup-frame {
         border-radius: 17px;
         height: auto;
-        min-height: auto;
+        min-height: 420px;
         background: linear-gradient(145deg, #f8f9ff 0%, #f0f2fb 100%);
     }
 
     .mockup-screen {
-        padding: 18px 14px;
+        padding: 22px 16px 28px;
     }
 
     .mockup-header {
@@ -2197,19 +2197,19 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .t-card {
-        padding: 12px;
+        padding: 14px;
         border-radius: 14px;
         gap: 10px;
     }
 
-    .t-avatar { width: 40px; height: 40px; border-radius: 10px; }
-    .t-info strong { font-size: 0.85rem; }
-    .t-info span { font-size: 0.72rem; }
+    .t-avatar { width: 44px; height: 44px; border-radius: 12px; }
+    .t-info strong { font-size: 0.88rem; }
+    .t-info span { font-size: 0.75rem; }
     .t-distance { font-size: 0.65rem; padding: 2px 5px; }
     .t-rating { font-size: 0.78rem; }
 
     .mockup-cards-container { min-height: auto; }
-    .mockup-cards { gap: 10px; }
+    .mockup-cards { gap: 12px; }
 
     /* --- Hero floating elements --- */
     .floating-element { display: none; }
