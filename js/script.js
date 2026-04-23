@@ -249,9 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================
-    // 9. APP DOWNLOAD REDIRECT LOGIC
+    // 9. APP DOWNLOAD REDIRECT LOGIC (SMART ROUTING)
     // =========================================================
-    const appLinks = document.querySelectorAll('a[href="https://link-to.app/ljiMjxDi5g"], .app-btn-mini, .app-btn');
+    // Tüm store ve uygulama indirme linklerini seçiyoruz
+    const appLinks = document.querySelectorAll('a[href*="apple.com/tr/app/"], a[href*="play.google.com/store/apps/"], .app-btn-mini, .app-btn');
     
     appLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -261,14 +262,15 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Check iOS
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "https://apps.apple.com/tr/app/id123456789"; // App Store Link
+                window.location.href = "https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546";
             } 
             // Check Android
             else if (/android/i.test(userAgent)) {
-                window.location.href = "https://play.google.com/store/apps/details?id=com.ogretsen.app"; // Play Store Link
+                window.location.href = "https://play.google.com/store/apps/details?id=com.ogretsen.app&hl=tr";
             } 
             // Desktop
             else {
+                // Eğer masaüstü cihazsa karekod veya uyarı gösteren fonksiyon
                 showDesktopWarning();
             }
         });
