@@ -290,8 +290,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 style="font-size:1.5rem; color:#1a1a2e; margin-bottom:12px; font-weight:700;">Mobil Uygulama Gerekli</h3>
                 <p style="color:#555; line-height:1.5; margin-bottom:24px; font-size:0.95rem;">Öğretsen'i kullanmak için mobil uygulamamızı telefonunuza indirin.</p>
                 
-                <div style="background:#f8f9ff; padding:20px 16px; border-radius:16px; margin-bottom:24px; border:1px solid #eef0fb;">
-                    <img src="${qrUrl}" alt="QR Kod" style="width:140px; height:140px; margin-bottom:16px; border-radius:8px; mix-blend-mode: multiply;">
+                <div style="background:#f8f9ff; padding:20px 16px; border-radius:16px; margin-bottom:24px; border:1px solid #eef0fb; text-align:center;">
+                    <img src="${qrUrl}" alt="QR Kod" style="display:block; margin:0 auto 16px; width:140px; height:140px; border-radius:8px; mix-blend-mode: multiply;">
                     <p style="font-size:0.85rem; color:#444; font-weight:600; margin:0;">Telefonunuzun kamerası ile okutarak <br>uygulamayı hemen indirebilirsiniz.</p>
                 </div>
 
