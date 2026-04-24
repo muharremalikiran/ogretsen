@@ -2449,6 +2449,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* Listings */
+    .listing-grid { padding: 0 12px; }
     .lc-cover { height: 180px; border-radius: 20px 20px 0 0; }
     .lc-profile { padding: 16px 16px 0; }
     .lc-body { padding: 14px 16px 20px; }
