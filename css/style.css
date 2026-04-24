@@ -2175,6 +2175,7 @@ h1, h2, h3, h4, h5, h6 {
             0 20px 60px rgba(84, 98, 235, 0.12),
             0 0 0 1px rgba(84, 98, 235, 0.04);
         background: white;
+        text-align: left; /* Parent div'deki center ayarını eziyoruz */
     }
 
     .mockup-frame {
