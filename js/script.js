@@ -1,3 +1,16 @@
+// QR Kod Yönlendirmesi (Anında Yönlendirme)
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('qr') === '1') {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.replace("https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546");
+        } else if (/android/i.test(userAgent)) {
+            window.location.replace("https://play.google.com/store/apps/details?id=com.ogretsen.app&hl=tr");
+        }
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
     // 1. HEADER: Aşağı gidince gizle, yukarı gelince göster
@@ -279,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showDesktopWarning() {
         if (document.getElementById('desktop-warning-popup')) return;
 
-        const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://ogretsen.com/&color=1a1a2e&bgcolor=ffffff";
+        const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://ogretsen.com/?qr=1&color=1a1a2e&bgcolor=ffffff";
 
         const popupHtml = `
         <div id="desktop-warning-popup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px); opacity:0; transition: opacity 0.3s ease;">
