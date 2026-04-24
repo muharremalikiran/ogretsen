@@ -325,9 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. DYNAMIC HERO KEYWORDS (Özel Ders, Okul, Kurs Merkezi)
     // =========================================================
     const heroKeywords = [
-        { main: "Özel Ders Öğretmenini", search: "özel ders" },
-        { main: "Okulu", search: "okul" },
-        { main: "Kurs Merkezini", search: "kurs merkezi" }
+        { main: "Özel Ders'i", search: "özel ders" },
+        { main: "Okul'u", search: "okul" },
+        { main: "Kurs'u", search: "kurs" }
     ];
     let keywordIndex = 0;
     const dynWordMain = document.querySelector('.dynamic-word');
