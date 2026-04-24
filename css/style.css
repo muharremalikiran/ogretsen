@@ -2301,14 +2301,12 @@ h1, h2, h3, h4, h5, h6 {
         box-shadow: 0 12px 30px rgba(0,0,0,0.06);
     }
     .listing-filters { 
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 12px;
-        gap: 8px;
-        justify-content: flex-start;
-        -webkit-overflow-scrolling: touch;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        overflow-x: visible !important;
+        padding-bottom: 0 !important;
+        gap: 10px;
     }
-    .listing-filters::-webkit-scrollbar { display: none; }
     
     .listing-filter { 
         padding: 8px 18px; 
