@@ -2506,7 +2506,7 @@ html, body {
     .hero {
         background: var(--bg-gray);
         padding-top: 100px;
-        padding-bottom: 20px;
+        padding-bottom: 0;
         margin-bottom: 0;
         border-radius: 0;
         overflow: hidden;
@@ -2549,13 +2549,8 @@ html, body {
         color: var(--black-russian);
     }
     
-    .badge, .hero-description, .hero-stats {
+    .badge, .hero-description, .hero-stats, .hero-buttons {
         display: none !important;
-    }
-    
-    .hero-buttons {
-        display: flex !important;
-        margin-top: 28px;
     }
     
     .hero-mobile-image {
