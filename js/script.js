@@ -325,26 +325,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. DYNAMIC HERO KEYWORDS (Özel Ders, Okul, Kurs Merkezi)
     // =========================================================
     const heroKeywords = [
-        { main: "Özel Ders'i", search: "özel ders" },
-        { main: "Okul'u", search: "okul" },
-        { main: "Kurs'u", search: "kurs" }
+        { main: "Özel Ders'i", search: "özel ders", img: "assets/images/cover_english.png" },
+        { main: "Okul'u", search: "okul", img: "assets/images/cover_school.png" },
+        { main: "Kurs'u", search: "kurs", img: "assets/images/cover_etut.png" }
     ];
     let keywordIndex = 0;
     const dynWordMain = document.querySelector('.dynamic-word');
     const dynWordSearch = document.querySelector('.dynamic-word-search');
+    const mobileDynamicImg = document.getElementById('mobile-dynamic-img');
 
     if (dynWordMain && dynWordSearch) {
         setInterval(() => {
             dynWordMain.style.opacity = 0;
             dynWordSearch.style.opacity = 0;
+            if (mobileDynamicImg) mobileDynamicImg.style.opacity = 0;
             
             setTimeout(() => {
                 keywordIndex = (keywordIndex + 1) % heroKeywords.length;
                 dynWordMain.textContent = heroKeywords[keywordIndex].main;
                 dynWordSearch.textContent = heroKeywords[keywordIndex].search;
+                if (mobileDynamicImg) mobileDynamicImg.src = heroKeywords[keywordIndex].img;
                 
                 dynWordMain.style.opacity = 1;
                 dynWordSearch.style.opacity = 1;
+                if (mobileDynamicImg) mobileDynamicImg.style.opacity = 1;
             }, 400); // Wait for fade out
         }, 3000); // Change every 3 seconds
     }
