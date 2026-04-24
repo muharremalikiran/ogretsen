@@ -2561,8 +2561,13 @@ html, body {
         color: var(--black-russian);
     }
     
-    .badge, .hero-buttons, .hero-stats {
+    .badge, .hero-description, .hero-stats {
         display: none !important;
+    }
+    
+    .hero-buttons {
+        display: flex !important;
+        margin-top: 16px;
     }
     
     .hero-mobile-image {
