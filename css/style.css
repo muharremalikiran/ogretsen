@@ -2157,12 +2157,7 @@ h1, h2, h3, h4, h5, h6 {
     
     /* --- Hero Visual / App Mockup (Mobil Premium) --- */
     .hero-visual { 
-        margin-top: 36px; 
-        max-width: none;
-        width: calc(100% + 24px);
-        margin-left: -12px;
-        margin-right: -12px;
-        perspective: none;
+        display: none !important;
     }
 
     .app-mockup {
