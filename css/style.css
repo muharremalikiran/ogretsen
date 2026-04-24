@@ -2365,16 +2365,22 @@ h1, h2, h3, h4, h5, h6 {
     .accordion-item.active .accordion-content { padding: 16px 16px 20px; }
 }
 
+/* Page Section */
+.page-section {
+    padding-top: 150px;
+    min-height: 60vh;
+}
+
 /* --- Telefon ekranları (iPhone SE, iPhone 16 Pro, Samsung vb.) --- */
 @media (max-width: 480px) {
     .container { padding: 0 20px; }
-    .section { padding: 48px 0; }
+    .section { padding: 40px 0; }
     
     /* Hero */
     .logo img { height: 20px; }
     .header.scrolled .logo img { height: 18px; }
     
-    .hero { padding-top: 100px; padding-bottom: 40px; }
+    .hero { padding-top: 80px; padding-bottom: 0; }
     .hero-title { font-size: 1.75rem; letter-spacing: -0.5px; line-height: 1.2; }
     .hero-description { font-size: 0.92rem; padding: 0; }
     .hero-buttons { flex-direction: row; flex-wrap: nowrap; gap: 8px; padding: 0; width: 100%; }
@@ -2430,7 +2436,7 @@ h1, h2, h3, h4, h5, h6 {
     /* Section headers */
     .section-header h2 { font-size: 1.55rem; }
     .section-header p { font-size: 0.88rem; }
-    .section-header { margin-bottom: 30px; }
+    .section-header { margin-bottom: 24px; }
     
     /* Map section */
     .map-section-text h2 { font-size: 1.5rem; }
@@ -2457,7 +2463,7 @@ h1, h2, h3, h4, h5, h6 {
     
     /* Download CTA */
     .download-wrapper { 
-        padding: 40px 20px; 
+        padding: 32px 20px; 
         border-radius: 32px; 
         background: linear-gradient(135deg, var(--royal-blue) 0%, #3e4ac2 100%);
     }
@@ -2465,7 +2471,7 @@ h1, h2, h3, h4, h5, h6 {
     .download-content p { font-size: 0.95rem; line-height: 1.5; }
     .store-buttons { flex-direction: column; gap: 14px; }
     .store-btn { min-width: unset; width: 100%; border-radius: 16px; padding: 14px; }
-    .phone-composition { width: 180px; height: 360px; margin-top: 40px; }
+    .phone-composition { width: 180px; height: 360px; margin-top: 32px; }
     
     /* Footer */
     .footer-links { grid-template-columns: 1fr; gap: 24px; }
@@ -2514,6 +2520,10 @@ html, body {
     
     .section {
         padding: 40px 0;
+    }
+    
+    .page-section {
+        padding-top: 100px;
     }
     
     .hero-container {
