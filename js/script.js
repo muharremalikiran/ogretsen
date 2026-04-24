@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showDesktopWarning() {
         if (document.getElementById('desktop-warning-popup')) return;
 
-        const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://ogretsen.com/download.html&color=1a1a2e&bgcolor=ffffff";
+        const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://ogretsen.com/&color=1a1a2e&bgcolor=ffffff";
 
         const popupHtml = `
         <div id="desktop-warning-popup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px); opacity:0; transition: opacity 0.3s ease;">
