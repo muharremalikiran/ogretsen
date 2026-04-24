@@ -148,7 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mockupPills.forEach((pill, index) => {
         pill.addEventListener('click', () => {
-            activateMockupTab(index);
+            if (typeof window.triggerHeroKeywordChange === 'function') {
+                window.triggerHeroKeywordChange(index);
+            } else {
+                activateMockupTab(index);
+            }
+        });
+    });
+
+    const mapPillsClickable = document.querySelectorAll('.mac-pill');
+    mapPillsClickable.forEach((pill, index) => {
+        pill.addEventListener('click', () => {
+            if (typeof window.triggerHeroKeywordChange === 'function') {
+                window.triggerHeroKeywordChange(index);
+            } else {
+                activateMockupTab(index);
+            }
         });
     });
 
@@ -347,23 +362,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. DYNAMIC HERO KEYWORDS (Özel Ders, Okul, Kurs Merkezi)
     // =========================================================
     const heroKeywords = [
+        { main: "Akademik Desteği", search: "LGS hazırlık kursu, Okul...", img: "assets/images/cover_school.png" },
         { main: "Özel Ders'i", search: "Matematik özel ders...", img: "assets/images/cover_english.png" },
-        { main: "Okul'u", search: "Fen lisesi...", img: "assets/images/cover_school.png" },
-        { main: "Kurs'u", search: "LGS hazırlık kursu...", img: "assets/images/cover_etut.png" }
+        { main: "Spor Hocasını", search: "Bireysel fitness, Tenis...", img: "assets/images/cover_fitness.png" }
     ];
     let keywordIndex = 0;
     const dynWordMain = document.querySelector('.dynamic-word');
     const dynWordSearch = document.querySelector('.dynamic-word-search');
     const mobileDynamicImg = document.getElementById('mobile-dynamic-img');
+    let heroIntervalId;
 
     if (dynWordMain && dynWordSearch) {
-        setInterval(() => {
+        
+        window.triggerHeroKeywordChange = function(index) {
+            keywordIndex = index;
             dynWordMain.style.opacity = 0;
             dynWordSearch.style.opacity = 0;
             if (mobileDynamicImg) mobileDynamicImg.style.opacity = 0;
             
             setTimeout(() => {
-                keywordIndex = (keywordIndex + 1) % heroKeywords.length;
                 dynWordMain.textContent = heroKeywords[keywordIndex].main;
                 dynWordSearch.textContent = heroKeywords[keywordIndex].search;
                 if (mobileDynamicImg) mobileDynamicImg.src = heroKeywords[keywordIndex].img;
@@ -376,8 +393,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 dynWordMain.style.opacity = 1;
                 dynWordSearch.style.opacity = 0.6;
                 if (mobileDynamicImg) mobileDynamicImg.style.opacity = 1;
-            }, 400); // Wait for fade out
-        }, 3000); // Change every 3 seconds
+            }, 400);
+            
+            // Reset interval when clicked manually
+            if (heroIntervalId) {
+                clearInterval(heroIntervalId);
+                heroIntervalId = setInterval(autoChangeKeyword, 3000);
+            }
+        };
+
+        function autoChangeKeyword() {
+            let nextIndex = (keywordIndex + 1) % heroKeywords.length;
+            window.triggerHeroKeywordChange(nextIndex);
+        }
+
+        heroIntervalId = setInterval(autoChangeKeyword, 3000);
+
     }
 
 });
