@@ -2506,3 +2506,119 @@ html, body {
 * {
     -webkit-tap-highlight-color: transparent;
 }
+
+/* ========================================= */
+/* PREMIUM MOBILE HERO (Like App Store UI)   */
+/* ========================================= */
+.mobile-br { display: none; }
+@media (max-width: 768px) {
+    .mobile-br { display: inline; }
+    .desktop-only { display: none !important; }
+    
+    .hero {
+        background: var(--royal-blue);
+        padding-top: 100px;
+        padding-bottom: 0;
+        margin-bottom: 40px;
+        border-radius: 0 0 32px 32px;
+        overflow: hidden;
+    }
+    
+    .hero-container {
+        padding: 0;
+    }
+    
+    .hero-content {
+        padding: 0 20px;
+    }
+    
+    .hero-title {
+        color: var(--white);
+        margin-bottom: 24px;
+    }
+    
+    .hero-title .hero-line-1 {
+        font-size: 1.3rem;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+    
+    .hero-title .dynamic-word {
+        color: var(--white);
+        font-size: 2.8rem;
+        font-weight: 800;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        margin: 4px 0;
+    }
+    
+    .hero-title .dynamic-word::after {
+        display: none;
+    }
+    
+    .hero-title .hero-line-3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        opacity: 0.95;
+    }
+    
+    .badge, .hero-buttons, .hero-stats {
+        display: none !important;
+    }
+    
+    .hero-mobile-search {
+        display: flex !important;
+        align-items: center;
+        background: var(--white);
+        border-radius: 100px;
+        padding: 6px 6px 6px 20px;
+        margin: 30px auto;
+        max-width: 340px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .hero-mobile-search .search-icon {
+        color: var(--medium-gray-900);
+        font-size: 1.2rem;
+        margin-right: 12px;
+    }
+    
+    .hero-mobile-search .search-placeholder {
+        flex: 1;
+        color: var(--medium-gray-600);
+        font-size: 0.95rem;
+        text-align: left;
+        font-weight: 500;
+    }
+    
+    .hero-mobile-search .search-placeholder .dynamic-word-search {
+        color: var(--royal-blue);
+        font-weight: 700;
+    }
+    
+    .hero-mobile-search .search-submit {
+        background: var(--bg-gray);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--royal-blue);
+        font-size: 1.2rem;
+    }
+    
+    .hero-visual {
+        display: block !important;
+        margin-top: 30px;
+        padding: 0 20px;
+        transform: translateY(20px);
+    }
+    
+    .app-mockup {
+        border-radius: 24px 24px 0 0;
+        border: none;
+        border-bottom: none;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+}

@@ -321,6 +321,33 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('mouseover', () => { closeBtn.style.background = '#e2e5f1'; });
         closeBtn.addEventListener('mouseout', () => { closeBtn.style.background = 'var(--bg-gray)'; });
     }
+    // =========================================================
+    // 10. DYNAMIC HERO KEYWORDS (Özel Ders, Okul, Kurs Merkezi)
+    // =========================================================
+    const heroKeywords = [
+        { main: "Özel Ders", search: "özel ders" },
+        { main: "Okul", search: "okul" },
+        { main: "Kurs Merkezi", search: "kurs merkezi" }
+    ];
+    let keywordIndex = 0;
+    const dynWordMain = document.querySelector('.dynamic-word');
+    const dynWordSearch = document.querySelector('.dynamic-word-search');
+
+    if (dynWordMain && dynWordSearch) {
+        setInterval(() => {
+            dynWordMain.style.opacity = 0;
+            dynWordSearch.style.opacity = 0;
+            
+            setTimeout(() => {
+                keywordIndex = (keywordIndex + 1) % heroKeywords.length;
+                dynWordMain.textContent = heroKeywords[keywordIndex].main;
+                dynWordSearch.textContent = heroKeywords[keywordIndex].search;
+                
+                dynWordMain.style.opacity = 1;
+                dynWordSearch.style.opacity = 1;
+            }, 400); // Wait for fade out
+        }, 3000); // Change every 3 seconds
+    }
 
 });
 
