@@ -2569,7 +2569,7 @@ html, body {
         border-radius: 100px;
         padding: 6px 6px 6px 20px;
         margin: 24px auto;
-        max-width: 340px;
+        width: 100%;
         box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         border: 1px solid var(--light-gray);
     }
