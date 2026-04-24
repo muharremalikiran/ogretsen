@@ -125,23 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMockupIndex = index;
     }
 
-    function startMockupAutoPlay() {
-        mockupInterval = setInterval(() => {
-            activateMockupTab((currentMockupIndex + 1) % mockupPills.length);
-        }, 3500);
-    }
-
     mockupPills.forEach((pill, index) => {
         pill.addEventListener('click', () => {
-            clearInterval(mockupInterval);
             activateMockupTab(index);
-            startMockupAutoPlay();
         });
     });
-
-    if (mockupPills.length > 0) {
-        startMockupAutoPlay();
-    }
 
 
     // =========================================================
@@ -358,6 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 dynWordMain.textContent = heroKeywords[keywordIndex].main;
                 dynWordSearch.textContent = heroKeywords[keywordIndex].search;
                 if (mobileDynamicImg) mobileDynamicImg.src = heroKeywords[keywordIndex].img;
+                
+                // Sync mockup tab with the new keyword
+                if (typeof activateMockupTab === 'function') {
+                    activateMockupTab(keywordIndex);
+                }
                 
                 dynWordMain.style.opacity = 1;
                 dynWordSearch.style.opacity = 0.6;
