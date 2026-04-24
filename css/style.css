@@ -2077,6 +2077,14 @@ h1, h2, h3, h4, h5, h6 {
         border-radius: 12px;
     }
 
+    .mobile-cta .btn i {
+        width: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        color: inherit !important;
+        font-size: 1.1rem !important;
+    }
+
     .w-full {
         width: 100%;
         text-align: center;
