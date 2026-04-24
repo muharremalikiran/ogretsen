@@ -2118,22 +2118,34 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-stats { 
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px !important;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 24px;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+        border: 1px solid rgba(84, 98, 235, 0.08);
+        margin-top: 32px;
+        align-items: start;
     }
     
     .stat-store-links {
+        grid-column: span 2;
         border-left: none !important;
-        padding-left: 0 !important;
-        border-top: 1px solid var(--light-gray);
-        padding-top: 20px;
-        align-items: center;
-        width: 100%;
-        margin-top: 10px;
+        padding: 16px 0 0 0 !important;
+        border-top: 1px dashed rgba(84, 98, 235, 0.2) !important;
+        margin-top: 4px;
         display: flex !important;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100%;
+    }
+    
+    .stat-store-links > span {
+        font-size: 0.75rem !important;
+        color: var(--royal-blue) !important;
     }
     
     /* --- Hero Visual / App Mockup (Mobil Premium) --- */
@@ -2353,20 +2365,31 @@ h1, h2, h3, h4, h5, h6 {
     .hero-description { font-size: 0.92rem; padding: 0; }
     .hero-buttons { flex-direction: column; gap: 10px; padding: 0; }
     .hero-stats { 
-        flex-direction: column; 
-        gap: 16px !important;
-        align-items: center;
+        /* Inherit from 768px, minor tweaks if needed */
+        margin-top: 24px;
+        padding: 16px;
     }
     .stat-item {
-        flex-direction: row;
-        text-align: left;
-        gap: 12px;
-        width: 100%;
+        flex-direction: column !important;
+        text-align: center !important;
+        background: #f8f9ff;
+        padding: 16px 10px;
+        border-radius: 16px;
+        gap: 8px !important;
+        width: 100% !important;
+        border: 1px solid rgba(84, 98, 235, 0.05);
         justify-content: center;
     }
-    .stat-icon { width: 40px; height: 40px; font-size: 20px; }
-    .stat-info strong { font-size: 1.2rem; }
-    .stat-info span { font-size: 0.8rem; }
+    .stat-icon { 
+        margin: 0 auto;
+        width: 44px; height: 44px; 
+        font-size: 22px; 
+        background: white;
+        box-shadow: 0 4px 12px rgba(84, 98, 235, 0.08);
+    }
+    .stat-info { display: flex; flex-direction: column; gap: 4px; }
+    .stat-info strong { font-size: 1.15rem; color: var(--black-russian); }
+    .stat-info span { font-size: 0.7rem; color: var(--medium-gray); font-weight: 500; }
 
     /* Mockup mobil ince ayar */
     .hero-visual { width: calc(100% + 20px); margin-left: -10px; margin-right: -10px; }
