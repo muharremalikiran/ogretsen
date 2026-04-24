@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMockupIndex = 0;
 
     function activateMockupTab(index) {
+        // Sync original mockup
         mockupPills.forEach(p => p.classList.remove('active'));
         mockupCardGroups.forEach(c => c.classList.remove('active'));
         if (mockupPills[index]) mockupPills[index].classList.add('active');
@@ -122,6 +123,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetCardGroup = document.getElementById('mockup-' + targetId);
             if (targetCardGroup) targetCardGroup.classList.add('active');
         }
+        
+        // Sync map mockup
+        const mapPills = document.querySelectorAll('.mac-pill');
+        const mapItems = document.querySelectorAll('.mac-item');
+        if (mapPills.length > 0 && mapItems.length > 0) {
+            mapPills.forEach((p, i) => {
+                if (i === index) p.classList.add('active');
+                else p.classList.remove('active');
+            });
+            mapItems.forEach((item, i) => {
+                if (i === index) {
+                    item.style.display = 'flex';
+                    item.classList.add('active');
+                } else {
+                    item.style.display = 'none';
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
         currentMockupIndex = index;
     }
 

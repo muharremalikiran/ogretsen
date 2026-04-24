@@ -16,7 +16,7 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=39">
+    <link rel="stylesheet" href="css/style.css?v=41">
     <!-- Leaflet Harita -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -376,24 +376,48 @@
 
                         <!-- Kategori Pilleri -->
                         <div class="mac-pills">
-                            <span class="mac-pill">🎓 Akademik</span>
-                            <span class="mac-pill active">🏫 Özel Okul</span>
-                            <span class="mac-pill">🏃 Spor</span>
+                            <span class="mac-pill active" id="mac-pill-0">🎯 Akademik</span>
+                            <span class="mac-pill" id="mac-pill-1">👨‍🏫 Özel Ders</span>
+                            <span class="mac-pill" id="mac-pill-2">🏃 Spor</span>
                         </div>
 
                         <!-- Harita -->
                         <div id="map-inner" style="width:100%;height:260px;border-radius:16px;overflow:hidden;margin-bottom:12px;"></div>
 
-                        <!-- Seçilen ilan (alt kart) -->
-                        <div class="mac-item" style="background:white;border-color:#c7ccf5;">
-                            <img src="assets/images/av_t_m.png" alt="Ali Y." class="mac-item-img" onerror="this.src='assets/images/av_s.png'" style="border-radius:50%;">
-                            <div class="mac-item-info">
-                                <strong>Ali Y.</strong>
-                                <span>Matematik Öğretmeni</span>
+                        <!-- Seçilen ilanlar (alt kart) -->
+                        <div class="mac-item-container">
+                            <div class="mac-item active" id="mac-item-0" style="background:white;border-color:#c7ccf5;">
+                                <img src="assets/images/av_s.png" alt="Hedef Kurs" class="mac-item-img" style="border-radius:12px;">
+                                <div class="mac-item-info">
+                                    <strong>Hedef Kurs</strong>
+                                    <span>LGS Hazırlık</span>
+                                </div>
+                                <div class="mac-item-meta">
+                                    <span class="mac-dist"><i class="ph-fill ph-map-pin"></i> 2.4 km</span>
+                                    <span class="mac-star"><i class="ph-fill ph-star"></i> 4.9</span>
+                                </div>
                             </div>
-                            <div class="mac-item-meta">
-                                <span class="mac-dist"><i class="ph-fill ph-map-pin"></i> 1.2 km</span>
-                                <span class="mac-star"><i class="ph-fill ph-star"></i> 4.9</span>
+                            <div class="mac-item" id="mac-item-1" style="background:white;border-color:#c7ccf5; display:none;">
+                                <img src="assets/images/av_t_m.png" alt="Ali Y." class="mac-item-img" style="border-radius:50%;">
+                                <div class="mac-item-info">
+                                    <strong>Ali Y.</strong>
+                                    <span>Matematik Öğretmeni</span>
+                                </div>
+                                <div class="mac-item-meta">
+                                    <span class="mac-dist"><i class="ph-fill ph-map-pin"></i> 1.2 km</span>
+                                    <span class="mac-star"><i class="ph-fill ph-star"></i> 4.9</span>
+                                </div>
+                            </div>
+                            <div class="mac-item" id="mac-item-2" style="background:white;border-color:#c7ccf5; display:none;">
+                                <img src="assets/images/av_sp.png" alt="Burak K." class="mac-item-img" style="border-radius:50%;">
+                                <div class="mac-item-info">
+                                    <strong>Burak K.</strong>
+                                    <span>Bireysel Fitness</span>
+                                </div>
+                                <div class="mac-item-meta">
+                                    <span class="mac-dist"><i class="ph-fill ph-map-pin"></i> 1.5 km</span>
+                                    <span class="mac-star"><i class="ph-fill ph-star"></i> 4.8</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -597,6 +621,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js?v=39"></script>
+    <script src="js/script.js?v=41"></script>
 </body>
 </html>
