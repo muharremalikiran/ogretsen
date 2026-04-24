@@ -2025,27 +2025,31 @@ h1, h2, h3, h4, h5, h6 {
     .nav-links li a {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 14px 8px;
-        font-size: 1rem;
+        gap: 14px;
+        padding: 16px 12px;
+        font-size: 1.05rem;
         font-weight: 600;
         color: var(--black-russian);
-        border-radius: 8px;
+        border-radius: 12px;
         transition: background 0.2s, color 0.2s;
     }
 
     .nav-links li a i {
         display: inline-flex;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         color: var(--royal-blue);
-        width: 24px;
+        width: 28px;
         justify-content: center;
         flex-shrink: 0;
+        background: rgba(84, 98, 235, 0.08);
+        padding: 6px;
+        border-radius: 8px;
     }
 
     .nav-links li a:hover {
-        background: rgba(84, 98, 235, 0.07);
+        background: #f8f9ff;
         color: var(--royal-blue);
+        transform: translateX(4px);
     }
 
     .nav-links li a::after {
@@ -2221,22 +2225,34 @@ h1, h2, h3, h4, h5, h6 {
     .section-header p { font-size: 0.95rem; }
     .section-header { margin-bottom: 40px; }
 
-    /* --- Features --- */
+    /* --- Features (Premium Mobile) --- */
     .feature-tabs {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
     }
     
+    .feature-tabs::-webkit-scrollbar { display: none; }
+    
     .tab-btn {
-        width: 100%;
-        max-width: 300px;
-        padding: 12px 20px;
-        font-size: 1rem;
+        flex-shrink: 0;
+        width: auto;
+        max-width: none;
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        border-radius: 100px;
+        white-space: nowrap;
     }
 
-    .features-grid { grid-template-columns: 1fr; }
-    .feature-card { padding: 30px 20px; }
+    .features-grid { grid-template-columns: 1fr; gap: 20px; }
+    .feature-card { 
+        padding: 32px 24px; 
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+        border: 1px solid rgba(84, 98, 235, 0.05);
+    }
 
     /* --- Map Section --- */
     .map-section-header { 
@@ -2253,17 +2269,37 @@ h1, h2, h3, h4, h5, h6 {
     }
     .map-float { display: none; }
 
-    /* --- Listings --- */
-    .listing-grid { grid-template-columns: 1fr; }
-    .listing-filters { gap: 6px; }
+    /* --- Listings (Premium Mobile) --- */
+    .listing-grid { grid-template-columns: 1fr; gap: 24px; }
+    .listing-card {
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+    .listing-filters { 
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        gap: 8px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+    .listing-filters::-webkit-scrollbar { display: none; }
+    
     .listing-filter { 
-        padding: 7px 14px; 
-        font-size: 0.8rem; 
+        padding: 8px 18px; 
+        font-size: 0.85rem; 
+        flex-shrink: 0;
+        border-radius: 100px;
+        white-space: nowrap;
     }
 
-    /* --- Testimonials --- */
-    .testimonial-grid { grid-template-columns: 1fr; }
-    .testimonial-card { padding: 30px 20px; }
+    /* --- Testimonials (Premium Mobile) --- */
+    .testimonial-grid { grid-template-columns: 1fr; gap: 20px; }
+    .testimonial-card { 
+        padding: 32px 24px;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
 
     /* --- Download / CTA --- */
     .download-wrapper {
@@ -2365,50 +2401,45 @@ h1, h2, h3, h4, h5, h6 {
     .mac-item-img { width: 42px; height: 42px; }
 
     /* Categories */
-    .cat-item { flex: 0 0 220px; padding: 24px 16px; }
+    .cat-item { 
+        flex: 0 0 240px; 
+        padding: 28px 20px; 
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
 
     /* Listings */
-    .listing-filters { 
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        padding-bottom: 8px;
-        -webkit-overflow-scrolling: touch;
-    }
-    .listing-filter { 
-        flex-shrink: 0;
-        white-space: nowrap;
-    }
-    .lc-cover { height: 180px; }
-    .lc-profile { padding: 14px 14px 0; }
-    .lc-body { padding: 12px 14px 16px; }
+    .lc-cover { height: 180px; border-radius: 20px 20px 0 0; }
+    .lc-profile { padding: 16px 16px 0; }
+    .lc-body { padding: 14px 16px 20px; }
     
     /* Download CTA */
-    .download-wrapper { padding: 32px 18px; border-radius: 20px; }
-    .download-content h2 { font-size: 1.5rem; }
-    .download-content p { font-size: 0.88rem; }
-    .store-buttons { flex-direction: column; }
-    .store-btn { min-width: unset; width: 100%; }
-    .phone-composition { width: 180px; height: 360px; }
-    
-    /* Testimonials */
-    .testimonial-card { padding: 24px 16px; }
-    .testimonial-card p { font-size: 0.92rem; }
+    .download-wrapper { 
+        padding: 40px 20px; 
+        border-radius: 32px; 
+        background: linear-gradient(135deg, var(--royal-blue) 0%, #3e4ac2 100%);
+    }
+    .download-content h2 { font-size: 1.6rem; }
+    .download-content p { font-size: 0.95rem; line-height: 1.5; }
+    .store-buttons { flex-direction: column; gap: 14px; }
+    .store-btn { min-width: unset; width: 100%; border-radius: 16px; padding: 14px; }
+    .phone-composition { width: 180px; height: 360px; margin-top: 40px; }
     
     /* Footer */
-    .footer-links { grid-template-columns: 1fr; gap: 20px; }
-    .footer-bottom { font-size: 0.8rem; }
-    .app-btn-mini { padding: 10px 16px; font-size: 0.85rem; }
+    .footer-links { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom { font-size: 0.85rem; padding-top: 24px; }
+    .app-btn-mini { padding: 12px 20px; font-size: 0.9rem; border-radius: 12px; }
 
     /* Accordion */
-    .acc-icon { width: 36px; height: 36px; font-size: 1rem; border-radius: 10px; }
-    .accordion-trigger span { font-size: 0.88rem; }
-    .acc-benefits { grid-template-columns: 1fr; }
-
-    /* Feature tabs */
-    .tab-btn { font-size: 0.9rem; padding: 10px 18px; }
-    .feature-card { padding: 24px 16px; }
-    .feature-icon { width: 50px; height: 50px; font-size: 24px; }
+    .acc-icon { width: 40px; height: 40px; font-size: 1.1rem; border-radius: 12px; }
+    .accordion-trigger span { font-size: 0.95rem; font-weight: 600; }
+    .acc-benefits { grid-template-columns: 1fr; gap: 20px; }
+    .accordion-item { border-radius: 20px; margin-bottom: 12px; }
+    .accordion-trigger { padding: 16px; }
+    
+    /* Feature tabs overriding from 768px */
+    .tab-btn { font-size: 0.88rem; padding: 10px 16px; }
+    .feature-icon { width: 56px; height: 56px; font-size: 26px; border-radius: 16px; }
 }
 
 /* --- Çok küçük ekranlar (iPhone SE, Galaxy S8) --- */
