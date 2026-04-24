@@ -2380,7 +2380,7 @@ h1, h2, h3, h4, h5, h6 {
     .logo img { height: 20px; }
     .header.scrolled .logo img { height: 18px; }
     
-    .hero { padding-top: 80px; padding-bottom: 0; }
+    .hero { padding-top: 100px; padding-bottom: 40px; }
     .hero-title { font-size: 1.75rem; letter-spacing: -0.5px; line-height: 1.2; }
     .hero-description { font-size: 0.92rem; padding: 0; }
     .hero-buttons { flex-direction: row; flex-wrap: nowrap; gap: 8px; padding: 0; width: 100%; }
@@ -2511,7 +2511,7 @@ html, body {
     
     .hero {
         background: var(--bg-gray);
-        padding-top: 80px;
+        padding-top: 100px;
         padding-bottom: 0;
         margin-bottom: 0;
         border-radius: 0;
@@ -2536,7 +2536,7 @@ html, body {
     
     .hero-title {
         color: var(--black-russian);
-        margin-bottom: 16px;
+        margin-bottom: 24px;
     }
     
     .hero-title .hero-line-1 {
@@ -2577,7 +2577,7 @@ html, body {
         background: var(--white);
         border-radius: 100px;
         padding: 6px 6px 6px 20px;
-        margin: 16px auto;
+        margin: 24px auto;
         width: 100%;
         box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         border: 1px solid var(--light-gray);
