@@ -326,9 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. DYNAMIC HERO KEYWORDS (Özel Ders, Okul, Kurs Merkezi)
     // =========================================================
     const heroKeywords = [
+        { main: "Akademik Desteği", search: "LGS hazırlık kursu, Okul...", img: "assets/images/cover_school.png" },
         { main: "Özel Ders'i", search: "Matematik özel ders...", img: "assets/images/cover_english.png" },
-        { main: "Okul'u", search: "Fen lisesi...", img: "assets/images/cover_school.png" },
-        { main: "Kurs'u", search: "LGS hazırlık kursu...", img: "assets/images/cover_etut.png" }
+        { main: "Spor Hocasını", search: "Bireysel fitness, Tenis...", img: "assets/images/cover_fitness.png" }
     ];
     let keywordIndex = 0;
     const dynWordMain = document.querySelector('.dynamic-word');

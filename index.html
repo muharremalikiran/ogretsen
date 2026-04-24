@@ -16,7 +16,7 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=39">
+    <link rel="stylesheet" href="css/style.css?v=40">
     <!-- Leaflet Harita -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -147,13 +147,50 @@
                                 <span>Matematik, Gitar, Fitness...</span>
                             </div>
                             <div class="mockup-categories">
-                                <div class="cat-pill active" data-mockup="ozelders">👨‍🏫 Özel Ders</div>
-                                <div class="cat-pill" data-mockup="okul">🏫 Okul</div>
-                                <div class="cat-pill" data-mockup="kurs">📚 Kurs</div>
+                                <div class="cat-pill active" data-mockup="akademik">🎯 Akademik</div>
+                                <div class="cat-pill" data-mockup="ozelders">👨‍🏫 Özel Ders</div>
+                                <div class="cat-pill" data-mockup="spor">🏃 Spor</div>
                             </div>
                             <div class="mockup-cards-container">
+                                <!-- Akademik -->
+                                <div class="mockup-cards active" id="mockup-akademik">
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Hedef Kurs" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Hedef Kurs</strong>
+                                            <span>LGS Hazırlık</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 2.4 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Vizyon Koleji" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Vizyon Koleji</strong>
+                                            <span>Özel Temel Lise</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.5 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                                        </div>
+                                    </div>
+                                    <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="Gelecek Okulları" class="t-avatar">
+                                        <div class="t-info">
+                                            <strong>Gelecek Okulları</strong>
+                                            <span>İlköğretim Kampüsü</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 6.1 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.7</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <!-- Özel Ders -->
-                                <div class="mockup-cards active" id="mockup-ozelders">
+                                <div class="mockup-cards" id="mockup-ozelders">
                                     <div class="t-card">
                                         <img src="assets/images/av_t_m.png" alt="Ali Y." class="t-avatar">
                                         <div class="t-info">
@@ -177,6 +214,21 @@
                                         </div>
                                     </div>
                                     <div class="t-card">
+                                        <img src="assets/images/av_s.png" alt="British English" class="t-avatar" onerror="this.src='assets/images/av_t_f.png'">
+                                        <div class="t-info">
+                                            <strong>British English</strong>
+                                            <span>Yabancı Dil Kursu</span>
+                                        </div>
+                                        <div class="t-meta">
+                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.2 km</div>
+                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Spor -->
+                                <div class="mockup-cards" id="mockup-spor">
+                                    <div class="t-card">
                                         <img src="assets/images/av_sp.png" alt="Burak K." class="t-avatar">
                                         <div class="t-info">
                                             <strong>Burak K.</strong>
@@ -187,63 +239,11 @@
                                             <div class="t-rating"><i class="ph-fill ph-star"></i> 4.8</div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Özel Okul -->
-                                <div class="mockup-cards" id="mockup-okul">
                                     <div class="t-card">
-                                        <img src="assets/images/av_s.png" alt="Vizyon Koleji" class="t-avatar">
+                                        <img src="assets/images/av_f_sport.png" alt="Selin H." class="t-avatar" onerror="this.src='assets/images/av_t_f.png'">
                                         <div class="t-info">
-                                            <strong>Vizyon Koleji</strong>
-                                            <span>Özel Temel Lise</span>
-                                        </div>
-                                        <div class="t-meta">
-                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.5 km</div>
-                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 5.0</div>
-                                        </div>
-                                    </div>
-                                    <div class="t-card">
-                                        <img src="assets/images/av_s.png" alt="Gelecek Okulları" class="t-avatar">
-                                        <div class="t-info">
-                                            <strong>Gelecek Okulları</strong>
-                                            <span>İlköğretim Kampüsü</span>
-                                        </div>
-                                        <div class="t-meta">
-                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 6.1 km</div>
-                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.7</div>
-                                        </div>
-                                    </div>
-                                    <div class="t-card">
-                                        <img src="assets/images/av_s.png" alt="Yeninesil Anaokulu" class="t-avatar">
-                                        <div class="t-info">
-                                            <strong>Yeninesil Anaokulu</strong>
-                                            <span>Okul Öncesi Eğitim</span>
-                                        </div>
-                                        <div class="t-meta">
-                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 400 m</div>
-                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Kurs -->
-                                <div class="mockup-cards" id="mockup-kurs">
-                                    <div class="t-card">
-                                        <img src="assets/images/av_s.png" alt="Hedef Kurs" class="t-avatar">
-                                        <div class="t-info">
-                                            <strong>Hedef Kurs</strong>
-                                            <span>LGS Hazırlık</span>
-                                        </div>
-                                        <div class="t-meta">
-                                            <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 2.4 km</div>
-                                            <div class="t-rating"><i class="ph-fill ph-star"></i> 4.9</div>
-                                        </div>
-                                    </div>
-                                    <div class="t-card">
-                                        <img src="assets/images/av_s.png" alt="British English" class="t-avatar" onerror="this.src='assets/images/av_t_f.png'">
-                                        <div class="t-info">
-                                            <strong>British English</strong>
-                                            <span>Yabancı Dil Kursu</span>
+                                            <strong>Selin H.</strong>
+                                            <span>Tenis Antrenörü</span>
                                         </div>
                                         <div class="t-meta">
                                             <div class="t-distance"><i class="ph-fill ph-map-pin"></i> 3.2 km</div>
@@ -597,6 +597,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js?v=39"></script>
+    <script src="js/script.js?v=40"></script>
 </body>
 </html>
