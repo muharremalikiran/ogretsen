@@ -1989,6 +1989,9 @@ h1, h2, h3, h4, h5, h6 {
     .hero { padding-top: 110px; padding-bottom: 50px; }
 
     /* --- Header / Nav --- */
+    .logo img { height: 24px; }
+    .header.scrolled .logo img { height: 22px; }
+    
     .nav-links { 
         display: flex;
         flex-direction: column;
@@ -2364,6 +2367,9 @@ h1, h2, h3, h4, h5, h6 {
     .section { padding: 48px 0; }
     
     /* Hero */
+    .logo img { height: 20px; }
+    .header.scrolled .logo img { height: 18px; }
+    
     .hero { padding-top: 100px; padding-bottom: 40px; }
     .hero-title { font-size: 1.75rem; letter-spacing: -0.5px; line-height: 1.2; }
     .hero-description { font-size: 0.92rem; padding: 0; }
