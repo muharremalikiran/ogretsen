@@ -323,3 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+
+// Kill zombie service workers
+if ("serviceWorker" in navigator) { navigator.serviceWorker.getRegistrations().then(function(r) { for(let i of r) i.unregister(); }); }
