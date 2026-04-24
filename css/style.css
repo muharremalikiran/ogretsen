@@ -565,6 +565,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .cat-pill:not(.active):hover {
     border-color: var(--royal-blue);
+    color: var(--royal-blue);
 }
 
 .mockup-cards-container {
@@ -1101,6 +1102,11 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--royal-blue);
     color: var(--white);
     border-color: var(--royal-blue);
+}
+
+.mac-pill:not(.active):hover {
+    border-color: var(--royal-blue);
+    color: var(--royal-blue);
 }
 
 /* İlan listesi */
