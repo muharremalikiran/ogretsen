@@ -2505,11 +2505,15 @@ html, body {
     
     .hero {
         background: var(--bg-gray);
-        padding-top: 100px;
+        padding-top: 80px;
         padding-bottom: 0;
         margin-bottom: 0;
         border-radius: 0;
         overflow: hidden;
+    }
+    
+    .section {
+        padding: 40px 0;
     }
     
     .hero-container {
@@ -2522,7 +2526,7 @@ html, body {
     
     .hero-title {
         color: var(--black-russian);
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
     
     .hero-title .hero-line-1 {
@@ -2563,7 +2567,7 @@ html, body {
         background: var(--white);
         border-radius: 100px;
         padding: 6px 6px 6px 20px;
-        margin: 24px auto;
+        margin: 16px auto;
         width: 100%;
         box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         border: 1px solid var(--light-gray);
