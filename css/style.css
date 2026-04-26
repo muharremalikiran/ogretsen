@@ -40,28 +40,6 @@
     --radius-pill: 100px;
 }
 
-/* --- Dark Mode Variables --- */
-[data-theme="dark"] {
-    --white: #0B0E17;
-    --bg-gray: #131722;
-    --light-gray: #242A3D;
-    --medium-gray: #8A93A6;
-    --medium-gray-600: #A8B1C2;
-    --medium-gray-900: #E2E8F0;
-    --dark-gray: #B4BCCD;
-    
-    --royal-blue: #4D8BFF;
-    --royal-blue-transparent: rgba(77, 139, 255, 0.15);
-    --black-russian: #FFFFFF;
-    --black-russian-transparent: rgba(255, 255, 255, 0.1);
-    
-    --gulf-blue: #F8FAFC;
-    
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
-}
-
 body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
