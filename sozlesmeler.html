@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sözleşmeler | Öğretsen</title>
+    <meta name="description" content="Öğrenmenin En Yakın Yolu. Öğretsen ile özel ders almak için en yakın konumdaki eğitmenleri keşfedin. Spor, Yabancı Dil, Akademik ve daha fazlası.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=48">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+<style>
+.sz-layout { display: flex; gap: 0; min-height: calc(100vh - 80px); padding-top: 80px; }
+.sz-sidebar {
+    width: 280px; min-width: 280px; background: #f8f9ff;
+    border-right: 1px solid #eef0fb; padding: 40px 0;
+    position: sticky; top: 80px; height: calc(100vh - 80px); overflow-y: auto;
+}
+.sz-sidebar h4 {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--medium-gray); padding: 0 24px; margin: 24px 0 10px;
+    font-weight: 600;
+}
+.sz-sidebar h4:first-child { margin-top: 0; }
+.sz-sidebar a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 24px; color: var(--dark-gray); text-decoration: none;
+    font-size: 0.92rem; font-weight: 500; transition: all 0.2s;
+    border-left: 3px solid transparent; line-height: 1.3;
+}
+.sz-sidebar a:hover { background: #eef0ff; color: var(--royal-blue); }
+.sz-sidebar a.active {
+    background: linear-gradient(90deg, rgba(41,97,221,0.08), transparent);
+    color: var(--royal-blue); border-left-color: var(--royal-blue); font-weight: 600;
+}
+.sz-sidebar a i { font-size: 1.15rem; flex-shrink: 0; }
+.sz-main { flex: 1; padding: 50px 60px 80px; max-width: 900px; }
+.sz-main .sz-content { display: none; }
+.sz-main .sz-content.active { display: block; }
+.sz-main .sz-title {
+    font-size: 2rem; color: var(--royal-blue); margin-bottom: 30px;
+    padding-bottom: 20px; border-bottom: 2px solid #eef0fb;
+}
+.sz-main .sz-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border-radius: 100px; font-size: 0.8rem;
+    font-weight: 600; margin-bottom: 14px;
+}
+.sz-badge-bireysel { background: #e0f2fe; color: #0284c7; }
+.sz-badge-kurumsal { background: #ede9fe; color: #7c3aed; }
+.sz-main .page-content { font-size: 1.02rem; line-height: 1.75; color: var(--medium-gray-900); }
+@media (max-width: 900px) {
+    .sz-layout { flex-direction: column; }
+    .sz-sidebar {
+        width: 100%; min-width: 100%; position: relative; top: 0;
+        height: auto; display: flex; flex-wrap: wrap; padding: 20px 16px;
+        gap: 6px; border-right: none; border-bottom: 1px solid #eef0fb;
+    }
+    .sz-sidebar h4 { width: 100%; padding: 0; margin: 10px 0 4px; }
+    .sz-sidebar a {
+        padding: 8px 14px; border-radius: 100px; border-left: none;
+        background: white; border: 1px solid #eef0fb; font-size: 0.82rem;
+    }
+    .sz-sidebar a.active {
+        background: var(--royal-blue); color: white; border-color: var(--royal-blue);
+    }
+    .sz-main { padding: 30px 20px 60px; }
+}
+</style>
+
+<div class="sz-layout">
+    <aside class="sz-sidebar">
+        <h4>Bireysel</h4>
+        <a href="#" data-target="bireysel-aydinlatma" class="active"><i class="ph ph-scroll"></i>Aydınlatma Metni</a>
+        <a href="#" data-target="bireysel-cerez"><i class="ph ph-cookie"></i>Çerez Politikası</a>
+        <a href="#" data-target="bireysel-gizlilik"><i class="ph ph-lock-simple"></i>Gizlilik Politikası</a>
+        <a href="#" data-target="bireysel-kvkk"><i class="ph ph-shield-check"></i>KVKK</a>
+        <h4>Kurumsal</h4>
+        <a href="#" data-target="kurumsal-uyelik"><i class="ph ph-handshake"></i>Üyelik Sözleşmesi</a>
+        <a href="#" data-target="kurumsal-aydinlatma"><i class="ph ph-shield-check"></i>Aydınlatma Metni</a>
+        <a href="#" data-target="ticari-satis"><i class="ph ph-receipt"></i>Ticari Satış Sözleşmesi</a>
+    </aside>
+    <main class="sz-main">
+
+        <div class="sz-content active" id="bireysel-aydinlatma">
+            <span class="sz-badge sz-badge-bireysel"><i class="ph-fill ph-user"></i> Bireysel</span>
+            <h1 class="sz-title">Aydınlatma Metni</h1>
+            <div class="page-content">
+                <p style="margin-bottom:14px;text-align:justify;">Bu içerik yakında eklenecektir. Mevcut aydınlatma metnine <a href="aydinlatma-metni.html" style="color:var(--royal-blue);font-weight:600;">buradan</a> ulaşabilirsiniz.</p>
+            </div>
+        </div>
+
+        <div class="sz-content" id="bireysel-cerez">
+            <span class="sz-badge sz-badge-bireysel"><i class="ph-fill ph-user"></i> Bireysel</span>
+            <h1 class="sz-title">Çerez Politikası</h1>
+            <div class="page-content">
+                <p style="margin-bottom:14px;text-align:justify;">Bu içerik yakında eklenecektir. Mevcut çerez politikasına <a href="cerez-politikasi.html" style="color:var(--royal-blue);font-weight:600;">buradan</a> ulaşabilirsiniz.</p>
+            </div>
+        </div>
+
+        <div class="sz-content" id="bireysel-gizlilik">
+            <span class="sz-badge sz-badge-bireysel"><i class="ph-fill ph-user"></i> Bireysel</span>
+            <h1 class="sz-title">Gizlilik Politikası</h1>
+            <div class="page-content">
+                <p style="margin-bottom:14px;text-align:justify;">Bu içerik yakında eklenecektir. Mevcut gizlilik politikasına <a href="gizlilik-politikasi.html" style="color:var(--royal-blue);font-weight:600;">buradan</a> ulaşabilirsiniz.</p>
+            </div>
+        </div>
+
+        <div class="sz-content" id="bireysel-kvkk">
+            <span class="sz-badge sz-badge-bireysel"><i class="ph-fill ph-user"></i> Bireysel</span>
+            <h1 class="sz-title">KVKK Politikası</h1>
+            <div class="page-content">
+                <p style="margin-bottom:14px;text-align:justify;">Bu içerik yakında eklenecektir. Mevcut KVKK politikasına <a href="kvkk.html" style="color:var(--royal-blue);font-weight:600;">buradan</a> ulaşabilirsiniz.</p>
+            </div>
+        </div>
+
+        <div class="sz-content" id="kurumsal-uyelik">
+            <span class="sz-badge sz-badge-kurumsal"><i class="ph-fill ph-buildings"></i> Kurumsal</span>
+            <h1 class="sz-title">Kurumsal Üyelik Sözleşmesi</h1>
+            <div class="page-content">
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">KURUMSAL ÜYELİK SÖZLEŞMESİ</h3>
+<p style="margin-bottom:14px;text-align:justify;">Kurumsal üyesi olduğunuz, 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun (“6563 sayılı Kanun”)da tanımlandığı üzere, başkalarına ait iktisadi ve ticari faaliyetlerin yapılmasına elektronik ticaret ortamını sağlayan ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET ANONİM ŞİRKETİ’nin Elektronik Ticaret Aracı Hizmet Sağlayıcı olarak hizmetlerini sunduğu IOS ve Android destekli mobil uygulaması olan ÖĞRETSEN adlı Mobil Uygulama (bundan sonra “UYGULAMA” olarak anılacaktır) ile www.ogretsen.com alan adlı web sitesi üzerinden hizmet sunmak için lütfen aşağıda yazılı koşulları okuyunuz. İşbu Kurumsal Üyelik Sözleşmesi’ni kabul etmediğiniz takdirde, bu ÖĞRETSEN Platformu üzerinden işlem yapamazsınız.</p>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Kurumsal Üyelik Sözleşmesi (“Sözleşme”) UYGULAMA üzerinden ilan ve/veya hizmet satışı yapacak olan “Elektronik Ticaret Hizmet Sağlayıcı” sıfatını haiz “KURUMSAL ÜYELER” için uygulanmaktadır. Bu Sözleşme’de düzenleme bulunmayan tüm konularda Türk Ticaret Kanunu (“TTK”) hükümleri ve Türk Borçlar Kanunu (“TBK”) hükümleri uygulanacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">I.TARAFLAR</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">1.ELEKTRONİK TİCARET ARACI HİZMET SAĞLAYICI</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme’nin bir tarafını, UYGULAMA’nın sahibi olup aşağıda bilgileri yer alan ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET ANONİM ŞİRKETİ (“ÖĞRETSEN A.Ş.”) oluşturmaktadır. ÖĞRETSEN A.Ş., Elektronik Ticaret Aracı Hizmet Sağlayıcı olup, iktisadi ve ticari faaliyetlerin yapılmasına ve KURUMSAL ÜYELER’in bu faaliyetlerin tarafı olmasına olanak sağlayan bir elektronik ticaret ortamı sağlamaktadır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Ticaret Unvanı:ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET ANONİM ŞİRKETİ (“ÖĞRETSEN A.Ş.” veya “ÖĞRETSEN”)</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">MERSİS No: 0652-0519-2790-0001</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Bağlı Bulunduğu</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Ticaret Sicil Müdürlüğü ve</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Ticaret Sicil Numarası: İstanbul Ticaret Sicili Müdürlüğü - 452401-5</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Bağlı Bulunduğu Vergi Dairesi</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">ve Vergi Numarası: Beykoz Vergi Dairesi -6520519279</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Şirket Adresi:Acarlar Mahallesi, 9. Cadde, No:1 İç Kapı No:30 Beykoz, İstanbul</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Şirket Telefonu: 0533 018 51 10</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kep Adresi        : ogretsen@hs03.kep.tr</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Şirket e-posta adresi: destek@ogretsen.com</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">2-KURUMSAL ÜYE</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme’nin diğer tarafını ise işbu ÖĞRETSEN Platformu  üzerinden işletmesine yönelik ilan yayınlayan ve/veya hizmet satmak isteyen şahıs şirketi niteliğindeki kuruluş veya tüzel kişiyi oluşturmaktadır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bundan böyle işbu Sözleşme’de ÖĞRETSEN  ve KURUMSAL ÜYE tek başlarına “Taraf” ve birlikte “Taraflar” olarak anılacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme Taraflarca elektronik ortamda akdedilmiştir. KURUMSAL ÜYE tarafından işbu Sözleşme’nin elektronik olarak onaylanması, Taraflar’ın aşağıdaki tüm hükümler ve şartlar konusunda karşılıklı olarak anlaştıkları anlamına gelmektedir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">II. TANIMLAR</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">KURUMSAL ÜYE/ÜYELER: ÖĞRETSEN Platformu üzerinden ilan yayınlayan ve/veya hizmet satışı yapan gerçek veya tüzel kişiyi;</h3>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN A.Ş. Hizmetleri (“Hizmetler”): ÖĞRETSEN Platformu üzerinde işbu Sözleşme’de tanımlı olan işlemleri gerçekleştirmek amacıyla ÖĞRETSEN . tarafından KURUMSAL ÜYE’ye sunulan faaliyetlerdir. ÖĞRETSEN  sunduğu Hizmetler ile ilgili olarak dilediği zaman ve önceden bildirim yapmasına gerek olmaksızın her türlü revize yapma haklı saklıdır. Söz konusu revizelerle ilgili KURUMSAL ÜYE’nin uymakla yükümlü olduğu şartlar uygulama veya web sitesi üzerinde yayınlandığı tarihte yürürlükte olacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">İlan/Hizmet Satışı: ÖĞRETSEN Platformu  üzerinden ÖĞRETSEN  tarafından KURUMSAL ÜYE’ye Hizmetler kapsamında sunulan ilan  paketi ve/veya hizmet  satışına ilişkin hizmetleri;</p>
+<p style="margin-bottom:14px;text-align:justify;">Grup Şirketi/Şirketleri: İlgili Taraf’ın bir iştiraki, bağlı şirketi, organik olarak veya hukuki olarak bağının bulunduğu şirketleri, Taraf bir holding şirketi çatısı altında bulunuyorsa holding şirketini ve kendisiyle birlikte bu çatı altındaki diğer şirketleri, bu sayılanların iştirak şirketlerini bağlı şirketlerini; (Burada geçen “holding şirketi”, “iştirak” ve “bağlı şirket” terimleri Sözleşme’nin İmza Tarihi itibariyle 6102 sayılı Türk Ticaret Kanunu’ndaki anlamları ifade etmektedir, ancak Sözleşme yürürlükte iken yasal düzenlemede değişiklik olması halinde güncel yasal düzenlemedeki anlamları ifade edecektir.)</p>
+<p style="margin-bottom:14px;text-align:justify;">Elektronik Ticaret: Fizikî olarak karşı karşıya gelmeksizin, elektronik ortamda gerçekleştirilen çevrim içi iktisadî ve ticari her türlü faaliyeti;</p>
+<p style="margin-bottom:14px;text-align:justify;">Elektronik Ticaret Aracı Hizmet Sağlayıcı: ÖĞRETSEN Platformu üzerinde KURUMSAL Üyeler’in hizmetlerinin tanıtımı için ilan yayınlanmasına veya hizmet teminine yönelik sözleşme yapılmasına imkân sağlayan ÖĞRETSEN A.Ş.’yi;</p>
+<p style="margin-bottom:14px;text-align:justify;">İçerik:  ÖĞRETSEN platformuna’ya yüklenen, yayınlanan ve erişimi mümkün olan her türlü bilgi, yazı, dosya, resim, görsel, ilan, materyalleri;</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kullanıcı: Ziyaretçi, ÜYE veya Hizmet Sağlayıcı Üye ayrımı olmaksızın ÖĞRETSEN Platformunu kullanan herkesi;</h3>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN Platformu: 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun’da tanımlandığı üzere başkalarına ait iktisadi ve ticari faaliyetlerin yapılmasına elektronik ticaret ortamını sağlayan ÖĞRETSEN A.Ş.’nin Elektronik Aracı Ticaret Hizmet Sağlayıcı olarak hizmetlerini sunduğu IOS ve Android destekli ÖĞRETSEN adını taşıyan mobil uygulamayı veya www.ogretsen.com alan adlı web sitesini;</p>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN Platformu Üyesi/Üye/Üyeleri/Üyeliği: ÖĞRETSEN Platformu’na  hizmet almak veya hizmet satmak amacıyla üye olan tüm gerçek veya tüzel kişileri;</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Tüketici/Tüketiciler: TKHK’na göre ticari veya mesleki olmayan amaçlarla hareket eden gerçek veya tüzel kişileri;</h3>
+<p style="margin-bottom:14px;text-align:justify;">Tüketici İşlemi: Mal veya hizmet piyasalarında kamu tüzel kişileri de dâhil olmak üzere ticari veya mesleki amaçlarla hareket eden veya onun adına ya da hesabına hareket eden gerçek veya tüzel kişiler ile tüketiciler arasında kurulan, eser, taşıma, simsarlık, sigorta, vekâlet, bankacılık ve benzeri sözleşmeler de dâhil olmak üzere her türlü sözleşme ve hukuki işlemi,</p>
+<p style="margin-bottom:14px;text-align:justify;">Profil/ler: ÖĞRETSEN Platformu‘na tanıtımını, ilanını ve/veya hizmet satmak amacıyla üye olan ve  KURUMSAL Üyeleri’n  işletmesi  hakkında bilgi vermek amacıyla ÖĞRETSEN Platformu üzerinde oluşturduğu profili;</p>
+<p style="margin-bottom:14px;text-align:justify;">ifade etmektedir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">III. SÖZLEŞME’NİN AMACI, KONUSU VE KAPSAMI</h3>
+<p style="margin-bottom:14px;text-align:justify;">Elektronik Ticaret Aracı Hizmet Sağlayıcı olarak ÖĞRETSEN .’in sahibi olduğu bu ÖĞRETSEN Platformu , birtakım hizmetlerin satış işlemleri için hizmet alan ve hizmet veren  tarafları  bir araya getirerek yer sağlayıcılık faaliyeti gösteren bir mecradır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bu kapsamda Sözleşme’nin konusu; ÖĞRETSEN  üzerinde sunulan Hizmetler’le ilgili faydalanma koşulları ile Taraflar’ın hak ve yükümlülüklerinin belirlenmesini oluşturmaktadır</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">IV. KURUMSAL ÜYE OLMA VE BU SIFATLA UYGULAMA’NIN KULLANILMASINA İLİŞKİN KOŞULLAR VE TARAFLAR’IN HAK VE YÜKÜMLÜLÜKLER</h3>
+<p style="margin-bottom:14px;text-align:justify;">1. Taraflar işbu Sözleşme’deki tüm yükümlülüklerini ve taahhütlerini hukuka ve Sözleşme’ye uygun şekilde tam olarak, zamanında ve gereği gibi yerine getireceklerini kabul ve taahhüt ederler.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.KURUMSAL ÜYE, kendisinden istenen bilgileri tam ve eksiksiz olarak doldurduktan sonra Sözleşmeyi elektronik ortamda onaylayarak imzalamış sayılacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">3.  ÖĞRETSEN Platformu üzerinden ilan verebilmek ve/veya hizmet satışı yapabilmek için Uygulama Üyesi olma zorunluluğu bulunmaktadır.</p>
+<p style="margin-bottom:14px;text-align:justify;">4. ÖĞRETSEN Platformu’na  giriş için gerekli kullanıcı adının ve şifrenin belirlenmesi ve korunması KURUMSAL ÜYE yetkilisi veya yetkilendirdiği çalışanının  kendi sorumluluğundadır. KURUMSAL ÜYE kullanıcı adını ve şifresini yalnızca kendi işletmesi adına yetkilendirdiği kişi veya kişiler ile paylaşabilir. Ne var ki; şifrenin KURUMSAL ÜYE kullanıcı adını ve/veya şifresini yetkisiz kullandırılmasından veya başka bir yolla hesabının kendi kusuru nedeniyle başka kişiler tarafından kullanılmasından yalnızca ve tek başına kendisi sorumludur, bunun için ÖĞRETSEN’i sorumlu tutamaz ve bundan kaynaklı olarak ÖĞRETSEN ’den hiçbir talepte bulunamaz, hatta bu nedenle KURUMSAL ÜYE ve/veya üçüncü kişiler tarafından ÖĞRETSEN’eyöneltilecek olan tüm taleplerin, iddiaların, şikayetlerin ve davaların tek muhatabının ilgili kullanıcı ile birlikte müştereken ve müteselsilen kendisi olduğunu,   ÖĞRETSEN ‘in  bu nedenle maruz kalacağı maddi manevi doğrudan ve dolaylı tüm zararlar  ile tüm masrafları derhal tazmin edeceğini kabul, beyan ve taahhüt eder. Tüm üyelere  ait kullanıcı adı ve şifreler ÖĞRETSEN . tarafından kriptolu olarak saklanmaktadır. KURUMSAL ÜYE’nin kullanıcı adını ve/veya şifresini başkasına devrettiğinin ve/veya yetkisiz kullandırdığının tespiti halinde, ÖĞRETSEN  işbu Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal fesih hakkına sahiptir.</p>
+<p style="margin-bottom:14px;text-align:justify;">5.KURUMSAL ÜYE, ÖĞRETSEN Platformu’nda’da sadece bir üyelik hesabı açabileceğini, farklı kullanıcı adları, e-posta adresleri, telefon numaraları kullanarak birden fazla KURUMSAL ÜYE hesabı açmamayı kabul, beyan ve taahhüt etmektedir. Bu kuralın ihlal edildiğinin ÖĞRETSEN  tarafından tespit edilmesi halinde; KURUMSAL ÜYE’nin tüm  üyelik hesapları ÖĞRETSEN  tarafından askıya alınabilir, kısıtlanabilir, hatta Sözleşme’ye göre şartları varsa Sözleşme’nin haklı nedenle derhal feshedilmesi suretiyle üyeliği iptal edilebilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">6. KURUMSAL ÜYE, kendisi için hazırlanmış olan başta işbu Sözleşme olmak üzere gerekli tüm hukuki metinleri okuyup onaylayarak Profil oluşturabilir ve paket satın almak suretiyle İlan yayınlayabilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">7.KURUMSAL ÜYE, beyan ettiği tüm kişisel ve ticari verilerin ve ayrıca sunacağı hizmetle ilgili ve hizmeti sunabilmek için bilgisi, eğitimi, uzmanlığı, yeterliliği ile ilgili olarak beyan ettiği, Profili’nde ve İlanları’nda yer verdiği  tüm bilgilerin kendisine ait, doğru, eksiksiz ve güncel olması zorunludur. Aksi durum ÖĞRETSEN . için işbu Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal fesih sebebini oluşturmaktadır. KURUMSAL ÜYE ,  ÖĞRETSEN Platformu’ndaki başta Profili’nde ve İlanları’nda olmak üzere tüm paylaşımlarında yer alan bilgilerin doğruluğundan bizzat sorumlu olup, Profili’nde ve İlanları’nda ahlaka, adaba, örf ve adetlere, kamu vicdanına ve/veya kanuna aykırı, suç teşkil eden bir İçerik yayınlamayacağını, ÖĞRETSEN Platformu  üzerinden bu nitelikte hiçbir paylaşım yapmayacağını kabul, beyan ve taahhüt eder.  KURUMSAL ÜYE , ÖĞRETSEN’in söz konusu bilgilerin KURUMSAL ÜYE’ye e aitliğini (kimlik doğrulama kontrolü yapma) ve/veya doğruluğunu ve/veya tamlığını ve/veya güncelliğini kontrol etmekle yükümlü olmadığını,  söz konusu bilgilerin ilgili KURUMSAL ÜYE’ye ’ye  ait olmamasından ve/veya doğru olmamasından ve/veya tam olmamasından ve/veya güncel olmamasından dolayı ve bu nedenle başta ÖĞRETSEN’in .’nin ve diğer Uygulama Üyeleri’nin uğrayacağı tüm doğrudan ve dolaylı maddi ve manevi zararlardan dolayı tüm hukuki ve cezai sorumluluk ile ÖĞRETSEN’i ve/veya ilgili üçüncü kişiyi bu nedenle uğradığı ve/veya uğrayacağı doğrudan ve dolaylı maddi ve manevi tüm zararlar ile her türlü masraflardan dolayı tazmin etme yükümlülüğünün yalnızca ve tek başına  KURUMSAL ÜYE sıfatıyla kendisine ait olduğunu kabul, beyan ve taahhüt eder.  Ayrıca, KURUMSAL ÜYE ilan verdiği ve bu kapsamda faaliyetini icra ettiği alanlardaki gerekli sertifika ve yeterlilik belgelerine haiz olmaksızın ilan yayınlamak suretiyle ÖĞRETSEN’i zarara uğratması durumunda ÖĞRETSEN’in  uğradığı veya uğrayabileceği maddi ve manevi, doğrudan ve dolaylı her tür zararlar için KURUMSAL ÜYE’ye rücu etme hakkı saklıdır.</p>
+<p style="margin-bottom:14px;text-align:justify;">8. KURUMSAL ÜYE’nin üyelik başvurusu esnasında beyan ettiği  bilgilerinin yeterli, gerçek veya güncel olmaması veya yanıltıcı ve kötü niyetli olduğunun herhangi bir şekilde tespit edilmesi, üyelik başvurusunun önceden reddedilmiş olması, üyeliğinin aktif olduğu süreçte KURUMSAL ÜYE  hakkında şikâyetler veya olumsuz eleştiriler alınması ve benzeri sebeplerle; ÖĞRETSEN . herhangi bir bildirimde ve herhangi bir tazminat yükümlülüğü altında bulunmaksızın işbu Sözleşme’yi feshederek KURUMSAL ÜYE’nin hesabını askıya alabilir veya  kapatabilir. Hesabın kapatılması veya geçici olarak durdurulması veya Sözleşme’nin herhangi bir sebeple feshedilmesinin ardından ÖĞRETSEN  kendi takdirine bağlı olarak, KURUMSAL ÜYE’nin ÖĞRETSEN . üzerinden paylaşmış olduğu İçerikler veya paylaşımlarının akıbeti konusunda münhasıran karar verme yetkisine sahiptir.</p>
+<p style="margin-bottom:14px;text-align:justify;">9. ÖĞRETSEN Platformu’nda Uygulama Üyeleri’nin kendi aralarında iletişim kurmalarını sağlayan bir Chat Bölümü bulunmaktadır. Ancak Chat Bölümü’nü kullanarak iletişim kurmak için mutlaka Uygulama Üyeliği oluşturmak gerekmektedir. KURUMSAL ÜYE, ÖĞRETSEN Platformu üzerindeki Chat Bölümü sayesinde dilediği kurumsal üye ile iletişim kurabilir, yazışabilir, kendisi ve hizmetleri hakkında bilgi alabilir. Chat Bölümü’ndeki yazışmayı ancak ve ancak hizmet satın almayı düşünen üye başlatabilir, herhangi bir  KURUMSAL  ÜYE başlatamaz. ÖĞRETSEN Platformu’ndaki kurumsal üyelerin  listesini, Profiller’ini, İlanlar’ını görebilmektedirler, ancak öte yandan KURUMSAL ÜYELER sadece hizmet satın almak için üye olan Uygulama Üyeleri’ni görememektedirler ve onlarla ÖĞRETSEN Platformu üzerinden iletişim başlatamamaktadırlar. KURUMSAL ÜYE, Bir Uygulama Üyesi’nin Chat Bölümü üzerinden kendisiyle yazışma başlatması halinde, ÖĞRETSEN Platformu üzerinden yazışma yaparken kamu düzenine, ahlaka, adaba, örf ve adetlere, kamu vicdanına ve/veya kanuna aykırı ve/veya suç teşkil eden yazışmalar yapmayacağını, bu şekilde İçerik paylaşımında ve gönderiminde bulunmayacağını kabul, beyan ve taahhüt eder. ÖĞRETSEN’in .’nin güvenlik nedeniyle Chat Bölümü’ndeki yazışmalara erişimi bulunmaktadır ve yine güvenlik nedeniyle ÖĞRETSEN bu yazışmaların kayıtlarını tutmaktadır.  ÖĞRETSEN , Chat Bölümü’ndeki yazışmalarda kamu düzenine, ahlaka, adaba, örf ve adetlere, kamu vicdanına, kanuna aykırı ve/veya suç teşkil eden hususlar tespit etmesi halinde, başta  tazminat talep hakkı olmak üzere  diğer her türlü talep, dava ve şikayet  hakları saklı kalmak kaydıyla, tamamen kendi takdirine bağlı olarak ilgili KURUMSAL ÜYE’nin üyeliğini kendisine  e-posta yoluyla bildirimde bulunmak kaydıyla dilediği süre boyunca askıya alabilecek, böylece ilgili KURUMSAL ÜYE’nin ÖĞRETSEN Platformu‘na ’yı ilan vermek, hizmet satmak, veya tüketici üye olarak hizmet almak veya başka hiçbir amaç için kullanamamasını sağlayabilecek ve hatta  ilgili KURUMSAL ÜYE’ninÖĞRETSEN Platformu’na ’ya her ne tür Üyelik sıfatıyla olursa olsun erişimini tamamen veya kısmen engelleyebilecek ve hatta işbu Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal feshedebilecek ve bu suretle KURUMSAL ÜYE’nin tüm Uygulama Üyeliği’ni iptal edebilecektir.</p>
+<p style="margin-bottom:14px;text-align:justify;">10.. KURUMSAL ÜYE, ÖĞRETSEN Platformu  üzerinden paylaşacağı başta Profili’nin, İlanları’nın, Chat Bölümü’ndeki tüm iletişimlerinin ve bunların içeriklerinin, ÖĞRETSEN  ile gerçekleştireceği tüm iletişimlerin ve bunların içeriklerinin  ve paylaşacağı sair İçerikler’in hukuka, ahlaka, kamu düzenine, kamu vicdanına, örf ve adetlere ve adaba uygun olacağını ve herhangi bir suç konusunu teşkil etmeyeceğini; işbu madde hükmüne aykırı İçerik, beyan, paylaşım, iletişim ve davranış halinde ÖĞRETSEN’inişbu İçerik, beyan, paylaşım, iletişim ve davranıştan kaynaklı olarak yer sağlayıcı olması nedeniyle hiçbir sorumluluğunun olmadığını, tüm sorumluluğun yalnızca ve tek başına kendisine ait olduğunu kabul, beyan ve taahhüt eder. KURUMSAL  ÜYE bu yükümlülüğüne aykırılıktan kaynaklı olarak ÖĞRETSEN .ve/veya yetkilileri hakkında para cezası yaptırımı uygulanması ve/veya diğer herhangi bir yaptırım uygulanması ve/veya üçüncü kişiye tazminat ödemeye mahkum edilmeleri halinde, ÖĞRETSEN’in ’nin ve/veya yetkililerinin bu nedenle uğradığı ve uğrayacağı tüm doğrudan ve dolaylı maddi ve manevi zararları ve yapmak zorunda kaldığı ve kalacağı her türlü masrafları ilk yazılı talepte karşılamakla yükümlü olacağını kabul ve taahhüt eder. KURUMSAL ÜYE, ÖĞRETSEN’in kayıt altında tuttuğu yazışmaları, bu hükme aykırılıktan kaynaklanan herhangi bir dava ve/veya idari soruşturma ve/veya cezai soruşturma için gerekli olduğu ölçüde yetkili kuruluşla paylaşacağını ve bu durumun ÖĞRETSEN’in.’nin gizlilik yükümlülüğünü ihlal etmediği gibi KURUMSAL ÜYE’nin de hiçbir hakkını ihlal etmediğini kabul ve beyan eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">11.ÖĞRETSEN , 6563 sayılı Kanun uyarınca yalnızca "Elektronik Ticaret Aracı Hizmet Sağlayıcı" ve 5651 sayılı İnternet Ortamında Yapılan Yayınların Düzenlenmesi ve Bu Yayınlar Yoluyla İşlenen Suçlarla Mücadele Edilmesi Hakkında Kanun (“5651 Sayılı Kanun”) uyarınca da "Yer Sağlayıcı" durumundadır. ÖĞRETSEN Platformu’ndaki İçerikler ÖĞRETSEN  tarafından yüklenmemiştir. Bu nedenle ÖĞRETSEN’inÖĞRETSEN Platformu’nda yer alan ve kendisi tarafından yüklenmemiş, yayınlanmamış İçerikler’e ilişkin olarak Uygulama Üyeleri’nden hiç birine karşı her ne ad altında olursa olsun hiçbir sorumluluğu ve zarara sebebiyet verilmiş olması halinde zararı tazmin yükümlülüğü bulunmamaktadır ve ayrıca ÖĞRETSEN’in .’nin ÖĞRETSEN Platformu’nda’daki  İçerikler’i kontrol etmek, İçerikler’in ve İçerikler’e  konu hizmetin ve/veya hizmetle ilgili herhangi bir faaliyetin ve/veya durumun hukuka uygun olup olmadığını kontrol etmek gibi bir yükümlülüğü bulunmamaktadır. ÖĞRETSEN . tarafından ÖĞRETSEN Platformu’na  yüklenmeyen, yayınlanmayan, Uygulama Üyeleri’ne ÖĞRETSEN Platformu üzerinden veya başka yollarla gönderimini ÖĞRETSEN‘in ’nin bizzat yapmadığı her İçerik’ten yalnızca onu yükleyen, yayınlayan ve/veya gönderen kişi veya kuruluş tek başına sorumludur. İşbu durumun aksi halinde, ÖĞRETSEN’in doğmuş veya doğacak zararı için İçerik’i yükleyen/yayınlayan/gönderen ilgili Uygulama Üyesi’ne rücu hakkı saklıdır.  Bu doğrultuda ÖĞRETSEN . veri tabanına herhangi bir Uygulama Üyesi tarafından   yüklenen İçerik’in ve içeriğe konu hizmetle ilgili herhangi bir faaliyetin ve/veya durumun hiçbir koşulda, doğruluğunu, gerçekliğini, güvenliğini, güvenilirliğini ve hukuka uygunluğunu Uygulama Üyeleri’ne garanti etmemektedir. Ancak hiçbir hukuki ve sözleşmesel yükümlülüğü olmamasına rağmen, takdiri tamamen kendisine ait olmak üzere, ÖĞRETSEN., ÖĞRETSEN Platformu’na Uygulama Üyeleri tarafından yüklenen, yayınlanan istediği İçerik’i istediği zaman kontrol etme ve gerekli görürse erişime kapatma ve silme hakkına sahiptir.</p>
+<p style="margin-bottom:14px;text-align:justify;">12. KURUMSAL ÜYE, ÖĞRETSEN’in , Profili’nde ve İlanları’nda yayınladığı ÖĞRETSEN, bilgilerin doğruluğu, gerçekliği, güncelliği, sunduğu hizmetteki yetkinliği, eğitimi, uzmanlığı, sunacağı hizmetin kalitesi, ayıpsızlığı, hizmetin zamanında, tam olarak, gereği gibi, taahhüt edildiği şekilde ve ayıpsız olarak ifa edilmesi konularında Uygulama Üyeleri’ne hiçbir taahhüt, hiçbir garanti vermediğini, kendisi ve sunacağı hizmet hakkındaki her şeyden ve hizmetin  zamanında, tam olarak ve ayıpsız olarak ifasından bu hizmeti satın alan Uygulama Üyeleri’ne karşı yalnızca ve tek başına kendisinin sorumlu olduğunu, ÖĞRETSEN’in sorumluluğuna gidilmesi durumunda ÖĞRETSEN’inbu nedenle uğradığı ve/veya uğrayacağı tüm dğrudan ve dolaylı, maddi ve manevi zararlar ile her türlü masrafları ilk yazılı talep üzerine derhal tazmin edeceğini kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">13.KURUMSAL  ÜYE, ÖĞRETSEN Platformu’na  yüklediği, aktarım yaptığı, ilettiği veya  yayınladığı başta Profili’ndeki ve İlanları’ndakiler olmak üzere tüm İçerikler’in üçüncü kişilere ait kişisel veriler ve gizli bilgiler  içermesi  halinde, 6698 sayılı Kişisel Verilerin Korunması Hakkında Kanun (“KVKK”) ve GDPR kapsamında  ilgili kişiden gerekli izinleri önceden aldığını, ilgili kişiyi önceden tabi olduğu mevzuata göre aydınlattığını ve bu nedenle ÖĞRETSEN’e yöneltilecek tüm üçüncü kişi şikayet, itiraz ve taleplerinde bu veriler bakımından veri sorumlusu olarak münhasıran kendisinin ilgili üçüncü kişiye karşı her türlü sorumluluğu taşıdığını kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">14.KURUMSAL ÜYE,  işbu Sözleşme yürürlükte olduğu sürece, başta  Profili’nde ve İlanları’nda paylaştığı İçerikler ile Chat Bölümü’ndeki iletişimlerinde ve ÖĞRETSEN. ile olan iletişimlerinde, ancak sayılanlarla sınırlı olmaksızın ÖĞRETSEN’e, Grup Şirketleri’ne, diğer Uygulama Üyeleri’ne, tüm bu sayılanların ortaklarına, yetkililerine, çalışanlarına ve diğer tüm üçüncü kişilere ait/karşı ; i) Sınai Mülkiyet Kanunu (“SMK”) kapsamında kalan başta marka, endüstriyel tasarım, faydalı model, patent olmak üzere her türlü sınai mülkiyet haklarına ve ii) 5846 sayılı Fikir ve Sanat Eserleri Kanunu (“FSEK”) kapsamında sahip oldukları tüm fikri mülkiyet haklarına, mali ve manevi haklara, iii) Türk Medeni Kanunu (“TMK”), KVKK ve bunlarla ilgili ikincil mevzuatlar kapsamındaki kişilik haklarına ve Kişisel Veriler’in korunmasına ilişkin tüm kurallara saygılı davranacağını, bu haklara ve kurallara uyacağını, ÖĞRETSEN Platformu’nda ve/veya hiçbir mecrada ve hiçbir suretle bu haklara ve/veya kurallara aykırı davranışlar içerisine girmeyeceğini, ihlal niteliğinde içerikler paylaşmayacağını, bu hakları ve/veya kuralları ihlal etmeyeceğini, Türk Ticaret Kanunu’nun (“TTK”) haksız rekabeti düzenleyen hükümleri çerçevesinde haksız rekabet teşkil eden fiillerde bulunmayacağını, bu minvalde özellikle ÖĞRETSEN Platformu hakkında, maddenin başında sayılan kişilerin mallarının, hizmetlerinin ve markalarının hiçbiri hakkında ÖĞRETSEN Platformu’nda ve/veya hiçbir mecrada doğrudan veya dolaylı olarak, açıkça veya kapalı olarak, imalı olarak kötüleyici, olumsuz, imajlarını, itibarlarını, marka değerlerini sarsıcı, yanıltıcı ve/veya gerçeğe aykırı sözlü, yazılı beyanlarda ve/veya görsel paylaşımlarda ve/veya sair icrai ve/veya ihmali davranışlarda bulunmayacağını, bu yükümlülüğe aykırılığın ÖĞRETSEN’e işbu Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal fesih hakkı vereceğini ve bu aykırılık nedeniyle bizzat kendisinin ve Uygulama üyeleri ve diğer tüm üçüncü kişilerin kendisine yönelttiği/yönelteceği  dava, iddia, talep, şikayet nedeniyle uğradığı/uğrayacağı doğrudan ve dolaylı maddi ve manevi tüm zararlar ve yapmak zorunda kaldığı veya kalacağı tüm masraflar için kendisinden tazminat talebinde bulunma hakkı vereceğini kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">15. KURUMSAL ÜYE, sattığı hizmetler ve bunların ifasıyla ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun başta olmak üzere tüm Türk Tüketici Mevzuatı’na ve TBK’ya uygun davranacağını, bu mevzuatlardaki tüm yükümlülükleri tam olarak ve zamanında ve gereği gibi yerine getireceğini, aksi halde tüm sorumluluğun yalnızca kendisine ait olduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">16.KURUMSAL ÜYE, ÖĞRETSEN Platformu’na  işbu Sözleşme’nin hükümlerine,ÖĞRETSEN Platformu’nda ’da güncel olarak belirtilen tüm koşullara, yürürlükteki Türk Hukuk Mevzuatı’na, kamu düzenine, ahlak kurallarına uygun olarak ve kamu vicdanını zedelemeyecek şekilde kullanmak ve ÖĞRETSEN Platformu’nda  bunlara uygun olarak hareket etmekle yükümlüdür. KURUMSAL ÜYE, ÖĞRETSEN Platformu’nu aşağıda sayılan haller başta olmak ancak bu sayılanlarla sınırlı olmamak üzere hukuka, kamu düzenine ve ahlaka ve kamu vicdanına aykırı bir şekilde kullanmayacak ve özellikle de pornografik, cinsiyetçi, ayrımcı, aşağılayıcı, özel gereksinimi olanları kırıcı, rencide edici, hayvana/insana yönelik ve her türlü şiddet içerikli ve şiddete yönlendirici ve tüm bunlara yönelik propoganda niteliğinde İçerikler’e ve beyanlara yer vermeyecektir;</p>
+<p style="margin-bottom:14px;text-align:justify;">i) ÖĞRETSEN Platformu’nun  herhangi bir kişi adına veri tabanı, kayıt veya rehber yaratmak amacıyla ve/veya KVKK uyarınca ihlal teşkil edecek diğer amaçlarla ve şekillerde kullanılması;</p>
+<p style="margin-bottom:14px;text-align:justify;">ii) ÖĞRETSEN Platformu’nun  bütününün veya bir bölümünün bozma, değiştirme veya ters mühendislik yapma amacıyla kullanılması;</p>
+<p style="margin-bottom:14px;text-align:justify;">iii)Yanlış bilgiler veya başka bir kişinin bilgileri kullanılarak işlem yapılması, yanlış veya yanıltıcı kişisel veriler kullanmak suretiyle gerçek olmayan üyelik hesapları oluşturulması, başka bir Uygulama  Üyesi’nin hesabının izinsiz kullanılması, başka birinin yerine geçilerek ya da yanlış/sahte bir isimle ÖĞRETSEN Platformu  üzerinden gerçekleştirilen işlemlere taraf ya da katılımcı olunması;</p>
+<p style="margin-bottom:14px;text-align:justify;">iv) ÖĞRETSEN Platformu’nda  bulunması halinde yorum ve puanlama sistemlerinin; ÖĞRETSEN Platformu ‘ndaki yorumları ÖĞRETSEN Platformu  dışında yayınlamak gibi gerçek amacı dışında kalan amaçlar için ve/veya gerek ÖĞRETSEN. gerekse herhangi bir Uygulama Üyesi aleyhinde haksız rekabet teşkil eden fiillerini icra etmek için ve/veya sistemleri ve/veya ÖĞRETSEN Platformu’nu ve/veya Uygulama Üyeleri’ni manipüle etmek için  kullanılması;</p>
+<p style="margin-bottom:14px;text-align:justify;">v) ÖĞRETSEN Platformu’na, , veri tabanına, ÖĞRETSEN Platformu üzerinde yer alan herhangi bir içeriğe zarar verici virüs ve/veya herhangi başka bir teknoloji yayılması;</p>
+<p style="margin-bottom:14px;text-align:justify;">vi)Profili’nde, İlanları’nda, Chat Bölümü’nde veya ÖĞRETSEN Platformu  tarafından belirlenmiş olan iletişimler ve teknik sistemler üzerinde makul olmayan veya orantısız derecede büyük yüklemeler yaratacak ya da teknik işleyişe zarar verecek faaliyetlerde bulunulması, ÖĞRETSEN’inönceden yazılı iznini alınmaksızın ÖĞRETSEN Platformu  üzerinde otomatik program, robot, web crawler, örümcek, veri madenciliği (data mining) ve veri taraması (data crawling) gibi "screen scraping" yazılımları veya sistemleri kullanılması ve bu şekildeÖĞRETSEN Platformu’nda  yer alan herhangi bir İçerik’in tamamının veya bir kısmının izinsiz kopyalanması, ifşa edilmesi, üçüncü kişiye aktarılması, çoğaltılması, yayınlanması veya kullanılması;</p>
+<p style="margin-bottom:14px;text-align:justify;">vii)Hizmetler’in, ÖĞRETSEN Platformu’nda ’da, sunulması halinde, kampanya ve avantajların kötü niyetle ve haksız fayda sağlanması amacına yönelik kullanılması, kampanya koşullarının ihlal edilmesi.</p>
+<p style="margin-bottom:14px;text-align:justify;">17. KURUMSAL ÜYE’nin hizmet satışı yapması halinde, Türk Hukuk Mevzuatı’nda teknik olarak yer alan “Elektronik Ticaret Hizmet Sağlayıcı” sıfatını taşıdığını, ÖĞRETSEN’in bahsi geçen hizmet alımlarında  ve dolayısıyla da hizmet alımına ilişkin sözleşme ilişkilerinde taraf olmadığını, ÖĞRETSEN’in sözleşme dışı üçüncü kişi konumunda olduğunu, dolayısıyla da sözleşmesel ilişkiye taraf olan ÜYE ile KURUMSAL ÜYE’nin birbirlerine karşı, yürürlükteki Tüketici Hukuku mevzuatı ve sair Türk Hukuk Mevzuatı kapsamında her anlamda münhasıran sorumlu olduklarını, ÖĞRETSEN’inilgili sözleşmeden, ilgili tarafların birbirine karşı olan hak ve yükümlülüklerinden, ilgili tarafların kusurlu davranışlarından Üye’ye karşı, sözleşmeye konu hizmetten, KURUMSAL ÜYE’nin  yeterliliğinden/uzmanlığından, hizmetin kalitesinden, hukuka uygunluğundan, her türlü ayıplı hizmetten, tarafların kusurlarından, hukuka ve sözleşmeye aykırılıklarından,  hizmet satışının faturalandırılmasından ve/veya bunlarla sınırlı olmamak üzere başkaca hiçbir husustan dolayı ÜYE’ye karşı hiçbir sorumluluğunun bulunmadığını, hiçbir taahhüdünün bulunmadığını ve işbu Sözleşme ile veya ÖĞRETSEN Platformu’ndaki  başka bir İçerik ile ÜYE’ye hiçbir garanti vermediğini  kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">18.KURUMSAL ÜYE, ÖĞRETSEN’in işbu Sözleşme’nin herhangi bir maddesinin KURUMSAL ÜYE tarafından ihlal edildiğini tespit etmesi veya buna ilişkin makul bir şüphe duyması halinde, başta  tazminat talep hakkı olmak üzere  diğer her türlü talep, dava ve şikayet  hakları saklı kalmak kaydıyla tamamen kendi takdirine bağlı olarak ilgili KURUMSAL ÜYE’nin üyeliğini kendisine e-posta yoluyla bildirimde bulunmak kaydıyla, dilediği süre boyunca askıya alma hakkının, böylece ilgili KURUMSAL ÜYE’nin ÖĞRETSEN Platformu’nu  kullanamamasını sağlama hakkının ve hatta ÖĞRETSEN Platformu’na  erişimini tamamen veya kısmen engelleme hakkının bulunduğunu kabul ve taahhüt eder. Ayrıca bu halde ÖĞRETSEN’inişbu Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal feshetme ve bu suretle KURUMSAL ÜYE’nin üyeliğini iptal etme hakkı saklıdır.</p>
+<p style="margin-bottom:14px;text-align:justify;">19.KURUMSAL  ÜYE, herhangi bir sebeple işbu Sözleşme ÖĞRETSEN tarafından feshedilerek  ÖĞRETSEN Platformu Üyeliği sona erdirilmiş veya üyeliği askıya alınmış ve/veya  ÖĞRETSEN Platformu’nu kullanması engellenmiş ve/veya ÖĞRETSEN Platformu’na   erişimi tamamen veya kısmen engellenmiş KURUMSAL ÜYE’nin ÖĞRETSEN Platformu’na   farklı cihazlardan erişmeye, yeni üyelik hesabı açarak ÖĞRETSEN Platformu’nu  kullanmaya çalışmasının ÖĞRETSEN . tarafından tespit edilmesi halinde; ÖĞRETSEN ‘inbu kişiye ait tüm ÖĞRETSEN Platformu  Üyelik hesaplarına ilişkin Üyelik Sözleşmeleri’ni haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal feshetme, bu suretle tüm ÖĞRETSEN Platformu Üyelik hesaplarını iptal etme hakkı bulunduğunu, ayrıca ÖĞRETSEN’in  ilgili KURUMSAL ÜYE’den bu fiillerinden dolayı tazminat, cezai şart, diğer her türlü talep ve dava hakkının saklı bulunduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">20. KURUMSAL ÜYE’nin ÖĞRETSEN Platformu’na  erişebilmesi için gerekli donanım ve yazılımın kendisinde bulunması gerekmektedir. Yazılım, donanım ve işleyiş konusunda ÖĞRETSEN’in hiçbir sorumluluğu bulunmamaktadır. KURUMSAL ÜYE, ÖĞRETSEN Platformu’na yaptığı işlemleri ÖĞRETSEN Platformu’na ya teknik olarak hiçbir surette zarar vermeyecek şekilde yürütmekle yükümlüdür. KURUMSAL ÜYE, Üye Hesap Sayfası’na robot veya otomatik giriş yöntemleriyle girmeyeceğini, ÖĞRETSEN Platformu’na sağlayacağı tüm İçerikler’in sisteme zarar verecek her türlü program, virüs, yazılım, lisansız ürün, truva atı vb. içermemesi için gerekli tüm koruyucu yazılımları ve lisanslı ürünleri kullanmak da dâhil olmak üzere gerekli her türlü tedbiri aldığını, aksi halde kendisinden kaynaklı olan ve veri güvenliğinin ihlali nedeniyle uğranılan zararlar da dahil olmak üzere her türlü doğrudan ve dolaylı maddi ve manevi zararları (üçüncü kişiye ödenmek zorunda kalınan tazminatlar ve para cezaları dahil) ve her türlü masrafları ilk yazılı talep üzerine derhal nakden ve defaten tazmin edeceğini kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">21.KURUMSAL  ÜYE, üyelik hesabı üzerinden yaptığı her türlü iş ve işlemin sorumluluğunun kendisine ait olduğunu; burada gerçekleştirilen iş ve işlemleri kendisinin gerçekleştirmediği yolunda herhangi bir def’i ve/veya itiraz ileri süremeyeceğini ve/veya bu def’i veya itiraza dayanarak işbu Sözleşme’deki yükümlülüklerini yerine getirmekten kaçınmayacağını kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">22.ÖĞRETSEN A.Ş., 5/11/2014 tarih ve 29166 sayılı Resmi Gazete’de yayımlanarak yürürlüğe giren 6563 sayılı Kanun kapsamındaki iş ve işlemlerine ilişkin bilgi, belge, defter ve elektronik kayıtlarını, iş veya işlemin gerçekleştiği tarihten itibaren on yıl süreyle saklar ve bunları talebi halinde Bakanlığa sunar.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">V. UYGULAMA ÜZERİNDEN ÖĞRETSEN A.Ş. TARAFINDAN VERİLEN  HİZMETLERE İLİŞKİN ESASLAR</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">A) İLAN YAYINLAMA HİZMETLERİ</h3>
+<p style="margin-bottom:14px;text-align:justify;">1. ÖĞRETSEN Platformu üzerinden KURUMSAL ÜYE tarafından  ilgili ilan paketinin satın alınmasıyla birlikte  ÖĞRETSEN tarafından İlan Hizmetleri sunulacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.  İlanlar haritada ve ÖĞRETSEN Platformu içinde sayfalarda listelenir. ÖĞRETSEN Platformu üzerinden ilan yayınlamak ve hizmet satışı yapmak ücrete tabidir.  İlan yayınları, ÖĞRETSEN Platformu üzerinden belirlenen sayı ile sınırlı paket olarak satılır. Söz konusu ilan paketinde belirtilen süre boyunca İlan yayında kalacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">3.ÖĞRETSEN ilan paketlerine yönelik ücret politikasını  dilediği zaman güncelleyebilir. KURUMSAL ÜYE  bu bedellerin ÖĞRETSEN  tarafından tek taraflı olarak belirleneceğini ve bu bedellere itiraz hakkı olmadığını ancak KURUMSAL ÜYE sıfatını devam ettirmeme hakkı olduğunu kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">4.ÖĞRETSEN üzerinden yayınlanacak İlan’a ilişkin her işlem ve eylemdeki hukuki ve cezai sorumluluk KURUMSAL ÜYE’nin kendisine aittir. KURUMSAL ÜYE, ÖĞRETSEN’e ve/veya başka bir üçüncü kişinin ayni veya kişilik haklarına, kişisel verilerine, malvarlığına tecavüz teşkil edecek nitelikteki   resimleri, metinleri, görsel ve işitsel imgeleri, video klipleri, dosyaları, veri tabanları, katalogları ve listeleri çoğaltmayacağını, kopyalamayacağını, dağıtmayacağını, işlemeyeceğini, başka veri tabanına aktarmayacağını veya bu nitelikte sonuçlar doğurabilecek şekilde ÖĞRETSEN’e yüklemeyeceğini; gerek bu eylemleri ile gerekse de başka yollarla ÖĞRETSEN ile doğrudan ve/veya dolaylı olarak rekabete girmeyeceğini kabul ve taahhüt etmektedir. KURUMSAL ÜYE’nin  hukuka aykırı olarak gerçekleştirdiği ÖĞRETSEN üzerindeki eylemleri nedeniyle üçüncü kişilerin uğradıkları veya uğrayabilecekleri zararlardan dolayı ÖĞRETSEN’idoğrudan ve/veya dolaylı olarak hiçbir şekilde sorumlu tutulamaz. ÖĞRETSEN’inböyle bir durumda uğrayacağı zarar için KURUMSAL ÜYE’ye rücu etme hakkı saklıdır</p>
+<p style="margin-bottom:14px;text-align:justify;">5. ÖĞRETSEN. ilan sayfaları da dahil olmak üzere ÖĞRETSEN’in ÖĞRETSEN Platformu üzerinde reklam alanları olarak belirleyeceği tüm alanlarda kendisinin ya da kurumsal üyelerinin reklamını yayınlayabilir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">6. İlan yayınlama kriterleri şu şekildedir:</h3>
+<p style="margin-bottom:14px;text-align:justify;">(i) KURUMSAL ÜYE, ÖĞRETSEN Platformu üzerinden  ÖĞRETSEN’inbelirlediği kriterlere uygun olarak ilanlarını oluşturur ve Uygulama’ya yükleyecektir.</p>
+<p style="margin-bottom:14px;text-align:justify;">(ii)  ÖĞRETSEN, ÖĞRETSEN Platformu ara yüzünde onay aşamasında bekleyen ve KURUMSAL ÜYE tarafından oluşturulan İlan içeriğini değerlendirmeye alarak onaylayacak veya reddedecektir.</p>
+<p style="margin-bottom:14px;text-align:justify;">(iii) ÖĞRETSEN Platformu’nda KURUMSAL ÜYE tarafından oluşturularak yayınlanan  ilanların hukuka ve ahlaka aykırı olması, herhangi bir kişinin kişilik haklarını veya ticari itibarını zedeleyici ticari haklarına tecavüz edici nitelik taşıması halinde yada ÖĞRETSEN’in bu hususları içeren bir şekilde yasal bildirim ile muhatap muhatap olması veya işbu Sözleşme’de ve  ilan yayınlama prosedürüne doğrudan veya dolaylı olarak aykırı olması gibi sebeplerle ÖĞRETSEN,  KURUMSAL ÜYE’ye herhangi bir ihtarda bulunmadan söz konusu İlan’ı geçici veya sürekli olarak askıya alabilir veya durdurabilir. Ne var ki; ÖĞRETSEN böyle bir durumun gerçekleşmesi halinde  KURUMSAL ÜYE’ye yapmış olduğu paket bedelinin iadesi yapmayacaktır. Aynı şekilde KURUMSAL ÜYE, söz konusu bedelin iadesi için herhangi bir talepte bulunmayacağı gibi ÖĞRETSEN’i dava etmeyeceğini kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(iv) KURUMSAL ÜYE, ÖĞRETSEN Platformu’nda yayınlayacağı İlanlar’ının başkasını kötüleyici, zarar verici, tehdit veya taciz edici bir içerikte olmayacağını, yüz kızartıcı, pornografik veya herhangi bir mevzuata  ve ahlaka aykırı içerikli metinlerin ve görsellerin  ÖĞRETSEN Platformu’nda  yayınlanacak ilan veya reklamlarında yer almasına izin vermeyeceğini kabul, beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(v) KURUMSAL ÜYE, ÖĞRETSEN Platformu’nda yayınladığı ilanların gerçek, doğru ve hukuka uygun olduğunu beyan ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(vi)KURUMSAL ÜYE İlan’ında yalnızca hukuken tasarruf yetkisi olduğu hizmetlere ilişkin ilan verebilir. Aksi takdirde, ÖĞRETSEN, KURUMSAL ÜYE’ye herhangi bir ihtarda bulunmaya gerek olmaksızın hesabını askıya alabilir, kapatabilir veya işbu Sözleşme’yi herhangi bir tazminat veya bedel ödemeksizin tek taraflı olarak feshedebilir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">7. Öne Çıkarma Hizmeti</h3>
+<p style="margin-bottom:14px;text-align:justify;">(i) Bu “Hizmet”;  KURUMSAL ÜYE’nin “ÖĞRETSEN  Platformu üzerinden girdiği ilan içeriklerinin, ÖĞRETSEN Platformu’nda ilgili kategori başlıkları altında yayımlanmasını ve Kullanıcılar tarafından daha fazla erişilebilir hale getirilmesini ifade eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">Öne Çıkarma İşlemi; ÖĞRETSEN Platformu teknik altyapısı üzerinden Kullanıcı’ların belirledikleri filtre ve sorgular doğrultusunda, KURUMSAL ÜYE’ye ait ilanların ÖĞRETSEN tarafından belirlenen algoritmik sıralama kurallarına uygun şekilde görüntülenmesi esasıyla çalışır. Bu süreç, ÖĞRETSEN veri tabanına yöneltilen sorguların, sistem üzerinde çalışan yazılım tarafından üretilen otomatik yanıtların kullanıcıya sunulması şeklinde işler. KURUMSAL ÜYE, ÖĞRETSEN Platformu’nda yayımlanan ilanlarının diğer ilanlara kıyasla daha kolay erişilebilir olması, görsel etkinliğinin artırılması ve kullanıcılar tarafından daha hızlı fark edilmesi amacıyla, ÖĞRETSEN Platformu tarafından sunulan ücrete tabi öne çıkarma hizmetlerinden yararlanabilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">KURUMSAL ÜYE işbu Sözleşme’de düzenlenen ek listeleme hizmetlerinden (örneğin öne çıkarma, vurgulama, görünürlük artırma) yararlanmadığı takdirde, İlanlar sistem tarafından standart biçimde listelenir. İlanların sorgu sırasına göre farklı biçimde öne çıkarılmasını veya görünürlüğünün artırılmasını isteyen KURUMSAL ÜYE işbu Sözleşme’de tanımlanan ek hizmetlerden faydalanmakla yükümlüdür.</p>
+<p style="margin-bottom:14px;text-align:justify;">(ii) İlan oluşturma aşamasında KURUMSAL ÜYE tarafından girilen bazı temel bilgiler, ÖĞRETSEN Platformu tarafından belirlenen kriterler uyarınca sonradan değiştirilmesi ÖĞRETSEN’in onayına tabiidir. KURUMSAL ÜYE, bu hususta herhangi bir itiraz ileri sürmeyeceğini peşinen kabul eder. ÖĞRETSEN Platformu, hangi kriterlere ilişkin bilgilerin değiştirilemeyeceğini belirleme, zaman içinde bu kriterlerde değişiklik yapma ve yapılan değişiklikleri yürürlük tarihinden itibaren tüm ilanlara uygulama hakkını saklı tutar.</p>
+<p style="margin-bottom:14px;text-align:justify;">(iii) Öne çıkarma hizmeti yalnızca seçildiği ilana özgüdür; KURUMSAL ÜYE tarafından belirlenen sürenin bitiminden önce veya sonra başka bir ilana aktarılamaz. ÖĞRETSEN Platformu kaynaklı sayfa hataları veya veri tabanı sorunları nedeniyle hizmetin görüntülenmesinde süre kaybı yaşanması halinde, ilgili hizmet süresine sorunlu günler kadar ekleme yapılarak telafi edilir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">(iv) KURUMSAL ÜYE, öne çıkarma hizmetini iptal etmesi halinde herhangi bir ücret iadesi talep edemeyeceğini kabul eder.</h3>
+<p style="margin-bottom:14px;text-align:justify;">(v) KURUMSAL ÜYE, oluşturduğu ilanların hangi kategori altında yayımlanacağını başlangıçta kendisi belirler. Ancak seçilen kategorinin ilan konusu ile doğrudan bağlantılı olmaması halinde, ÖĞRETSEN ilanı sistemin bütünlüğünü ve kullanıcı deneyimini korumak amacıyla uygun gördüğü kategoriye aktarabilir. Bu durumda KURUMSAL ÜYE’ye ayrıca bildirim yapılması zorunlu değildir.</p>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN, ilanların doğru, tutarlı ve erişilebilir biçimde görüntülenmesini sağlamak için kategori yapısında değişiklik yapma, yeni kategori ekleme veya mevcut kategorileri kaldırma yetkisine sahiptir. Yapılan düzenlemeler yürürlük tarihinden itibaren tüm ilanlara uygulanır ve KURUMSAL ÜYE bu hususu peşinen kabul eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">KURUMSAL ÜYE, ilanını yanlış veya ilgisiz bir kategori altında yayımlaması nedeniyle doğabilecek erişim kaybı, görünürlük azalması veya kullanıcı nezdinde oluşabilecek olumsuz sonuçlardan bizzat sorumlu olduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(vi) Öne çıkarma hizmetlerinin içeriği ve ücretleri ÖĞRETSEN  tarafından belirlenir. ÖĞRETSEN, söz konusu içerik ve ücretleri platformda duyurmak kaydıyla dilediği zaman değiştirme hakkına sahiptir. Öne çıkarma hizmeti aktif olan bir ilan, KURUMSAL ÜYE tarafından yayından kaldırıldığında veya ilgili ilan platform kurallarına ya da yürürlükteki mevzuata aykırı bulunduğunda, ilan ve öne çıkarma hizmeti ÖĞRETSEN tarafından yayından kaldırılır. Bu durumda KURUMSAL ÜYE’ye herhangi bir ödeme iadesi yapılmaz.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">8.  İlan Yayınlama ve Görüntüleme Hizmeti</h3>
+<p style="margin-bottom:14px;text-align:justify;">(i) Bu hizmet, KURUMSAL ÜYE’nin ÖĞRETSEN Platformu hesabı üzerinden girdiği ilan içeriklerinin, platformda ilgili kategoriler altında yayımlanmasını ve kullanıcılar tarafından görüntülenmesini sağlar.İlanların görüntülenmesi; ÖĞRETSEN Platformu’nun dinamik altyapısı üzerinden kullanıcıların belirledikleri sorgular doğrultusunda, KURUMSAL ÜYE’ye ait ilanların ÖĞRETSEN tarafından belirlenen sıralama kurallarına uygun şekilde arayüzde gösterilmesi esasına dayanır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bu süreç, ÖĞRETSEN veri tabanına yöneltilen sorguların sistem üzerinde çalışan yazılım tarafından üretilen otomatik yanıtların kullanıcıya sunulması şeklinde işler.</p>
+<p style="margin-bottom:14px;text-align:justify;">KURUMSAL ÜYE, işbu sözleşmede belirtilen öne çıkarma hizmetlerinden yararlanmamışsa, ilanlar sistem tarafından standart biçimde görüntülenir. İlanların sorgu sırasına göre farklı biçimde öne çıkarılmasını veya görünürlüğünün artırılmasını isteyen KURUMSAL ÜYE, işbu sözleşmede düzenlenen öne çıkarma hizmetlerinden faydalanmakla yükümlüdür.</p>
+<p style="margin-bottom:14px;text-align:justify;">(ii) KURUMSAL ÜYE, oluşturduğu ilanların hangi kategori altında yayımlanacağını başlangıçta kendisi belirler. Ancak seçilen kategorinin ilan konusu ile doğrudan bağlantılı olmaması halinde, ÖĞRETSEN Platformu ilanı sistemin bütünlüğünü ve kullanıcı deneyimini korumak amacıyla uygun gördüğü kategoriye aktarabilir. Bu işlem için KURUMSAL ÜYE’ye ayrıca bildirim yapılması zorunlu değildir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">9. İlanların Yayınlanmasına İlişkin Özel Şartlar</h3>
+<p style="margin-bottom:14px;text-align:justify;">(i) Danışmanlık hizmetlerine ilişkin ilanlarda yer alan ücret bilgileri, yürürlükteki mevzuat uyarınca yalnızca Türk Lirası cinsinden girilebilir. KURUMSAL ÜYE, fiyat bilgisini yabancı para birimiyle belirtemeyeceğini kabul eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(ii) Yatırım danışmanlığı veya yatırım eğitmenliği konulu ilanların yayımlanabilmesi için, ilgili hizmeti sunan kişinin Sermaye Piyasası Kurulu tarafından verilmiş Düzey 3 lisansına sahip olması zorunludur. Lisans belgesi bulunmayan kişiler bu kategoride ilan veremez.</p>
+<p style="margin-bottom:14px;text-align:justify;">(iii) Cinsel terapi, cinsel eğitim veya benzeri içeriklere ilişkin özel ders ilanları ÖĞRETSEN Platformu’nda yayımlanamaz. Bu tür içerikler sistem tarafından reddedilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">(iv) Yaşam koçluğu, ilişki koçluğu, terapi veya benzeri uzmanlık alanlarına ilişkin ilanların yayımlanabilmesi için, ilgili uzmanlığa dair diploma veya sertifikanın ilanla birlikte görsel olarak eklenmesi şarttır. Belge eklenmeyen ilanlar yayımlanmaz.</p>
+<p style="margin-bottom:14px;text-align:justify;">(v) KURUMSAL ÜYE, özellikle kanun ve yönetmelikler uyarınca tüketiciyi yanıltma ihtimali taşıyan açıklamalara ilanlarında yer vermeyeceğini peşinen kabul eder. Bu yükümlülüğün ihlali halinde, ilgili ilan ÖĞRETSEN Platformu tarafından yayından kaldırılabilir ve işbu  Sözleşmesi’nde öngörülen yaptırımlar uygulanabilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">(vi) ÖĞRETSEN Platformu’nda yayımlanmış ilanlar, KURUMSAL ÜYE tarafından kaldırıldığında veya ilan verme kurallarına ve/veya  Sözleşmesi’ne aykırılık nedeniyle ÖĞRETSEN Platformu tarafından yayından kaldırıldığında; ilan ve öne çıkarma hizmetleri elektronik ortamda anında ifa edilen hizmetler olduğundan, yayından kaldırılan ilana ilişkin ödenmiş ilan bedeli ile uygulanmış öne çıkarma hizmeti ücreti iade edilmez. Ayrıca, ilgili ilan kapsamında tanımlanmış kampanya veya promosyonlardan (örneğin ücretsiz ilan hakkı, ürüne bağlı öne çıkarma hizmeti vb.) doğan haklar da ilan yayından kaldırıldığında geçersiz hale gelir ve KURUMSAL ÜYE bu hususu peşinen kabul eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">(vii) Kullanıcılar, ÖĞRETSEN Platformu dahilinde eriştikleri bilgileri yalnızca bu bilgileri paylaşan KURUMSAL ÜYE veya ÖĞRETSEN Platformu’nun öngördüğü amaçlar doğrultusunda kullanabilir; ticari olmayan amaçlarla görüntülemekle yükümlüdür.</p>
+<p style="margin-bottom:14px;text-align:justify;">10. KURUMSAL ÜYE tarafından girilen ilanlardaki iletişim bilgileri yalnızca ilgili ilan hakkında bilgi almak amacıyla kullanılabilir. İlanlarda yer alabilecek, 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında koruma altında bulunan kişisel veriler veya özel nitelikli kişisel veriler, hiçbir şekilde farklı bir amaçla kullanılamaz, kopyalanamaz, başka mecralarda doğrudan veya dolaylı olarak yayımlanamaz, işlenemez, dağıtılamaz ve üçüncü kişilerin erişimine açılacak şekilde başka veri tabanlarına aktarılamaz.</p>
+<p style="margin-bottom:14px;text-align:justify;">11. KURUMSAL ÜYE, ÖĞRETSEN  tarafından uygun görülen ilanlarının, platformun belirleyeceği süre boyunca özel kategoriler altında yayımlanmasına onay vermektedir. Ayrıca, ÖĞRETSEN Platformu tarafından seçilen ilanlar sosyal medya kanallarında, basın bültenlerinde ve diğer dijital veya basılı mecralarda tanıtım amacıyla paylaşılabilir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">VI.HAK SAHİPLİĞİ</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.KURUMSALÜYE, ÖĞRETSEN Platformu’nda ’da yer alan unvan, işletme adı, marka, patent, logo, tasarım, yazılım, bilgi ve yöntem, uygulama  tasarımı, alan adı, slogan, ticari takdim şekli gibi tescilli veya tescilsiz tüm fikri ve sınai mülkiyet hakları ile fikir ve sanat eserlerinin  işleteni ve sahibi olan ÖĞRETSEN’e ’ye veya ÖĞRETSEN Platformu’nda da belirtilen ilgili kişilere ait olduğunu ve ulusal ve uluslararası hukukun koruması altında olduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.KURUMSAL  ÜYE, İşbu ÖĞRETSEN Platformu’nda’ya üye olunmasının ve/veya ÖĞRETSEN Platformu’nun  kullanılmasının ve/veya bu UYGULAMA’daki hizmetlerden yararlanılmasının, ÖĞRETSEN Platformu’nda yer alan ve ÖĞRETSEN tarafından ve/veya diğer Uygulama Üyeleri tarafından yüklenen, yayınlanan İçerikler’in ÜYE’nin kullanımına açılmasının ve/veya ÖĞRETSEN Platformu üzerinden hizmet satışı yapılmasının hem bir üst maddedeki tüm fikri ve sınai mülkiyet hakları ile fikir ve sanat eserleri hem de söz konusu İçerikler ile ilgili olarak kendisine SMK ve/veya FSEK ve/veya başka herhangi bir mevzuat kapsamında hiçbir yetki, hak, izin, lisans, ruhsat ve/veya alt kategorilerinin verildiği şeklinde anlaşılmayacağını ve yorumlanmayacağını ve ÖĞRETSEN ve/veya ilgili hak sahibinin yazılı izni olmaksızın bu İçerikler’in kopyalanamayacağını, kullanılamayacağını, taklit edilmeyeceğini, yeniden üretilemeyeceğini ve/veya  çoğaltılamayacağını kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">3.KURUMSAL ÜYE, ÖĞRETSEN’inve/veya Grup Şirketleri’nin ve/veya bu sayılanların ortaklarının/yetkililerinin mülkiyetine tabi fikri mülkiyet haklarını ve sınai mülkiyet haklarını ÖĞRETSEN’den ve/veya ilgili hak sahibinden önceden yazılı izin almaksızın kullanamaz, paylaşamaz, dağıtamaz, sergileyemez, çoğaltamaz veya bunlardan türemiş çalışmalar yapamaz. KURUMSAL ÜYE, ÖĞRETSEN Platformu’nun ’nın bütününü ya da bir kısmını başka bir ortamda ÖĞRETSEN’in izni olmaksızın kullanamaz.</p>
+<p style="margin-bottom:14px;text-align:justify;">4.KURUMSAL ÜYE’nin bu maddede sayılan yükümlülüklerinden herhangi birine aykırılığı, ÖĞRETSEN. tarafından işbu Sözleşme’nin haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal feshi sebebini oluşturacaktır ve ÖĞRETSEN’yeveya ilgili hak sahibine karşı bu ihlalden kaynaklı tüm hukuki ve cezai sorumluluk KURUMSAL ÜYE’ye ait olacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">VII.GİZLİLİK VE KİŞİSEL VERİLERİN KORUNMASI</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.ÖĞRETSEN., veri güvenliğine ve işlem güvenliğine son derece önem vermektedir.  KURUMSAL ÜYE’nin gerçek kişi ile ilintili kişisel verilerinin ve “Gizli Bilgi” niteliğindeki tüm diğer verilerinin korunması ve işlem güvenliğinin sağlanması için gerekli tüm idari ve teknik tedbirleri alacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">2. ÖĞRETSEN ., KURUMSAL ÜYE’den aldığı tüm bilgileri, 07.04.2016 tarihli ve 29677 sayılı Resmi Gazete’de yayımlanarak yürürlüğe giren 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun (“KVKK”) 5. maddesindeki işleme şartlarına uygun olarak (idari zorunluluk ve/veya yasal zorunluluk halleri, sözleşmenin ifası vb. KVKK m.5’te sayılan haller dışında) gizli tutacağını, açıklamayacağını ve üçüncü kişilere aktarmayacağını kabul ve taahhüt eder. İdari ve/veya yasal zorunluluk hallerindeyse bu bilgilerin yalnızca zorunlu olanları zorunlu oldukları ölçüde ilgili idari makamlarla ve/veya yasal mercilerle paylaşılacaktır. ÖĞRETSEN A.Ş. tarafından Avrupa Birliği Genel Veri Koruma Yönetmeliği’ne (General Data Protection Regulation) (“GDPR”) uyumlu olarak “Gizlilik Politikası”, “Çerez Politikası” ve “Kişisel Verilerin İşlenmesi ve Korunması Politikası” ve kişisel verilerin korunması mevzuatı kapsamındaki diğer metinler düzenlenmiştir ve ÖĞRETSEN Platformu’nda da yayınlanmaktadır. KURUMSAL ÜYE’nin bu Politikalar ve metinler hakkında detaylı bilgi edinmesi için ÖĞRETSEN Platformu’nda daki ilgili metinleri okuması gerekmektedir. KURUMSAL ÜYE, tüm bu  metinlere tabi olduğunu, tüm bu metinlerin şartlarına uyacağını, tüm bu metinleri ve ayıca Aydınlatma Metinlerini, Açık Rıza Metinlerini ve diğer tüm metinleri dikkatlice okuduğunu, anladığını ve bu metinler vasıtasıyla gerekli ve yeterli bilgilendirmenin  kendisine  ÖĞRETSEN tarafından yapıldığını, ÖĞRETSEN’inkendisine ait tüm verileri işbu metinler ve Açık Rıza Metinleri  kapsamında kullanabileceğini kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">3. ÖĞRETSEN KURUMSAL ÜYE ile ilgili olarak yürürlükteki mevzuat hükümleri gereğince resmi makamlara açıklama yapmakla yükümlü olduğu durumlarda; KURUMSAL ÜYE’ye ait gizli/özel/ticari bilgileri resmi makamlara açıklamaya yetkili olduğunu, bu sebeple ÖĞRETSEN’den en geniş anlamda herhangi bir talepte bulunmayacağını kabul ve taahhüt etmektedir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">VIII. MÜCBİR SEBEPLER</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.Sözleşme’nin a) imzalandığı tarihte mevcut olmayan ve b) öngörülmeyen ve c) Taraflar’ın kontrolleri dışında gelişen ve d)Taraflar’ın kaçınamayacakları ve e)ortaya çıkmasıyla Taraflar’dan birinin ya da her ikisinin de Sözleşme ile üstlendikleri yükümlülüklerin tamamını veya bir kısmını geçici olarak veya daimi olarak yerine getirmelerini olanaksızlaştıran; doğal afet, savaş, terör, ayaklanma, değişen mevzuat hükümleri, el koyma, grev, lokavt ve sair durumlar “Mücbir Sebep Hali” olarak kabul edilecektir. Bir halin Mücbir Sebep Hali sayılması için yukarıda belirtilen tüm koşulları birlikte sağlaması gerekmektedir. Taraflar, yukarıda belirtilen şartlar oluşmadıkça, ekonomiyi, piyasayı olumsuz etkileyen herhangi bir halin işbu Sözleşme bakımından Mücbir Sebep Hali olarak kabul edilmeyeceğini kabul ve beyan ederler.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.Mücbir Sebep Hali şahsında gerçekleşen Taraf, diğer Taraf’a durumu derhal ve yazılı olarak bildirecektir. Mücbir Sebep Hali’nin devamı sürecince Taraflar’ın tüm yükümlülükleri askıda olacak ve tüm yasal ve akdi süreler Mücbir Sebep Hali’nin gerçekleştiği tarihten itibaren işlemeyecektir. Bu durumda Taraflar’ın Mücbir Sebep Hali süresince yükümlülüklerini yerine getirmemelerinden dolayı birbirlerine karşı herhangi bir sorumlulukları doğmayacaktır, yükümlülüğünü yerine getiremeyen Taraf’tan tazminat, cezai şart ve sair taleplerde bulunma hakkı bulunmayacaktır. Yükümlülükler ve süreler Mücbir Sebep Hali’nin veya Taraflar’a etkisinin ortadan kalkmasıyla kaldığı yerden devam edecektir. İşbu Mücbir Sebep Hali 30 (otuz) günden fazla sürerse, Taraflar’dan her birinin işbu Sözleşme’yi tek taraflı olarak ve fesihten dolayı hiçbir cezai şart, tazminat ödemeksizin veya başkaca bir yükümlülük altına girmeksizin derhal fesih hakkı doğacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">3.Taraflar, Dünya Sağlık Örgütü tarafından pandemi olarak ilan edilen Kovit 19 salgınının varlığı sırasında işbu Sözleşme’nin akdedildiğini, dolayısıyla KOVİT 19 pandemisi de dahil olmak üzere işbu Sözleşme’nin yürürlüğünü, ifasını ve başta esas yükümlülükler olmak üzere kendilerine ait olan herhangi bir yükümlülüğün ifasını kısmen veya tamamen, geçici veya daimi olarak, doğrudan veya dolaylı olarak olumsuz etkileyen ve/veya engelleyen herhangi bir durumun Sözleşme’nin akdedilmesi sırasında mevcut olmadığını, sırf Kovit 19 pandemisinin varlığını bahane ederek yükümlülüklerini ifadan kaçınmayacaklarını kabul, beyan  ve taahhüt ederler.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">IX. SÖZLEŞME’NİN SÜRESİ, FESHİ, FESHİN SONUÇLARI, TAZMİNAT</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.İşbu Sözleşme Taraflarca elektronik ortamda imzalanmaktadır, elektronik ortamda KURUMSAL ÜYE tarafından onaylandığı tarihte kurulur ve yürürlüğe girer ve Taraflar’dan biri tarafından feshedilinceye kadar yürürlükte kalır.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.ÖĞRETSEN işbu Sözleşme’yi herhangi bir gerekçe göstermeksizin ve tazminat, cezai şart ödemeksizin her zaman  iletişim kanallarından veya uygulamaya kayıtlı mail yoluyla yazılı bildirimde bulunmak kaydıyla feshetme hakkına sahiptirler. Böyle bir fesih halinde Taraflar fesih tarihine kadar doğmuş olan hak ve borçlarını karşılıklı olarak tamamen ifa edeceklerdir.</p>
+<p style="margin-bottom:14px;text-align:justify;">3. İşbu Sözleşme’de özel olarak düzenlenen ve Taraflar’a Sözleşme’yi haklı nedenle, tek taraflı olarak ve yazılı bildirimde bulunmak suretiyle derhal fesih hakkı tanıyan durumlar saklıdır. Bu durumlara ek olarak, Taraflar’dan biri  tarafından, Sözleşme’de özellikle belirtilen haller dışında kalıp da Sözleşme’nin haklı nedenle derhal feshini gerektirmeyen türden bir Sözleşme ihlali gerçekleştirilmesi durumunda, diğer Taraf ihlali gerçekleştiren Taraf’a yazılı bir ihtar gönderecek ve ihlalin ihtarda yazılı süre içerisinde giderilmesini talep edecektir, ihlalin bu süre içerisinde giderilmemesi halinde ihtarı göndermiş olan Taraf başka bir ihtara veya ihbara gerek olmaksızın verdiği sürenin  sonunda  Sözleşme’yi derhal, tek taraflı olarak fesih hakkına sahip olacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">4. Taraflar, işbu Sözleşme yürürlükte olduğu sürece herhangi bir zamanda, Taraflar’dan biri ve/veya Taraflar’dan birinin Sözleşme’de düzenlenen hükümlerden ve/veya yükümlülüklerden herhangi birinin ihlal edilmesi durumunda, diğer Taraf’ın Sözleşme’yi feshedip etmemesine bağlı olmaksızın, bu ihlal nedeniyle diğer Taraf’ın uğradığı ve uğrayacağı her türlü doğrudan ve dolaylı maddi ve manevi tüm zararları tüm fer’ileriyle birlikte ve bu ihlal nedeniyle yapmak zorunda kaldığı ve/veya kalacağı her türlü masrafları (başta ihlalin giderilmesi için yapılacak gerekli, teknik, sistemsel masraflar, tüm yargılama ve icra masrafları, hükmedilen yasal vekalet ücretleri olmak ancak bunlarla sınırlı olmamak kaydıyla ve her biri belgelendirilmiş olmak kaydıyla tüm masraflar) tüm fer’ileriyle birlikte ve eğer mağdur olan Taraf ihlal nedeniyle Sözleşme’yi feshetmişse, Sözleşme’nin bu nedenle feshinin sebep olduğu tüm zararları ve masrafları ve fer’ilerini de diğer Taraf’ın ilk yazılı talebi üzerine derhal nakden ve defaten kendisine bildirecek olan banka hesabına ödeyeceğini kabul, beyan ve taahhüt ederler.</p>
+<p style="margin-bottom:14px;text-align:justify;">5. Sözleşme’de düzenlenen hükümlerden ve/veya yükümlülüklerden herhangi birini ihlal eden Taraf’ın KURUMSAL ÜYE olması durumunda, bu ihlal nedeniyle üçüncü kişiler zarar görmüşse ve ÖĞRETSEN’e birtakım talepler ileri sürmüşlerse, ÖĞRETSEN aleyhinde hukuki yola başvurmuşlarsa ve/veya resmi/idari kurumlarca/yargı mercilerince  ÖĞRETSEN aleyhinde adli veya idari soruşturma başlatılmış, birtakım adli, idari cezalar tahakkuk edilmiş ve hükümler tesis edilmişse, KURUMSAL  ÜYE, ÖĞRETSEN’inüçüncü kişilere ve idari/resmi kurumlara ödemek zorunda kaldığı tüm bedeller ve fer’ileri, idari karar/mahkeme hükmü nedeniyle ödemek zorunda kaldığı tüm bedeller ve fer’ileri ve bu sebeplerle yapmak zorunda kaldığı tüm masraflar (başta zararın giderilmesi için yapılacak gerekli, teknik, sistemsel masraflar, yargılama masrafları, icra masrafları, avukat masrafları, yasal vekalet ücretleri olmak ancak bunlarla sınırlı olmamak kaydıyla ve her biri belgelendirilmiş olmak kaydıyla tüm masraflar) için kendisine rücu etme hakkının olduğunu, bu maddede bahsedilen bedellerin üst maddedeki “zarar” kapsamında kaldığını ve bahsi geçen bedeller ile ilgili olarak ÖĞRETSEN’iilk talepte tazmin etmekle yükümlü olduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">6. KURUMSAL ÜYE, yukarıdaki madde uyarınca işbu Sözleşme’yi feshedecek olursa, yapılacak fesih bildirimlerinin, hukuken geçerli olması için, yazılı şekilde noter aracılığıyla veya güvenli elektronik imza kullanılarak kayıtlı elektronik posta sistemi ile yapmasının zorunlu olduğunu kabul ve taahhüt eder.</p>
+<p style="margin-bottom:14px;text-align:justify;">7.Mevzuattan kaynaklanan sebeplerle veya kamu düzenini ilgilendiren, gecikmesinde sakınca bulunan ya da dolandırıcılık, veri ihlali veya diğer siber güvenlik risklerini içeren durumlarda üyelik ilişkisi ÖĞRETSEN. tarafından derhal kısıtlanabilir, askıya alınabilir veya işbu Sözleşme’nin haklı nedenle derhal feshi suretiyle haklı nedenle sonlandırılabilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">8. KURUMSAL ÜYE’nin  ilan ve/veya hizmet satışı konusunda ÖĞRETSEN ‘iaradan çıkarma gibi art niyetli bir fiilinin tespit edilmesi halinde, ilgilinin üyeliği ÖĞRETSEN tarafından derhal kısıtlanabilir, askıya alınabilir veya veya işbu Sözleşme’nin haklı nedenle derhal feshi suretiyle haklı nedenle sonlandırılabilir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">X.SÖZLEŞME’DE DEĞİŞİKLİK YAPMA HAKKI</h3>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN  işbu Sözleşme şartlarını ve ÖĞRETSEN Platformu’nda  yer alan her tür bilgiyi ve İçerik’i HİZMET SAĞLAYICI ÜYE’den izin almak ve/veya onay almak ve/veya KURUMSAL ÜYE’ye herhangi bir ihbarda veya bildirimde bulunmak zorunda olmaksızın dilediği zaman, hukuka aykırı olmamak kaydıyla, dilediği şekilde ve tamamen kendi takdirine bağlı olarak,  kısmen veya tamamen ve tek taraflı olarak değiştirebilir. Bu değişiklikler periyodik olarak da ilan edilecek ve ilan edildiği tarihte geçerli olacaktır, üzerinde değişiklik yapılmamış olan hükümler ise aynen yürürlükte kalarak hüküm ve sonuçlarını doğurmaya devam edeceklerdir.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bu değişiklikleri takip etmek münhasıran KURUMSAL ÜYE’nin sorumluluğundadır. Değişiklik ilanından sonra KURUMSAL ÜYE,  ÖĞRETSEN Platformu üzerinden hizmet satışına  devam etmekle bu değişiklikleri kabul etmiş sayılır. İşbu Sözleşme, ÖĞRETSEN Platformu üzerinden yayınlanarak; Sözleşme’ye erişim UYGULAMA’yı kullanan her gerçek veya tüzel kişi KURUMSAL ÜYE tarafından mümkün kılınmıştır. Şüpheye mahal vermemek adına, belirtmek gerekir ki işbu Sözleşme  KURUMSAL ÜYE tarafından tek taraflı olarak değiştirilemez.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XI. DEVİR VE TEMLİK</h3>
+<p style="margin-bottom:14px;text-align:justify;">KURUMSAL ÜYE, ÖĞRETSEN’denönceden yazılı izin almadığı sürece işbu Sözleşme’yi ve/veya Sözleşme’den doğan haklarını ve/veya yetki ve/veya yükümlülüklerini her ne surette olursa olsun, kısmen veya tamamen üçüncü şahıslara devir veya temlik edemez.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XII. FERAGAT</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme’nin hükümlerinin herhangi birinin ihlalinin ileri sürülmesinden feragat edilmesi, ileri sürülmekte gecikilmesi, bir sebeple ihlalin ileri sürülememesi veya bu hakkın kullanılmaması, ileride oluşabilecek herhangi bir ihlale ilişkin haklardan feragat edildiği veya edileceği anlamına gelmeyecek, bu şekilde yorumlanmayacak ve söz konusu hükmün işlerliğini etkilemeyecektir. Her türlü feragat yazılı olarak yapılacaktır, aksi halde geçerli olmayacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XIII. BÖLÜNEBİLİRLİK</h3>
+<p style="margin-bottom:14px;text-align:justify;">Sözleşme’nin herhangi bir hükmünün ve/veya alt hükmünün hükümsüzlüğü ve/veya uygulanamaz oluşu ve/veya geçersiz oluşu, ilgili hüküm ve/veya alt hüküm işbu Sözleşme’nin kurulması bakımından Taraflar’dan biri için esaslı bir unsur olmadığı sürece Sözleşme’nin diğer hüküm ve/veya alt hükümlerinin hüküm ifade etmesini, uygulanabilirliğini ve geçerliliğini etkilemeyecektir. Böyle bir durumda geriye kalan hükümler ve/veya alt hükümler geçerliliğini, yürürlüğünü ve uygulanabilirliğini koruyacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XIV. BİLDİRİMLER</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.Taraflar arasında yapılacak her türlü yazışma,  TTK’da, TBK’da ve sair Türk Hukuku’nda  sayılan zorunlu haller dışında, ÖĞRETSEN A.Ş.’ne ait kayıtlı e-posta adresi olan ogretsen@hs03.kep.tr  adresi üzerinden veya Sözleşme’nin I-1. maddesinde yazan kurumsal e-posta adresi üzerinden ve KURUMSAL  ÜYE’ye ait Sözleşme’nin I-2. maddesinde belirtilen e-posta adresi üzerinden e-posta aracılığıyla veya “I.TARAFLAR” maddesinde belirtilen tebligat adreslerine kargo veya posta göndermek suretiyle yazılı olarak yapılacaktır. Taraflar işbu Sözleşme’de belirtilen tebligat adreslerinin ve/veya e-posta adreslerinin değişmesi durumunda, bu hususu en geç değişimden itibaren 2 (iki) gün içerisinde diğer Taraf’a bildirmelidirler. Aksi halde Sözleşme’de yazılı olan tebligat adreslerine ve kayıtlı e-posta adreslerine ve kurumsal e-posta adreslerine yapılacak olan bildirimler hem hukuken geçerli bir bildirimin tüm hüküm ve sonuçlarını doğuracak hem de iyi niyetli olmak kaydıyla bildirim yapan Taraf bakımından ilgili yükümlülük ifa edilmiş olacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.KURUMSAL  ÜYE, yapılan fesih bildirimlerinin geçerli olması için yazılı şekilde noter aracılığıyla veya güvenli elektronik imza kullanılarak kayıtlı elektronik posta sistemi ile yapmasının zorunlu olduğunu kabul ve taahhüt eder.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XV. UYGULANACAK HUKUK VE DELİL ANLAŞMASI</h3>
+<p style="margin-bottom:14px;text-align:justify;">1. İşbu Sözleşme’nin akdedilmesinde, yorumlanmasında, geçerliliğinde, uygulanmasında ve bunlardan kaynaklanacak olan ve/veya Sözleşme’den kaynaklanacak olan diğer her türlü uyuşmazlıkların çözümünde, yabancılık unsurunun varlığı halinde dahi kanunlar ihtilafı kuralları uygulanmayacak ve dikkate alınmayacak olmak kaydıyla, Türk Hukuku’nun maddi hükümleri uygulanacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">2. Taraflar, işbu Sözleşme’den doğabilecek ihtilaflarda aralarındaki e-posta yazışmalarının, kargo veya posta yoluyla gönderilen tebligatların, UYGULAMA mesajlaşma bölümü üzerinden yaptıkları yazışmaların, ÖĞRETSEN A.Ş.’nin resmi defterlerinin, ticari kayıtlarının, kendi veri tabanında, sunucularında tuttuğu e-arşiv kayıtlarının, elektronik bilgilerin ve bilgisayar kayıtlarının Taraflar için bağlayıcı, yeterli, kesin ve münhasır delil teşkil edeceğini, bu maddenin 6100 sayılı Hukuk Muhakemeleri Kanunu’nun 193. maddesi anlamında delil sözleşmesi niteliğinde olduğunu kabul, beyan ve taahhüt ederler.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XVI. UYUŞMAZLIKLARIN ÇÖZÜMÜ</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.Eğer ortada bir uyuşmazlık varsa öncelikle Taraflar uyuşmazlığı dostane yollarla çözmek için çalışacaklar ve ellerinden gelen tüm gayreti göstereceklerdir.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.Uyuşmazlığa konu olan hususun Taraflar arasında uzlaşma ile çözülememesi halinde, uyuşmazlığın çözümünde, uyuşmazlık dava şartı ara buluculuk müessesesine tabi ise önce İstanbul Anadolu Arabuluculuk Merkezi, arabulucu önünde anlaşma sağlanamazsa İstanbul Anadolu Mahkemeleri ve İcra Müdürlükleri yetkilidir. Uyuşmazlık dava şartı ara buluculuk müessesesine tabi değilse uyuşmazlığın çözümünde doğrudan İstanbul Anadolu Mahkemeleri ve İcra Müdürlükleri yetkilidir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">XVII. SON HÜKÜMLER</h3>
+<p style="margin-bottom:14px;text-align:justify;">1.İşbu Sözleşme, Sözleşme’nin konusu ile ilgili olan Taraflar arasında önceki yazılı veya sözlü tüm sözleşmelerin, taahhütlerin, yazışmaların ve diğer düzenlemelerin yerine geçer.</p>
+<p style="margin-bottom:14px;text-align:justify;">2.İşbu Sözleşme, KURUMSAL ÜYE tarafından elektronik ortamda onaylandıktan sonra Sözleşme’nin I/2 maddesinde yazılı olan elektronik posta adresine gönderilecektir.</p>
+<p style="margin-bottom:14px;text-align:justify;">3.İşbu Sözleşme’de açık düzenleme bulunmayan durumlar için Elektronik Ticaret Hizmet Sağlayıcı üyeler (KURUMSAL ÜYELER) bakımından TTK ve TBK hükümleri uygulanır.</p>
+<p style="margin-bottom:14px;text-align:justify;">4. İşbu Sözleşme’nin imzalanmasından ve ifasından doğacak her türlü vergi, harç ve sair masraflar Taraflarca eşit olarak karşılanacaktır. Herhangi bir vergi, harç veya masrafın tamamının Taraflar’dan biri tarafından ödenmesi halinde, ödemeyi yapan Taraf diğer Taraf’a payına düşen kısımları fatura edecektir.</p>
+<p style="margin-bottom:14px;text-align:justify;">17 (on yedi) maddeden ibaret bu Sözleşme, KURUMSAL ÜYE tarafından online ortamda okunarak, elektronik ortamda onaylandığı tarihte kurulmuş ve derhal yürürlüğe girmiştir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">ELEKTRONİK ARACI TİCARET HİZMET SAĞLAYICI</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET A.Ş.</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">KURUMSAL  ÜYE</h3>
+            </div>
+        </div>
+
+        <div class="sz-content" id="kurumsal-aydinlatma">
+            <span class="sz-badge sz-badge-kurumsal"><i class="ph-fill ph-buildings"></i> Kurumsal</span>
+            <h1 class="sz-title">Kurumsal Üye Aydınlatma Metni</h1>
+            <div class="page-content">
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">KİŞİSEL VERİLERİN İŞLENMESİ KAPSAMINDA</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">GENEL ÜYELİK AYDINLATMA METNİ</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Veri Sorumlusu: ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET ANONİM ŞİRKETİ</h3>
+<p style="margin-bottom:14px;text-align:justify;">ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET A.Ş. (“Şirket” ya da “Veri Sorumlusu”) olarak kişisel verilerinizin korunmasına ve güvenliğine en yüksek derecede özen göstermekteyiz. Buna göre, başta özel hayatın gizliliği olmak üzere kişilerin temel hak ve özgürlüklerini korumak ve kişisel verilerin korunması amacıyla düzenlenen 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK veya Kanun”) kapsamında, kişisel verilerinizin toplanma şekilleri, işlenme amaçları, işlemenin hukuki nedenleri ve haklarınıza ilişkin olarak Veri Sorumlusu sıfatıyla sizleri işbu Genel Üyelik Aydınlatma Metni (“Aydınlatma Metni”) kapsamında bilgilendirmek isteriz:</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kişisel Verilerin İşlenme Amacı:</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Aydınlatma Metni kapsamında işlenen kişisel verileriniz; üyelik kaydınızın yapılması için sözleşme süreçlerinin yürütülmesi amacı uyarınca işlenmektedir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">İşlenen kişisel verileriniz şöyledir:</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kimlik              : Ad-Soyad bilgisi</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">İletişim            : E-posta adresi</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">İşlem Güvenliği: Oluşturduğunuz şifreniz (tarafımızca kriptolu olarak saklanmaktadır.)</h3>
+<p style="margin-bottom:14px;text-align:justify;">Söz konusu veriler genel üyelik kaydınız için alınmakta olup, işletmeniz adına ilan kaydı açmanız halinde tarafınız ayrıca aydınlatılmaktadır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bununla birlikte Aydınlatma Metni’nde belirtilen Kişisel Verilerinizin işlenme amacında herhangi bir değişiklik olması halinde, ayrıca tarafınızdan izin alınacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kişisel Verilerin Aktarılabileceği Taraflar ile Aktarım Amacı:</h3>
+<p style="margin-bottom:14px;text-align:justify;">KVKK’nın 8. ve 9. Maddesi kapsamında ÖĞRETSEN A.Ş. ile paylaştığınız kişisel verileriniz ÖĞRETSEN A.Ş.’nin hizmet aldığı ve Türkiye Cumhuriyeti’nde yerleşik bulunan sunucu hizmeti ve bulut hizmeti sağlayıcı firmaya aktarılmaktadır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verileriniz sunucuları yurt dışına bulunan Amazon Web Services ‘e aktarılmaktadır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Toplama Yöntemi ve Hukuki Sebebi</h3>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verileriniz, işbu Aydınlatma Metni’nde belirtilen amaçlar doğrultusunda kullanılmak üzere, web sitemiz ve/veya IOS ve ANDROID işletim sistemleriyle uyumlu olan “ÖĞRETSEN” adlı uygulamamız (“UYGULAMA”) üzerinden elektronik ortamlarda toplanmaktadır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Bu kapsamda; KVKK’nın 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartlarına dayalı olarak; yukarıda 1. madde kapsamında belirtilen veri işleme amaçları çerçevesince kişisel verileriniz; bir sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması amacıyla işlenmektedir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Kişisel Veri Sahibinin Hakları</h3>
+<p style="margin-bottom:14px;text-align:justify;">Kanun’un 11. maddesi uyarınca, veri sahibi olarak;</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verilerinin işlenip işlenmediğini öğrenme,</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verileri işlenmişse buna ilişkin bilgi talep etme,</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verilerinin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</p>
+<p style="margin-bottom:14px;text-align:justify;">Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme,</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</p>
+<p style="margin-bottom:14px;text-align:justify;">KVKK ve ilgili diğer kanun hükümlerine uygun olarak işlenmiş olmasına rağmen, işlenmesini gerektiren sebeplerin ortadan kalkması hâlinde kişisel verilerin silinmesini veya yok edilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</p>
+<p style="margin-bottom:14px;text-align:justify;">İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme,</p>
+<p style="margin-bottom:14px;text-align:justify;">Kişisel verilerinin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması hâlinde zararın giderilmesini talep etme</p>
+<p style="margin-bottom:14px;text-align:justify;">haklarına sahipsiniz.</p>
+<p style="margin-bottom:14px;text-align:justify;">KVKK madde 13 /1 uyarınca, işbu maddede belirtilen haklarınızı kullanmak için talebinizi, yazılı olarak Şirket’e ait  UYGULAMA’da yer alan KVKK Başvuru Formu’nu ve kimliğinizi tevsik edici belgeleri eksiksiz doldurarak “Acarlar Mahallesi, 9. Cadde, No:1 İç Kapı No:30 Beykoz, İstanbul, Türkiye” adresine bizzat elden getirebilirsiniz veya noter vasıtasıyla gönderebilirsiniz veya size ait bir KEP adresinizin bulunması durumunda Şirket’e ait KEP adresi olan ogretsen@hs03.kep.tr adresine, size ait bir KEP adresi bulunmaması durumunda ise Şirket’in destek@ogretsen.com adresine e-posta yoluyla gönderebilirsiniz. KVKK Başvuru Formu’nun Şirket’e iletilmesinden itibaren 30 (otuz) gün içerisinde başvurunuz değerlendirilerek sonuçlandırılacaktır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">ÖĞRETSEN DİJİTAL TEKNOLOJİLER VE TİCARET A.Ş.</h3>
+            </div>
+        </div>
+
+        <div class="sz-content" id="ticari-satis">
+            <span class="sz-badge sz-badge-kurumsal"><i class="ph-fill ph-buildings"></i> Kurumsal</span>
+            <h1 class="sz-title">Ticari Satış Sözleşmesi</h1>
+            <div class="page-content">
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">TİCARİ SATIŞ SÖZLEŞMESİ</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Ticari Satış Sözleşmesi (“Sözleşme”), Kurumsal Üyelik Sözleşmesi ile birlikte değerlendirilmektedir; bir diğer deyişle  tüm sözleşme ve ekler birbirinin ayrılmaz parçasıdır. Taraflar, işbu Sözleşme kapsamında belirlenen hizmet bedeli, ödeme koşulları ve diğer mali hususların Kurumsal Üyelik Sözleşmesi’nde yer alan hükümlerle birlikte uygulanacağını kabul ederler.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Taraflar</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme, Kurumsal Üyelik Sözleşmesi kapsamında düzenlenmiş olup; bir tarafta Öğretsen Öğretsen Dijital Teknolojiler Ve Ticaret Anonim Şirketi (“Öğretsen”) ile diğer tarafta, Öğretsen Platformu’nda yayınlanan hizmetlerinden yararlanan gerçek veya tüzel kişi Kurumsal Üye (“Kurumsal Üye”) arasında akdedilmiştir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Genel Esaslar</h3>
+<p style="margin-bottom:14px;text-align:justify;">Öğretsen tarafından sunulan platform kullanımı kapsamındaki hizmet, Kurumsal Üye’nin seçimine göre aylık veya yıllık abonelik modeli ile sunulur.</p>
+<p style="margin-bottom:14px;text-align:justify;">Paket bedelleri Öğretsen tarafından belirlenen plan ve kullanım limitlerine göre değişiklik gösterebilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">Hizmet, Kurumsal Üye’nin elektronik ortamda onaylanarak ödeme yapması ile başlar.</p>
+<p style="margin-bottom:14px;text-align:justify;">Paketler, Kurumsal Üye’nin yalnızca bir işletmesinin kullanımına yöneliktir.</p>
+<p style="margin-bottom:14px;text-align:justify;">Fatura, Kurumsal Üye tarafından beyan edilen e-posta adresine elektronik ortamda iletilecek olup, ayrıca fiziki gönderim yapılmayacaktır.</p>
+<p style="margin-bottom:14px;text-align:justify;">Öğretsen, belirtilen esaslar çerçevesinde hizmet bedellerini tek taraflı olarak güncelleme hakkına haizdir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Teklif İçeriği</h3>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Faturalandırma ve İletişim Bilgileri</h3>
+<p style="margin-bottom:14px;text-align:justify;">Kurumsal Üye, faturalandırma için gerekli tüm bilgi ve belgeleri doğru ve eksiksiz olarak sağlamakla yükümlüdür.</p>
+<p style="margin-bottom:14px;text-align:justify;">Kurumsal Üye bilgileri veya fatura adresinde meydana gelen değişikliklerin Öğretsen’e bildirilmemesi halinde, Öğretsen bu nedenle uğrayacağı her türlü zarar Kurumsal tarafından karşılanır.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Fatura ve Ödeme</h3>
+<p style="margin-bottom:14px;text-align:justify;">Kurumsal Üye, Öne çıkarma, listeleme hizmetlerine ilişkin paket bedelini ödedikten sonra, hizmetten kısmen veya tamamen yararlanmasa dahi herhangi bir iade veya mahsup talebinde bulunamaz. Öğretsen Kurumsal Üye’nin  talebi üzerine üyeliğini erken sonlandırsa dahi, kalan süreye ilişkin ücret iadesi yapmaz.</p>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme kapsamında belirlenen tüm bedeller her türlü vergi, resim, harç ve benzeri mali yükümlülükler hariç olarak belirlenmiştir. Öğretsen tarafından düzenlenecek faturaya yansıtılacak Katma Değer Vergisi (KDV) ve yürürlükteki mevzuat uyarınca doğabilecek diğer vergisel yükümlülükler, Kurumsal Üye tarafından ödenir.</p>
+<h3 style="margin:28px 0 12px;font-size:1.2rem;color:var(--gulf-blue);">Son Hüküm</h3>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme’den doğan veya bu Sözleşme’ye ek olarak düzenlenecek her türlü belgeye ilişkin damga vergisi, noter ve sair resmi giderler tamamen Kurumsal Üye’ye aittir.Öğretsen söz konusu ödemeleri doğrudan yapması halinde, yaptığı tutar ilk talepte Kurumsal Üye’ye edilir.</p>
+<p style="margin-bottom:14px;text-align:justify;">İşbu Sözleşme, Öğretsen tarafından tek taraflı olarak hazırlanmış olup, Kurumsal Üye tarafından elektronik ortamda imzalanmasıyla yürürlüğe girer; Kurumsal Üye tarafından ayrıca imza altına alınmasına gerek bulunmamaktadır.</p>
+            </div>
+        </div>
+
+
+    </main>
+</div>
+
+<script>
+document.querySelectorAll('.sz-sidebar a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = this.getAttribute('data-target');
+        document.querySelectorAll('.sz-sidebar a').forEach(function(a) { a.classList.remove('active'); });
+        this.classList.add('active');
+        document.querySelectorAll('.sz-content').forEach(function(c) { c.classList.remove('active'); });
+        document.getElementById(target).classList.add('active');
+        if (window.innerWidth <= 900) {
+            document.querySelector('.sz-main').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        history.replaceState(null, '', '#' + target);
+    });
+});
+window.addEventListener('DOMContentLoaded', function() {
+    var hash = window.location.hash.replace('#','');
+    if (hash) {
+        var link = document.querySelector('.sz-sidebar a[data-target="' + hash + '"]');
+        if (link) link.click();
+    }
+});
+</script>
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Bireysel Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="sozlesmeler.html#bireysel-aydinlatma">Aydınlatma Metni</a></li>
+                            <li><a href="sozlesmeler.html#bireysel-cerez">Çerez Politikası</a></li>
+                            <li><a href="sozlesmeler.html#bireysel-gizlilik">Gizlilik Politikası</a></li>
+                            <li><a href="sozlesmeler.html#bireysel-kvkk">KVKK</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Kurumsal Sözleşmeler</h4>
+                        <ul>
+                            <li><a href="sozlesmeler.html#kurumsal-uyelik">Üyelik Sözleşmesi</a></li>
+                            <li><a href="sozlesmeler.html#kurumsal-aydinlatma">Aydınlatma Metni</a></li>
+                            <li><a href="sozlesmeler.html#ticari-satis">Ticari Satış Sözleşmesi</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>İletişim</h4>
+                        <ul style="color: var(--medium-gray); line-height: 1.6; font-size: 0.95rem;">
+                            <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                                <i class="ph-fill ph-map-pin" style="color: var(--royal-blue); margin-top: 3px; font-size: 1.1rem;"></i> 
+                                <span>Acarlar Mah. Acarkent Sitesi 9.Cad Coliseum 5.Kat Archerson,<br>34820 Beykoz/İstanbul</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 8px;">
+                                <i class="ph-fill ph-phone" style="color: var(--royal-blue); font-size: 1.1rem;"></i> 
+                                <a href="tel:+905330185110" style="color: inherit; text-decoration: none;">+90 533 018 51 10</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.ogretsen.app" target="_blank" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=48"></script>
+</body>
+</html>
