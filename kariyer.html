@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kariyer | Öğretsen</title>
+    <meta name="description" content="Öğretsen ekibine katılın! Açık pozisyonlarımızı inceleyin ve kariyer başvurunuzu yapın.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=53">
+    <!-- Leaflet Harita -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Öğretsen Logo">
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="hakkimizda.html"><i class="ph ph-info"></i>Hakkımızda</a></li>
+                    <li><a href="neden-ogretsen.html"><i class="ph ph-lightbulb"></i>Neden Öğretsen?</a></li>
+                    <li><a href="kategoriler.html"><i class="ph ph-squares-four"></i>Kategoriler</a></li>
+                    <li><a href="blog.html"><i class="ph ph-newspaper"></i>Blog</a></li>
+                    <li><a href="sss.html"><i class="ph ph-question"></i>SSS</a></li>
+                    <!-- Sadece mobilde görünecek CTA butonlar -->
+                    <li class="mobile-cta">
+                        <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="btn btn-secondary w-full"><i class="ph ph-sign-in"></i>Giriş Yap</a>
+                        <a href="https://corp.ogretsen.com/" target="_blank" class="btn btn-primary w-full"><i class="ph ph-buildings"></i>Kurumsal Giriş</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="btn btn-secondary btn-login">Giriş Yap</a>
+                    <a href="https://corp.ogretsen.com/" class="btn btn-primary btn-signup" target="_blank">Kurumsal Giriş</a>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+<section class="section" style="padding-top: 150px; min-height: 60vh;">
+    <div class="container">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.04)); padding: 6px 18px; border-radius: 100px; margin-bottom: 14px; border: 1px solid rgba(99,102,241,0.2);">
+                <i class="ph-fill ph-rocket-launch" style="color: #6366f1; font-size: 1.1rem;"></i>
+                <span style="color: #6366f1; font-weight: 600; font-size: 0.85rem;">Kariyer</span>
+            </div>
+            <h1 style="color: var(--royal-blue); margin-bottom: 16px; font-size: 2.5rem;">Öğretsen Ekibine Katılın</h1>
+            <p style="font-size: 1.15rem; color: var(--medium-gray); max-width: 650px; line-height: 1.7;">Eğitim teknolojilerini birlikte dönüştürelim. Yetenekli, tutkulu ve yenilikçi ekip arkadaşları arıyoruz.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 40px; max-width: 1000px;">
+
+            <!-- Sol: Neden Öğretsen -->
+            <div>
+                <h2 style="font-size: 1.5rem; margin-bottom: 28px; color: var(--gulf-blue);">Neden Öğretsen?</h2>
+                
+                <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px;">
+                    <div style="width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="ph-fill ph-trend-up" style="color: #6366f1; font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.05rem;">Hızlı Büyüyen Startup</h4>
+                        <p style="color: var(--medium-gray); font-size: 0.95rem; line-height: 1.5;">Türkiye'nin en hızlı büyüyen eğitim teknolojisi platformlarından birinde kariyer fırsatı.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px;">
+                    <div style="width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="ph-fill ph-globe-hemisphere-west" style="color: #059669; font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.05rem;">Uzaktan Çalışma</h4>
+                        <p style="color: var(--medium-gray); font-size: 0.95rem; line-height: 1.5;">Esnek ve hibrit çalışma modelleriyle Türkiye'nin her yerinden ekibimize katılabilirsiniz.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px;">
+                    <div style="width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="ph-fill ph-graduation-cap" style="color: #d97706; font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.05rem;">Gelişim Odaklı Kültür</h4>
+                        <p style="color: var(--medium-gray); font-size: 0.95rem; line-height: 1.5;">Sürekli öğrenme ve gelişimi destekleyen, ilham veren bir çalışma ortamı.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 14px;">
+                    <div style="width: 44px; height: 44px; min-width: 44px; background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <i class="ph-fill ph-heart" style="color: #db2777; font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 4px; font-size: 1.05rem;">Anlamlı Bir Misyon</h4>
+                        <p style="color: var(--medium-gray); font-size: 0.95rem; line-height: 1.5;">Milyonlarca öğrencinin hayatına dokunacak bir ürün geliştirmenin parçası olun.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağ: Başvuru Formu -->
+            <div style="background: var(--bg-gray); padding: 40px; border-radius: 24px; border: 1px solid var(--light-gray);">
+                <h2 style="font-size: 1.5rem; margin-bottom: 8px; color: var(--gulf-blue);">Başvuru Formu</h2>
+                <p style="color: var(--medium-gray); font-size: 0.9rem; margin-bottom: 28px;">Bilgilerinizi doldurun, size en kısa sürede dönüş yapalım.</p>
+
+                <form id="kariyer-form" onsubmit="return false;">
+                    <input type="text" placeholder="Adınız Soyadınız" required style="width:100%; padding: 14px 16px; margin-bottom:16px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; transition: border 0.2s;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'">
+
+                    <input type="email" placeholder="E-posta Adresiniz" required style="width:100%; padding: 14px 16px; margin-bottom:16px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; transition: border 0.2s;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'">
+
+                    <input type="tel" placeholder="Telefon Numaranız" style="width:100%; padding: 14px 16px; margin-bottom:16px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; transition: border 0.2s;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'">
+
+                    <select style="width:100%; padding: 14px 16px; margin-bottom:16px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; color: var(--medium-gray); background: white; transition: border 0.2s; appearance: auto;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'">
+                        <option value="" disabled selected>İlgilendiğiniz Departman</option>
+                        <option>Yazılım Geliştirme</option>
+                        <option>Ürün Yönetimi</option>
+                        <option>Pazarlama</option>
+                        <option>Satış</option>
+                        <option>İnsan Kaynakları</option>
+                        <option>Müşteri İlişkileri</option>
+                        <option>Tasarım (UI/UX)</option>
+                        <option>Diğer</option>
+                    </select>
+
+                    <input type="url" placeholder="LinkedIn Profiliniz (opsiyonel)" style="width:100%; padding: 14px 16px; margin-bottom:16px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; transition: border 0.2s;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'">
+
+                    <textarea placeholder="Kendinizden kısaca bahsedin..." rows="4" style="width:100%; padding: 14px 16px; margin-bottom:20px; border:1px solid #e2e8f0; border-radius:12px; outline:none; font-family:inherit; font-size: 0.95rem; resize:vertical; transition: border 0.2s;" onfocus="this.style.borderColor='var(--royal-blue)'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
+
+                    <button type="submit" class="btn btn-primary btn-lg" style="width:100%; font-size: 1rem;">
+                        <i class="ph ph-paper-plane-tilt" style="margin-right: 8px;"></i>Başvuruyu Gönder
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+@media (max-width: 768px) {
+    .section [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html"><img src="assets/images/logo.png" alt="Öğretsen Logo" class="footer-logo"></a>
+                    <p>Öğrenmenin En Yakın Yolu. Öğrenmek istediğiniz her şeyi keşfetmek ve kendinizi geliştirmek için en iyi seçenek.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ogretsen/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://twitter.com/ogretsenapp" target="_blank"><i class="ph ph-twitter-logo"></i></a>
+                        <a href="https://www.facebook.com/ogretsen/" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.linkedin.com/company/ogretsen/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Hakkımızda</h4>
+                        <ul>
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="iletisim.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Kurumsal</h4>
+                        <ul>
+                            <li><a href="https://corp.ogretsen.com/" target="_blank">Kurumsal Giriş</a></li>
+                            <li><a href="sozlesmeler.html">Sözleşmeler</a></li>
+                            <li><span style="color: var(--medium-gray); cursor: default;">Faaliyet Raporu</span></li>
+                            <li><a href="kariyer.html">Kariyer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>İletişim</h4>
+                        <ul style="color: var(--medium-gray); line-height: 1.6; font-size: 0.95rem;">
+                            <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                                <i class="ph-fill ph-map-pin" style="color: var(--royal-blue); margin-top: 3px; font-size: 1.1rem;"></i> 
+                                <span>Acarlar Mah. Acarkent Sitesi 9.Cad Coliseum 5.Kat Archerson,<br>34820 Beykoz/İstanbul</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 8px;">
+                                <i class="ph-fill ph-phone" style="color: var(--royal-blue); font-size: 1.1rem;"></i> 
+                                <a href="tel:+905330185110" style="color: inherit; text-decoration: none;">+90 533 018 51 10</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Mobil Uygulama</h4>
+                        <div class="app-links-mini">
+                            <a href="https://apps.apple.com/tr/app/%C3%B6%C4%9Fretsen-%C3%B6zel-ders-uygulamas%C4%B1/id1605358546" target="_blank" class="app-btn-mini"><i class="ph-fill ph-apple-logo"></i> App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.ogretsen.app" target="_blank" class="app-btn-mini"><i class="ph-fill ph-google-play-logo"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Öğretsen. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=53"></script>
+</body>
+</html>
